@@ -61,7 +61,7 @@ export function Hero() {
   }, [currentSlide]);
 
   return (
-    <section className="relative z-[20] h-screen flex items-center overflow-hidden bg-black">
+    <section className="relative z-[20] h-screen flex items-center overflow-hidden bg-surface">
       {/* Background Media */}
       {slides.map((slide, index) => {
         const isActive = index === currentSlide;
@@ -100,22 +100,30 @@ export function Hero() {
       <div className="container mx-auto px-6 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col items-start space-y-8 min-h-[300px] justify-center">
-            {/* We use a key trick here to re-trigger animations on slide change */}
-            <div key={currentSlide} className="space-y-6">
-              <h1 className="text-white text-display-lg md:text-6xl lg:text-7xl font-display font-medium leading-tight opacity-0 animate-slide-up">
-                {slides[currentSlide].heading}
+            {/* We use a key trick here to re-trigger animations on slide change for text ONLY */}
+            <div key={currentSlide} className="space-y-6 min-h-[220px]">
+              <h1 className="text-white text-display-lg md:text-6xl lg:text-7xl font-display font-medium leading-tight">
+                <span className="block overflow-hidden pb-2">
+                  <span className="block animate-mask-reveal">
+                    {slides[currentSlide].heading}
+                  </span>
+                </span>
               </h1>
-              <p className="text-white/80 text-lg md:text-xl font-body max-w-md leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: '300ms' }}>
-                {slides[currentSlide].subheading}
+              <p className="overflow-hidden">
+                <span className="block text-white text-xl md:text-2xl font-display italic leading-relaxed animate-mask-reveal" style={{ animationDelay: '300ms' }}>
+                  {slides[currentSlide].subheading}
+                </span>
               </p>
-              <div className="flex gap-4 opacity-0 animate-slide-in-right" style={{ animationDelay: '600ms' }}>
-                <Button variant="white" className="shadow-ambient">
-                  Apply Now
-                </Button>
-                <Button variant="outline-white">
-                  Explore Courses
-                </Button>
-              </div>
+            </div>
+
+            {/* Sticky Buttons - Enhanced & Cool */}
+            <div className="flex gap-4 pt-4 opacity-0 animate-fade-in" style={{ animationDelay: '2000ms', animationFillMode: 'forwards' }}>
+              <Button variant="white" className="btn-premium px-10 py-5 rounded-2xl text-primary font-black uppercase tracking-widest shadow-2xl">
+                Apply Now
+              </Button>
+              <Button variant="outline-white" className="btn-premium btn-glass px-10 py-5 rounded-2xl text-white font-black uppercase tracking-widest">
+                Explore Courses
+              </Button>
             </div>
           </div>
         </div>

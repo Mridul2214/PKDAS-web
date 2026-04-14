@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,9 +10,28 @@ import { BackgroundOverlayCard } from '../components/BackgroundOverlayCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// --- Wave Divider Component ---
+const WavyDivider = ({ type = 'wave1', color = 'white', position = 'top', flipped = false, opacity = 1 }) => {
+  const waves = {
+    wave1: "M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,112C960,139,1056,181,1152,176C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+    wave2: "M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,80C960,64,1056,96,1152,101.3C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+    wave3: "M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+  };
+
+  return (
+    <div className={`section-wave wave-${position} ${flipped ? 'wave-flipped' : ''}`} style={{ opacity }}>
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path fill={color} fillOpacity="1" d={waves[type]}></path>
+      </svg>
+    </div>
+  );
+};
+
+
+
 function BentoCard({ title, desc, images, spans }) {
-  const [activeIdx, setActiveIdx] = React.useState(0);
-  const intervalRef = React.useRef(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const intervalRef = useRef(null);
 
   const startCycling = () => {
     intervalRef.current = setInterval(() => {
@@ -27,7 +46,7 @@ function BentoCard({ title, desc, images, spans }) {
 
   return (
     <div
-      className={`gsap-stagger-child group relative rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 hover:border-white/20 transition-all duration-700 cursor-pointer shadow-2xl ${spans}`}
+      className={`gsap-stagger-child group relative rounded-3xl overflow-hidden border border-primary/10 bg-white hover:border-primary/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-primary/15 ${spans}`}
       style={{ isolation: 'isolate' }}
       onMouseEnter={startCycling}
       onMouseLeave={stopCycling}
@@ -45,32 +64,67 @@ function BentoCard({ title, desc, images, spans }) {
         ))}
       </div>
 
-      {/* Gradient overlay — only darken bottom area where text sits */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/5 to-transparent group-hover:from-black/90 group-hover:via-black/30 transition-all duration-500"></div>
+      {/* Dark gradient overlay for readability now that white shadow is removed */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-all duration-500"></div>
 
       {/* Content Layer */}
       <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
         <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
-          <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight drop-shadow-lg">
+          <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight">
             {title}
           </h3>
-          <p className="text-zinc-300 font-body text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 max-w-sm line-clamp-3 md:line-clamp-none">
+          <p className="text-white/80 font-body text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 max-w-sm line-clamp-3 md:line-clamp-none">
             {desc}
           </p>
         </div>
 
         {/* Perspective Line Graphic (Premium detail) */}
-        <div className="mt-6 flex items-center gap-4 opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="h-px bg-white/60 w-12 group-hover:w-20 transition-all duration-700"></div>
-          <span className="text-[10px] font-bold text-white/60 group-hover:text-white tracking-[0.2em] uppercase transition-colors duration-500">VIEW DETAILS</span>
+        <div className="mt-6 flex items-center gap-4 opacity-70 group-hover:opacity-100 transition-opacity duration-500">
+          <div className="h-px bg-white/40 w-12 group-hover:w-20 transition-all duration-700"></div>
+          <span className="text-[10px] font-bold text-white/90 tracking-[0.2em] uppercase transition-colors duration-500">VIEW DETAILS</span>
         </div>
       </div>
-
-      {/* Subtle hover glow — contained inside card */}
-      <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-[2]"></div>
     </div>
   );
 }
+
+const alumniReviews = [
+  {
+    name: "Anjali Menon",
+    batch: "2022",
+    dept: "Computer Science",
+    text: "PKDAS provided me not just an education, but a platform to discover my true potential. The faculty support was exceptional.",
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    name: "Siddharth Nair",
+    batch: "2021",
+    dept: "Mechanical Engineering",
+    text: "The state-of-the-art labs and hands-on projects prepared me perfectly for the challenges in the automotive industry.",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    name: "Priyanka Das",
+    batch: "2023",
+    dept: "Management Studies",
+    text: "From leadership workshops to corporate internships, the exposure at PKDAS is truly world-class.",
+    img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    name: "Rohan Varma",
+    batch: "2020",
+    dept: "Commerce",
+    text: "The vibrant campus life and the placement cell's dedication helped me land my dream job at a Big Four firm.",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    name: "Kavya S",
+    batch: "2022",
+    dept: "Biotechnology",
+    text: "Research-driven learning and amazing mentors. I am now pursuing my PhD with full confidence.",
+    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80"
+  }
+];
 
 export function Home() {
   const container = useRef(null);
@@ -78,61 +132,153 @@ export function Home() {
   const hoverTimer = useRef(null);
   const [instView, setInstView] = useState('categories'); // 'categories' | 'all' | category title
   const [instSearch, setInstSearch] = useState('');
-  const [expandedStudentCard, setExpandedStudentCard] = useState(null);
+
+  // Mobile Carousel States
+  const [activeAlumni, setActiveAlumni] = useState(0);
+  const [activeScholar, setActiveScholar] = useState(0);
+  const [activeCareer, setActiveCareer] = useState(0);
+
+  // Auto-slide effect for mobile carousels
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveAlumni((prev) => (prev + 1) % alumniReviews.length);
+      setActiveScholar((prev) => (prev + 1) % topStudents.length);
+      setActiveCareer((prev) => (prev + 1) % careerSuccessData.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, []);
 
   useGSAP(() => {
+    // ── Use gsap.set() + gsap.to() pattern instead of gsap.from() ──
+    // gsap.from() immediately sets opacity:0 and relies on ScrollTrigger
+    // timing to animate back — this fails on SPA navigation because
+    // trigger positions are calculated before layout settles.
+    // gsap.to() avoids this: elements start hidden via set(), and
+    // animate to visible whenever the trigger fires.
+
+    // Reveal individual elements
     const reveals = gsap.utils.toArray('.gsap-reveal');
     gsap.set(reveals, { opacity: 0, y: 30 });
     reveals.forEach((element) => {
       gsap.to(element, {
-        opacity: 1,
-        y: 0,
+        opacity: 1, y: 0,
         duration: 0.8,
         ease: 'power3.out',
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 95%',
-          toggleActions: 'play none none none'
-        }
+        scrollTrigger: { trigger: element, start: 'top 90%', toggleActions: 'play none none none' }
       });
     });
 
-    // Stagger parent blocks (includes bento cards)
+    // Patterned Reveals - Left
+    const revealsLeft = gsap.utils.toArray('.gsap-reveal-left');
+    gsap.set(revealsLeft, { opacity: 0, x: -50 });
+    revealsLeft.forEach((element) => {
+      gsap.to(element, {
+        opacity: 1, x: 0,
+        duration: 1,
+        ease: 'power4.out',
+        scrollTrigger: { trigger: element, start: 'top 90%' }
+      });
+    });
+
+    // Patterned Reveals - Right
+    const revealsRight = gsap.utils.toArray('.gsap-reveal-right');
+    gsap.set(revealsRight, { opacity: 0, x: 50 });
+    revealsRight.forEach((element) => {
+      gsap.to(element, {
+        opacity: 1, x: 0,
+        duration: 1,
+        ease: 'power4.out',
+        scrollTrigger: { trigger: element, start: 'top 90%' }
+      });
+    });
+
+    // Stagger parent blocks
     const staggerSections = gsap.utils.toArray('.gsap-stagger-parent');
     staggerSections.forEach((parent) => {
       const children = parent.querySelectorAll('.gsap-stagger-child');
-      gsap.set(children, { opacity: 0, y: 20 });
+      gsap.set(children, { opacity: 0, y: 30, scale: 0.95 });
       gsap.to(children, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: 'power2.out',
-        overwrite: 'auto',
-        scrollTrigger: {
-          trigger: parent,
-          start: 'top 95%',
-          toggleActions: 'play none none none'
-        }
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'back.out(1.2)',
+        scrollTrigger: { trigger: parent, start: 'top 85%' }
       });
     });
 
-    // Scholar cards
-    const scholarCards = gsap.utils.toArray('.scholar-wrapper');
-    if (scholarCards.length) {
-      gsap.set(scholarCards, { opacity: 0, y: 40 });
-      gsap.to(scholarCards, {
+    // Empowering Next Gen Images (Right side)
+    const aboutImages = gsap.utils.toArray('.about-floating-img');
+    if (aboutImages.length > 0) {
+      aboutImages.forEach((img) => {
+        const isCentered = img.classList.contains('-translate-x-1/2');
+        gsap.set(img, { 
+          opacity: 0, 
+          y: 120, // Reduced from 200 for smoother feel
+          ...(isCentered ? { xPercent: -50, yPercent: -50 } : {})
+        });
+      });
+
+      gsap.to(aboutImages, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power2.out',
-        overwrite: true,
+        duration: 1.4,
+        stagger: 0.12,
+        ease: 'power3.out', // Shifting to power3 for smoother deceleration
+        force3D: true,
         scrollTrigger: {
-          trigger: '.scholars-grid',
-          start: 'top 95%',
-          toggleActions: 'play none none none'
+          trigger: '.about-image-grid-trigger',
+          start: 'top 85%',
         }
+      });
+    }
+
+    // About Section Background Elements
+    const bgShapes = gsap.utils.toArray('.about-bg-shape');
+    if (bgShapes.length > 0) {
+      gsap.set(bgShapes, { opacity: 0, scale: 0.7 });
+      gsap.to(bgShapes, {
+        opacity: 1,
+        scale: 1,
+        duration: 2.5,
+        stagger: 0.4,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.about-section-trigger',
+          start: 'top 80%',
+        }
+      });
+    }
+
+    const bgDots = container.current.querySelector('.about-bg-dots');
+    if (bgDots) {
+      gsap.set(bgDots, { opacity: 0, y: 40 });
+      gsap.to(bgDots, {
+        opacity: 1,
+        y: 0,
+        duration: 2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.about-section-trigger',
+          start: 'top 85%',
+        }
+      });
+    }
+
+    // Generic Section Background Blobs Reveal
+    const sectionBlobs = gsap.utils.toArray('.section-bg-blob');
+    if (sectionBlobs.length > 0) {
+      gsap.set(sectionBlobs, { opacity: 0, scale: 0.8 });
+      sectionBlobs.forEach((blob) => {
+          gsap.to(blob, {
+            opacity: 1,
+            scale: 1,
+            duration: 3,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: blob,
+              start: 'top 95%',
+            }
+          });
       });
     }
 
@@ -156,37 +302,37 @@ export function Home() {
       title: "Engineering & Technology",
       description: "Fostering technical excellence across 4 elite engineering campuses.",
       colleges: ["NIET (Coimbatore)", "NIT (Coimbatore)", "NCERC (Kerala)", "JCET (Kerala)"],
-      img: "/Buildings/NGI-aerial view - NIET- Entrance.JPG"
+      img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=90"
     },
     {
       title: "Arts, Science & Commerce",
       description: "Premier programs focusing on literature and core sciences.",
       colleges: ["NASC (Coimbatore)", "PK Das Liberal College (Kerala)"],
-      img: "/Buildings/NGI-aerial view - NASC- Front view (2).JPG"
+      img: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=90"
     },
     {
       title: "Management & IT",
       description: "Developing strategic business leaders and leading-edge technologists.",
       colleges: ["NCM (Coimbatore)", "NIITM (Coimbatore)", "NSM (Kerala)"],
-      img: "/Buildings/NGI-aerial view - NIITM  (1).JPG"
+      img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=90"
     },
     {
       title: "Healthcare & Medical",
       description: "Pioneering medical sciences and progressive patient care.",
       colleges: ["PKDIMS Medical College", "Nursing Colleges", "Physiotherapy", "Allied Health Sciences"],
-      img: "/Buildings/NGI-aerial view - NASC- front view low angle - birds eye view.JPG"
+      img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=90"
     },
     {
       title: "Aviation & Specialized",
       description: "Niche, industry-focused training in aeronautical sciences.",
       colleges: ["Aeronautics Institute", "Jawaharlal Aviation", "Design Institute"],
-      img: "/Buildings/NGI-aerial view - NIT - Main block tight soht.JPG"
+      img: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=800&q=90"
     },
     {
       title: "Group Level Disciplines",
       description: "Specialized schools focusing on legal studies and architectural design.",
       colleges: ["Architecture Schools", "Nehru Academy of Law", "Nehru College of Pharmacy"],
-      img: "/Buildings/NGI-aerial view - NASC- Front view (2).JPG"
+      img: "https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=800&q=90"
     }
   ]; const highlights = [
     {
@@ -246,44 +392,95 @@ export function Home() {
     }
   ];
 
-  const topStudents = [
-    {
-      name: "Aisha Rahman",
-      course: "B.Sc Computer Science",
-      achievement: "Secured University 1st Rank and recruited by Google as a Software Engineer.",
-      img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-      name: "Rahul Menon",
-      course: "BBA",
-      achievement: "Founded a successful tech startup while in his final year of studies.",
-      img: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-      name: "Sneha Krishnan",
-      course: "BA English",
-      achievement: "Published author and winner of the National Youth Literary Award.",
-      img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-      name: "Priya Sharma",
-      course: "M.Sc Data Science",
-      achievement: "Published a research paper on predictive AI models in a top ACM journal.",
-      img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-      name: "David Chen",
-      course: "B.Tech Aerospace",
-      achievement: "Won the National Robotics Competition and interned at ISRO.",
-      img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
-    },
-    {
-      name: "Anita Desai",
-      course: "B.Sc Nursing",
-      achievement: "Awarded 'Best Student Nurse' for exemplary service during clinicals.",
-      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
-    }
-  ];
+const topStudents = [
+  {
+    name: "Aisha Rahman",
+    course: "B.Sc Computer Science",
+    achievement: "Secured University 1st Rank and recruited by Google as a Software Engineer.",
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    name: "Rahul Menon",
+    course: "BBA",
+    achievement: "Founded a successful tech startup while in his final year of studies.",
+    img: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    name: "Sneha Krishnan",
+    course: "BA English",
+    achievement: "Published author and winner of the National Youth Literary Award.",
+    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    name: "Priya Sharma",
+    course: "M.Sc Data Science",
+    achievement: "Published a research paper on predictive AI models in a top ACM journal.",
+    img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    name: "David Chen",
+    course: "B.Tech Aerospace",
+    achievement: "Won the National Robotics Competition and interned at ISRO.",
+    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    name: "Anita Desai",
+    course: "B.Sc Nursing",
+    achievement: "Awarded 'Best Student Nurse' for exemplary service during clinicals.",
+    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+  }
+];
+
+const careerSuccessData = [
+  {
+    name: 'Arjun Nair',
+    role: 'Software Engineer',
+    company: 'TCS',
+    ctc: '₹6.5 LPA',
+    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+    quote: 'The placement cell prepared me with mock interviews and resume workshops that made all the difference.'
+  },
+  {
+    name: 'Meera Krishnan',
+    role: 'Data Analyst',
+    company: 'Infosys',
+    ctc: '₹5.8 LPA',
+    img: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80',
+    quote: 'From campus to corporate — the transition was seamless thanks to the industry exposure I received here.'
+  },
+  {
+    name: 'Rahul Menon',
+    role: 'Associate Consultant',
+    company: 'Deloitte',
+    ctc: '₹8.2 LPA',
+    img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80',
+    quote: 'The practical learning approach and expert mentors gave me a competitive edge in every interview.'
+  },
+  {
+    name: 'Sneha Das',
+    role: 'Cloud Engineer',
+    company: 'Amazon',
+    ctc: '₹10 LPA',
+    img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80',
+    quote: 'Landing a role at Amazon was a dream — the college\'s placement support made it a reality.'
+  },
+  {
+    name: 'Vishnu Prasad',
+    role: 'Business Analyst',
+    company: 'Capgemini',
+    ctc: '₹7 LPA',
+    img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80',
+    quote: 'The internship program was the gateway that connected me directly to my first corporate role.'
+  },
+  {
+    name: 'Ananya Roy',
+    role: 'UI/UX Designer',
+    company: 'Wipro',
+    ctc: '₹6 LPA',
+    img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80',
+    quote: 'Being creative is one thing, but the college taught me how to apply that creativity to solve business problems.'
+  }
+];
 
   const cultureSections = [
     {
@@ -325,20 +522,31 @@ export function Home() {
   ];
 
   return (
-    <main ref={container} className="bg-black">
+    <main ref={container} className="bg-surface">
       <Hero />
 
       {/* About Preview Section */}
-      <section className="relative z-[20] py-24 bg-transparent overflow-hidden">
-        {/* Subtle Background Blob */}
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+      <section className="relative z-[20] py-24 bg-transparent overflow-hidden about-section-trigger">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <div className="about-bg-shape absolute -top-20 -left-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"></div>
+          <div className="about-bg-shape absolute bottom-0 -right-40 w-[500px] h-[500px] bg-accent/20 rounded-full blur-[100px]"></div>
+          
+          {/* Decorative Pattern - Enhanced visibility */}
+          <div className="about-bg-dots absolute top-40 right-10 flex flex-wrap w-32 gap-3 opacity-0">
+             {[...Array(24)].map((_, i) => (
+                <div key={i} className="w-2 h-2 rounded-full bg-primary/30"></div>
+             ))}
+          </div>
+          
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-px h-80 bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
+        </div>
 
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left Content */}
             <div className="max-w-2xl">
               <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-widest uppercase mb-6 border border-primary/20">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                 Discover PKDAS
               </div>
               <h2 className="gsap-reveal text-display-md md:text-5xl lg:text-6xl font-display text-on-surface mb-6 leading-tight">
@@ -353,11 +561,11 @@ export function Home() {
               <div className="gsap-stagger-parent grid grid-cols-2 gap-6 mb-10">
                 <div className="gsap-stagger-child border-l-2 border-primary pl-4">
                   <div className="text-3xl font-display font-medium text-on-surface mb-1">20+</div>
-                  <div className="text-sm font-body text-on-surface-variant uppercase tracking-wide">Years of Heritage</div>
+                  <div className="text-xs font-display text-on-surface-variant uppercase tracking-widest">Years of Heritage</div>
                 </div>
                 <div className="gsap-stagger-child border-l-2 border-accent pl-4">
                   <div className="text-3xl font-display font-medium text-on-surface mb-1">3500+</div>
-                  <div className="text-sm font-body text-on-surface-variant uppercase tracking-wide">Active Students</div>
+                  <div className="text-xs font-display text-on-surface-variant uppercase tracking-widest">Active Students</div>
                 </div>
               </div>
 
@@ -370,34 +578,42 @@ export function Home() {
             </div>
 
             {/* Right Interactive Image Grid */}
-            <div className="relative h-[600px] w-full hidden md:block">
+            <div className="relative h-[600px] w-full hidden md:block about-image-grid-trigger">
               {/* Center Main Image */}
-              <img
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Students collaborating"
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-80 object-cover rounded-2xl shadow-2xl z-20 border-[6px] border-surface-container-lowest"
-              />
+              <div className="about-floating-img absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-80 z-20">
+                <img
+                  src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  alt="Students collaborating"
+                  className="w-full h-full object-cover rounded-2xl shadow-2xl border-[6px] border-surface-container-lowest hover:scale-105 transition-transform duration-500 cursor-pointer"
+                />
+              </div>
+
               {/* Floating Image Top Left */}
-              <img
-                src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Campus Life"
-                className="absolute top-[10%] left-[5%] w-48 h-56 object-cover rounded-2xl shadow-xl z-10 border-4 border-surface-container-lowest hover:rotate-3 transition-transform duration-500 hover:z-30 hover:scale-105 cursor-pointer"
-              />
+              <div className="about-floating-img absolute top-[10%] left-[5%] w-48 h-56 z-10 hover:z-40">
+                <img
+                  src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                  alt="Campus Life"
+                  className="w-full h-full object-cover rounded-2xl shadow-xl border-4 border-surface-container-lowest hover:rotate-3 transition-transform duration-500 hover:scale-105 cursor-pointer"
+                />
+              </div>
+
               {/* Floating Image Bottom Right */}
-              <img
-                src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="University students"
-                className="absolute bottom-[10%] right-[0%] w-60 h-48 object-cover rounded-2xl shadow-xl z-30 border-4 border-surface-container-lowest hover:-rotate-3 transition-transform duration-500 hover:scale-105 cursor-pointer"
-              />
+              <div className="about-floating-img absolute bottom-[10%] right-[0%] w-60 h-48 z-30 hover:z-40">
+                <img
+                  src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                  alt="University students"
+                  className="w-full h-full object-cover rounded-2xl shadow-xl border-4 border-surface-container-lowest hover:-rotate-3 transition-transform duration-500 hover:scale-105 cursor-pointer"
+                />
+              </div>
+
               {/* Floating Image Bottom Left */}
-              <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Study group"
-                className="absolute bottom-[5%] left-[20%] w-40 h-40 object-cover rounded-2xl shadow-lg z-10 border-4 border-surface-container-lowest hover:rotate-6 transition-transform duration-500 hover:z-30 hover:scale-105 cursor-pointer"
-              />
-              {/* decorative element */}
-              <div className="absolute top-[20%] right-[10%] w-24 h-24 bg-accent/20 rounded-full blur-xl animate-pulse delay-700 pointer-events-none"></div>
-              <div className="absolute bottom-[20%] left-[5%] w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-pulse pointer-events-none"></div>
+              <div className="about-floating-img absolute bottom-[5%] left-[20%] w-40 h-40 z-10 hover:z-40">
+                <img
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                  alt="Study group"
+                  className="w-full h-full object-cover rounded-2xl shadow-lg border-4 border-surface-container-lowest hover:rotate-6 transition-transform duration-500 hover:scale-105 cursor-pointer"
+                />
+              </div>
             </div>
 
             {/* Mobile Fallback Image List */}
@@ -411,21 +627,35 @@ export function Home() {
       </section>
 
       {/* ── Achievements Section ── */}
-      <section className="relative z-[20] py-24 bg-transparent overflow-hidden">
-        <div className="container mx-auto px-6">
+      <section className="relative z-[20] py-40 bg-white overflow-hidden">
+        {/* Section-Wide Background Image Slot */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+           <img 
+             src="/backgrounds/3rd%20section.jpg" 
+             className="w-full h-full object-cover opacity-100" 
+             alt="Background"
+           />
+           {/* Semi-transparent overlay to ensure text contrast while keeping image visible */}
+           <div className="absolute inset-0 bg-white/70"></div>
+        </div>
+        
+        {/* Top Wave (matching Hero surface) */}
+        <WavyDivider type="wave1" color="var(--color-surface)" position="top" flipped={true} />
+        
+        <div className="container mx-auto px-6 relative z-10">
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-bold tracking-widest uppercase mb-5 border border-amber-500/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0145F2]/10 text-[#0145F2] text-xs font-bold tracking-widest uppercase mb-5 border border-[#0145F2]/20">
               Milestones
             </div>
-            <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-white leading-tight mb-5">
-              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">Achievements</span>
+            <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-on-surface leading-tight mb-5">
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Achievements</span>
             </h2>
-            <p className="gsap-reveal text-zinc-400 font-body text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="gsap-reveal text-on-surface-variant font-display text-xl leading-relaxed max-w-2xl mx-auto italic opacity-80">
               Decades of excellence reflected in the accomplishments of our students, faculty, and institution. Every milestone fuels our mission to empower the next generation.
             </p>
           </div>
+
 
           {/* Achievement Cards — Asymmetric Grid */}
           <div className="gsap-stagger-parent grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
@@ -523,28 +753,46 @@ export function Home() {
               { value: '200+', label: 'Awards Won', icon: '🏆' },
               { value: '50K+', label: 'Alumni Network', icon: '🌐' },
             ].map((stat, idx) => (
-              <div key={idx} className="gsap-stagger-child group text-center p-8 rounded-2xl border border-white/5 hover:border-amber-400/20 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500">
+              <div key={idx} className="gsap-stagger-child group text-center p-8 rounded-2xl border border-primary/5 hover:border-amber-400/20 bg-white hover:bg-slate-50 transition-all duration-500 shadow-sm hover:shadow-lg">
                 <div className="text-3xl mb-3">{stat.icon}</div>
-                <div className="text-4xl md:text-5xl font-display font-bold text-white mb-2 group-hover:text-amber-400 transition-colors duration-500">
+                <div className="text-4xl md:text-5xl font-display font-bold text-on-surface mb-2 group-hover:text-primary transition-colors duration-500">
                   {stat.value}
                 </div>
-                <div className="text-xs font-body text-zinc-500 uppercase tracking-[0.2em]">{stat.label}</div>
+                <div className="text-xs font-display text-on-surface-variant/70 uppercase tracking-[0.2em]">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+
       {/* Institutions Overview Section */}
-      <section className="relative z-[20] py-16 bg-transparent text-on-surface">
-        <div className="absolute top-0 left-0 w-full h-px bg-surface-container-high"></div>
-        <div className="container mx-auto px-6">
+      <section className="relative z-[20] py-40 bg-[#EDF1F5] text-on-surface overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <div className="section-bg-blob absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px]"></div>
+          <div className="section-bg-blob absolute top-1/2 -left-40 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]"></div>
+          
+          <div className="absolute bottom-20 left-10 opacity-20 hidden md:block">
+             <div className="grid grid-cols-4 gap-4">
+                {[...Array(12)].map((_, i) => (
+                   <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+                ))}
+             </div>
+          </div>
+        </div>
+
+        {/* Wave matches Achievements (White) */}
+        <WavyDivider type="wave1" color="white" position="top" flipped={true} />
+        
+        <div className="container mx-auto px-6 relative z-10 gsap-stagger-parent">
           <div className="max-w-3xl mb-10 mx-auto text-center">
-            <h2 className="gsap-reveal text-display-md md:text-5xl font-display mb-6">Our Institutions</h2>
-            <p className="gsap-reveal text-lg text-on-surface-variant font-body">
+            <h2 className="gsap-reveal text-3xl md:text-display-md lg:text-5xl font-display mb-4 md:mb-6 text-on-surface">Our Institutions</h2>
+            <p className="gsap-reveal text-lg md:text-xl text-on-surface-variant font-display italic opacity-80">
               Explore our diverse ecosystem of specialized colleges and institutes, operating across multiple cutting-edge domains.
             </p>
           </div>
+
 
           {/* Filter Tabs + Search */}
           <div className="gsap-reveal flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
@@ -552,13 +800,13 @@ export function Home() {
             <div className="flex flex-wrap items-center gap-2">
               <button
                 onClick={() => { setInstView('categories'); setInstSearch(''); }}
-                className={`px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === 'categories' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-high/80'}`}
+                className={`px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === 'categories' ? 'bg-[#0145F2] text-white shadow-lg shadow-[#0145F2]/20' : 'bg-white text-on-surface-variant hover:bg-[#EDF1F5]'}`}
               >
                 Categories
               </button>
               <button
                 onClick={() => { setInstView('all'); setInstSearch(''); }}
-                className={`px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === 'all' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-high/80'}`}
+                className={`px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === 'all' ? 'bg-[#0145F2] text-white shadow-lg shadow-[#0145F2]/20' : 'bg-white text-on-surface-variant hover:bg-[#EDF1F5]'}`}
               >
                 All Colleges
               </button>
@@ -695,60 +943,98 @@ export function Home() {
         </div>
       </section>
 
+      {/* Mid-Page Quick Enrollment CTA */}
+      {/* <div className="relative z-30 bg-surface">
+        <div className="container mx-auto px-6 py-16">
+          <div className="relative group overflow-hidden bg-primary px-8 py-12 md:py-16 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row items-center justify-between gap-10">
+             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+             
+             <div className="relative z-10 text-center md:text-left">
+                <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">Ready to start your journey?</h3>
+                <p className="text-white/80 text-lg max-w-lg">Get immediate assistance with admissions and take the first step towards a bright career.</p>
+             </div>
+             
+             <div className="relative z-10 flex flex-col sm:flex-row flex-wrap justify-center gap-4 w-full sm:w-auto">
+                <Link to="/contact" className="w-full sm:w-auto text-center px-6 md:px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-slate-50 transition-all shadow-lg hover:scale-105">
+                   Request Information
+                </Link>
+                <a href="tel:+914912501234" className="w-full sm:w-auto text-center px-6 md:px-8 py-4 bg-primary-btn text-white font-bold border border-white/20 rounded-xl hover:bg-white/10 transition-all shadow-lg">
+                   Call: +91 491 250...
+                </a>
+             </div>
+          </div>
+        </div>
+      </div> */}
+
+
       {/* ── What's Your Interest? ── */}
-      <section className="relative z-[20] py-14 sm:py-20 md:py-24 bg-transparent overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="relative z-[20] py-32 md:py-40 bg-white overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <div className="section-bg-blob absolute top-0 -right-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[130px]"></div>
+          <div className="section-bg-blob absolute bottom-0 -left-20 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[110px]"></div>
+        </div>
+
+        {/* Wave matches Institutions (Off-white) */}
+        <WavyDivider type="wave2" color="var(--color-surface)" position="top" flipped={true} />
+
+        <div className="container mx-auto px-6 relative z-10">
           {/* Header Row */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-14">
             <div>
-              <h2 className="gsap-reveal text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight">
+              <h2 className="gsap-reveal text-4xl md:text-5xl lg:text-7xl font-display font-bold text-on-surface leading-tight">
                 What's Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Interest?</span>
               </h2>
-              <p className="gsap-reveal text-zinc-400 font-body text-base sm:text-lg mt-2 sm:mt-3 max-w-xl">
+              <p className="gsap-reveal text-on-surface-variant font-body text-lg mt-3 max-w-xl">
                 Explore our diverse range of academic disciplines and find your perfect path.
               </p>
             </div>
             <div className="gsap-reveal flex items-center gap-3 flex-shrink-0">
-              <Link to="/courses" className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/15 text-white font-semibold text-xs sm:text-sm hover:bg-white/5 transition-all duration-300">
-                Search Programs
+              <Link to="/courses" className="relative group overflow-hidden px-6 py-3 rounded-full border border-primary/20 text-primary font-bold text-sm transition-all duration-300 hover:text-white">
+                <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+                <span className="relative z-10">Search Programs</span>
               </Link>
-              <Link to="/contact" className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-primary text-white font-semibold text-xs sm:text-sm hover:brightness-110 transition-all duration-300 shadow-lg shadow-primary/20">
-                Apply Now
+              <Link to="/contact" className="relative group overflow-hidden px-6 py-3 rounded-full bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-105 active:scale-95">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <span className="relative z-10 flex items-center gap-2">
+                  Apply Now
+                  <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </span>
               </Link>
             </div>
           </div>
 
           {/* Disciplines Grid */}
-          <div className="gsap-stagger-parent grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div className="gsap-stagger-parent grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {[
-              { name: 'Arts & Humanities', slug: 'arts-humanities', icon: '🎨', color: 'from-rose-500/20 to-rose-500/5', border: 'hover:border-rose-400/30' },
-              { name: 'Commerce', slug: 'commerce', icon: '📊', color: 'from-blue-500/20 to-blue-500/5', border: 'hover:border-blue-400/30' },
-              { name: 'Computer Science', slug: 'computer-science', icon: '💻', color: 'from-violet-500/20 to-violet-500/5', border: 'hover:border-violet-400/30' },
-              { name: 'Engineering', slug: 'engineering', icon: '⚙️', color: 'from-zinc-500/20 to-zinc-500/5', border: 'hover:border-zinc-400/30' },
-              { name: 'Architecture', slug: 'architecture', icon: '🏛️', color: 'from-amber-500/20 to-amber-500/5', border: 'hover:border-amber-400/30' },
-              { name: 'Business & MBA', slug: 'business-mba', icon: '💼', color: 'from-emerald-500/20 to-emerald-500/5', border: 'hover:border-emerald-400/30' },
-              { name: 'Medicine', slug: 'medicine', icon: '🩺', color: 'from-red-500/20 to-red-500/5', border: 'hover:border-red-400/30' },
-              { name: 'Nursing', slug: 'nursing', icon: '🏥', color: 'from-pink-500/20 to-pink-500/5', border: 'hover:border-pink-400/30' },
-              { name: 'Pharmacy', slug: 'pharmacy', icon: '💊', color: 'from-teal-500/20 to-teal-500/5', border: 'hover:border-teal-400/30' },
-              { name: 'Aviation', slug: 'aviation', icon: '✈️', color: 'from-sky-500/20 to-sky-500/5', border: 'hover:border-sky-400/30' },
-              { name: 'Law', slug: 'law', icon: '⚖️', color: 'from-yellow-500/20 to-yellow-500/5', border: 'hover:border-yellow-400/30' },
-              { name: 'Data Science', slug: 'data-science', icon: '📈', color: 'from-indigo-500/20 to-indigo-500/5', border: 'hover:border-indigo-400/30' },
-              { name: 'Biotechnology', slug: 'biotechnology', icon: '🧬', color: 'from-lime-500/20 to-lime-500/5', border: 'hover:border-lime-400/30' },
-              { name: 'Physical Sciences', slug: 'physical-sciences', icon: '🔬', color: 'from-cyan-500/20 to-cyan-500/5', border: 'hover:border-cyan-400/30' },
-              { name: 'Allied Health', slug: 'allied-health', icon: '🫀', color: 'from-orange-500/20 to-orange-500/5', border: 'hover:border-orange-400/30' },
-              { name: 'Design', slug: 'design', icon: '🎯', color: 'from-fuchsia-500/20 to-fuchsia-500/5', border: 'hover:border-fuchsia-400/30' },
-              { name: 'Physiotherapy', slug: 'physiotherapy', icon: '🦴', color: 'from-green-500/20 to-green-500/5', border: 'hover:border-green-400/30' },
-              { name: 'Aeronautics', slug: 'aeronautics', icon: '🚀', color: 'from-blue-600/20 to-blue-600/5', border: 'hover:border-blue-500/30' },
+              { name: 'Arts & Humanities', slug: 'arts-humanities', icon: '🎨', color: 'from-rose-500/10' },
+              { name: 'Commerce', slug: 'commerce', icon: '📊', color: 'from-blue-500/10' },
+              { name: 'Computer Science', slug: 'computer-science', icon: '💻', color: 'from-violet-500/10' },
+              { name: 'Engineering', slug: 'engineering', icon: '⚙️', color: 'from-zinc-500/10' },
+              { name: 'Architecture', slug: 'architecture', icon: '🏛️', color: 'from-amber-500/10' },
+              { name: 'Business & MBA', slug: 'business-mba', icon: '💼', color: 'from-emerald-500/10' },
+              { name: 'Medicine', slug: 'medicine', icon: '🩺', color: 'from-red-500/10' },
+              { name: 'Nursing', slug: 'nursing', icon: '🏥', color: 'from-pink-500/10' },
+              { name: 'Pharmacy', slug: 'pharmacy', icon: '💊', color: 'from-teal-500/10' },
+              { name: 'Aviation', slug: 'aviation', icon: '✈️', color: 'from-sky-500/10' },
+              { name: 'Law', slug: 'law', icon: '⚖️', color: 'from-yellow-500/10' },
+              { name: 'Data Science', slug: 'data-science', icon: '📈', color: 'from-indigo-500/10' },
+              { name: 'Biotechnology', slug: 'biotechnology', icon: '🧬', color: 'from-lime-500/10' },
+              { name: 'Physical Sciences', slug: 'physical-sciences', icon: '🔬', color: 'from-cyan-500/10' },
+              { name: 'Allied Health', slug: 'allied-health', icon: '🫀', color: 'from-orange-500/10' },
+              { name: 'Design', slug: 'design', icon: '🎯', color: 'from-fuchsia-500/10' },
+              { name: 'Physiotherapy', slug: 'physiotherapy', icon: '🦴', color: 'from-green-500/10' },
+              { name: 'Aeronautics', slug: 'aeronautics', icon: '🚀', color: 'from-blue-600/10' },
             ].map((discipline, idx) => (
               <Link
                 to={`/interest/${discipline.slug}`}
                 key={idx}
-                className={`gsap-stagger-child group flex items-center gap-3 sm:gap-4 p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-white/10 ${discipline.border} bg-white/[0.06] backdrop-blur-md shadow-lg shadow-black/20 hover:bg-gradient-to-br ${discipline.color} transition-all duration-300 cursor-pointer hover:-translate-y-1`}
+                className={`gsap-stagger-child group flex flex-col items-center text-center gap-4 p-5 rounded-2xl border border-primary/5 bg-white shadow-sm hover:shadow-xl hover:shadow-primary/5 hover:bg-gradient-to-br ${discipline.color} transition-all duration-300 cursor-pointer hover:-translate-y-1`}
               >
-                <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-white/10 border border-white/5 flex items-center justify-center text-xl sm:text-2xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0 shadow-inner">
+                <div className="w-11 h-11 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0 shadow-sm">
                   {discipline.icon}
                 </div>
-                <span className="text-xs sm:text-sm font-body font-semibold text-zinc-100 group-hover:text-white transition-colors duration-300 leading-tight">
+                <span className="text-sm font-body font-bold text-on-surface group-hover:text-primary transition-colors duration-300 leading-tight">
                   {discipline.name}
                 </span>
               </Link>
@@ -757,74 +1043,86 @@ export function Home() {
         </div>
       </section>
 
-      {/* Top Students Spotlight */}
-      <section className="relative z-[20] py-16 bg-transparent text-on-surface border-t border-white/5">
-        <div className="container mx-auto px-6">
+      {/* Top Students Spotlight - DARK BREAK SECTION */}
+      <section className="relative z-[20] py-40 bg-[var(--color-section-dark)] text-white overflow-hidden">
+        {/* Wave matches Interests (White) */}
+        <WavyDivider type="wave3" color="white" position="top" flipped={true} />
+        
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mb-12 mx-auto text-center">
-            <h2 className="gsap-reveal text-display-md md:text-5xl font-display mb-6">Our Top Scholars</h2>
-            <p className="gsap-reveal text-lg text-on-surface-variant font-body">
+            <h2 className="gsap-reveal text-display-md md:text-5xl font-display mb-6 text-white">Our Top Scholars</h2>
+            <p className="gsap-reveal text-lg text-white/70 font-body">
               Meet some of our brightest minds who are setting new benchmarks in academics, leadership, and innovation.
             </p>
           </div>
-          <div className="scholars-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 relative z-10 w-full mb-8 pt-8">
+
+          {/* Scholars Desktop Grid */}
+          <div className="hidden md:grid scholars-grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 relative z-10 w-full mb-8 pt-8">
             {topStudents.map((student, idx) => (
               <div key={idx} className="flex flex-col group relative">
-                {/* Visual Card Area */}
                 <div className="relative pt-8 px-4 mb-6">
-                  {/* Dark Blue Base Card */}
-                  <div className="absolute inset-x-0 bottom-0 top-12 bg-[#081b3f] rounded-[2.5rem] z-0 overflow-hidden shadow-2xl transition-transform duration-500 group-hover:-translate-y-2">
-                    {/* Subtle Repeating Watermark like in screenshot */}
-                    <div className="absolute inset-0 opacity-[0.03] text-white font-display text-9xl font-black flex items-center justify-center whitespace-nowrap overflow-hidden tracking-[0.5em] pointer-events-none select-none">
-                      P K D A S
-                    </div>
+                  <div className="absolute inset-x-0 bottom-0 top-12 bg-white border border-primary/10 rounded-[2.5rem] z-0 overflow-hidden shadow-xl transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-primary/15 hover:border-primary/30">
+                    <div className="absolute inset-0 opacity-[0.02] text-primary font-display text-9xl font-black flex items-center justify-center whitespace-nowrap overflow-hidden tracking-[0.5em] pointer-events-none select-none">P K D A S</div>
                   </div>
-
-                  {/* Image Masked as a Bust */}
                   <div className="relative z-10 flex justify-center h-[260px]">
-                    <img
-                      src={student.img}
-                      alt={student.name}
-                      className="w-full max-w-[220px] h-full object-cover rounded-t-[140px] rounded-b-[40px] shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 ease-out group-hover:scale-105 group-hover:rounded-t-[100px]"
-                    />
+                    <img src={student.img} alt={student.name} className="w-full max-w-[220px] h-full object-cover rounded-t-[140px] rounded-b-[40px] transition-all duration-700 ease-out group-hover:scale-105 group-hover:rounded-t-[100px]" />
                   </div>
-
-                  {/* Floating Frosted Tag */}
-                  <div className="absolute top-[40%] -left-2 z-20 bg-blue-500/20 backdrop-blur-md border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-lg transform -rotate-[5deg] shadow-lg group-hover:-rotate-[2deg] group-hover:bg-blue-500/40 transition-all duration-300">
-                    {student.course}
-                  </div>
+                  <div className="absolute top-[40%] -left-2 z-20 bg-primary/95 backdrop-blur-md border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-lg transform -rotate-[5deg] shadow-lg group-hover:-rotate-[2deg] group-hover:bg-primary transition-all duration-300">{student.course}</div>
                 </div>
-
-                {/* Text Info Below */}
                 <div className="px-2">
-                  <h3 className="text-xl md:text-2xl font-display font-medium text-white flex items-center gap-2 mb-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500/80"></span>
-                    {student.name}
-                  </h3>
-                  <p className="font-body text-sm md:text-base text-zinc-400 leading-relaxed mb-6 lg:min-h-[72px]">
-                    {student.achievement}
-                  </p>
-                  <button className="text-xs font-bold text-blue-500 tracking-widest uppercase hover:text-white transition-colors flex items-center gap-2 cursor-pointer group/link w-fit">
-                    FIND OUT MORE
-                    <span className="text-base group-hover/link:translate-x-1 transition-transform">→</span>
-                  </button>
+                  <h3 className="text-xl md:text-2xl font-display font-medium text-white mb-3 hover:text-primary transition-colors">{student.name}</h3>
+                  <p className="font-body text-sm md:text-base text-white/70 leading-relaxed mb-6 lg:min-h-[72px]">{student.achievement}</p>
+                  <button className="text-xs font-bold text-amber-400 tracking-widest uppercase hover:text-amber-300 transition-colors flex items-center gap-2 cursor-pointer group w-fit">FIND OUT MORE<span className="text-base group-hover:translate-x-1 transition-transform">→</span></button>
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* Scholars Mobile Carousel (Single focused card, 2s shift) */}
+          <div className="flex md:hidden overflow-hidden w-full relative z-10 mb-8 pt-4">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out w-full"
+              style={{ transform: `translateX(-${activeScholar * 100}%)` }}
+            >
+              {topStudents.map((student, idx) => (
+                <div key={idx} className="w-full flex-shrink-0 px-4">
+                   <div className="flex flex-col group relative bg-white/5 border border-white/10 p-6 rounded-[2rem] backdrop-blur-sm">
+                      <div className="flex justify-center mb-6">
+                        <img src={student.img} alt={student.name} className="w-32 h-40 object-cover rounded-t-full rounded-b-2xl border border-white/20" />
+                      </div>
+                      <div className="text-center">
+                        <div className="inline-block px-3 py-1 bg-primary text-[10px] font-bold text-white rounded-full mb-3 uppercase tracking-wider">{student.course}</div>
+                        <h3 className="text-xl font-display font-medium text-white mb-2">{student.name}</h3>
+                        <p className="font-body text-sm text-white/70 leading-relaxed mb-4">{student.achievement}</p>
+                        <button className="text-[10px] font-bold text-amber-400 tracking-widest uppercase flex items-center gap-1 mx-auto">LEARN MORE<span>→</span></button>
+                      </div>
+                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex md:hidden justify-center gap-2 mb-8">
+            {topStudents.map((_, i) => (
+              <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === activeScholar ? 'w-4 bg-primary' : 'w-1 bg-white/20'}`}></div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Highlights Section - Bento Redesign */}
-      <section className="relative py-32 overflow-hidden" style={{ backgroundColor: 'transparent', isolation: 'isolate', zIndex: 20 }}>
+      <section className="relative py-40 bg-white overflow-hidden" style={{ isolation: 'isolate', zIndex: 20 }}>
+        {/* Wave matches Scholar Spotlight (Off-white) */}
+        <WavyDivider type="wave1" color="var(--color-surface)" position="top" flipped={true} />
 
         <div className="container mx-auto px-6 relative z-10">
+
           <div className="max-w-4xl mb-20 mx-auto text-center">
 
-            <h2 className="gsap-reveal text-5xl md:text-7xl font-display font-bold text-white leading-tight mb-6">
-              Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 ">Choose </span>
+            <h2 className="gsap-reveal text-5xl md:text-7xl font-display font-bold text-on-surface leading-tight mb-6">
+              Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600 ">Choose </span>
               Us
             </h2>
-            <p className="gsap-reveal text-zinc-400 font-body text-xl max-w-2xl leading-relaxed mx-auto">
+            <p className="gsap-reveal text-on-surface-variant font-body text-xl max-w-2xl leading-relaxed mx-auto">
               We combine legendary heritage with modern innovation to create an educational experience that is truly world-class.
             </p>
           </div>
@@ -855,20 +1153,23 @@ export function Home() {
       </section>
 
       {/* Campus Culture & Additional Sections */}
-      <section className="relative z-[20] py-24 bg-transparent overflow-hidden">
-        <div className="container mx-auto px-6">
+      <section className="relative z-[20] py-32 bg-surface overflow-hidden">
+        {/* Wave matches Highlights (White) */}
+        <WavyDivider type="wave2" color="white" position="top" flipped={true} />
+        
+        <div className="container mx-auto px-6 relative z-10">
+
 
           {/* Section Heading */}
           <div className="mb-20 max-w-3xl mx-auto text-center">
-            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-bold tracking-widest uppercase mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-on-surface-variant text-xs font-bold tracking-widest uppercase mb-5">
               Student Experience
             </div>
-            <h2 className="gsap-reveal text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-none mb-5">
+            <h2 className="gsap-reveal text-5xl md:text-6xl lg:text-7xl font-display font-bold text-on-surface leading-none mb-5">
               Campus
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400"> Life</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600"> Life</span>
             </h2>
-            <p className="gsap-reveal text-zinc-400 font-body text-lg md:text-xl leading-relaxed max-w-xl mx-auto">
+            <p className="gsap-reveal text-on-surface-variant font-body text-lg md:text-xl leading-relaxed max-w-xl mx-auto">
               A world beyond academics — discover the vibrant events, sports, arts, and clubs that make NASC a truly unforgettable place to grow.
             </p>
           </div>
@@ -877,36 +1178,35 @@ export function Home() {
             {cultureSections.map((section, index) => (
               <div key={index} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 {/* 3D Card Image */}
-                <CardContainer
-                  containerClassName={`w-full ${section.reverse ? 'lg:order-2' : 'lg:order-1'}`}
-                  className="w-full"
-                >
-                  <CardBody className="w-full h-[300px] md:h-[400px] lg:h-[460px] rounded-2xl overflow-hidden relative">
-                    <CardItem translateZ={60} className="w-full h-full">
-                      <video
-                        src={section.video}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover rounded-2xl shadow-2xl"
-                      />
-                    </CardItem>
-                    {/* Floating subtitle badge */}
-                    <CardItem
-                      translateZ={90}
-                      className="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest rounded-full"
-                    >
-                      {section.subtitle}
-                    </CardItem>
-                  </CardBody>
-                </CardContainer>
+                <div className={`gsap-reveal-${section.reverse ? 'right' : 'left'} w-full ${section.reverse ? 'lg:order-2' : 'lg:order-1'}`}>
+                  <CardContainer className="w-full">
+                    <CardBody className="w-full h-[300px] md:h-[400px] lg:h-[460px] rounded-2xl overflow-hidden relative shadow-2xl">
+                      <CardItem translateZ={60} className="w-full h-full">
+                        <video
+                          src={section.video}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover rounded-2xl"
+                        />
+                      </CardItem>
+                      {/* Floating subtitle badge */}
+                      <CardItem
+                        translateZ={90}
+                        className="absolute top-4 left-4 px-3 py-1 bg-primary/90 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest rounded-full"
+                      >
+                        {section.subtitle}
+                      </CardItem>
+                    </CardBody>
+                  </CardContainer>
+                </div>
 
                 {/* Text Content */}
-                <div className={`max-w-xl mx-auto lg:mx-0 ${section.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
+                <div className={`gsap-reveal-${section.reverse ? 'left' : 'right'} max-w-xl mx-auto lg:mx-0 ${section.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
                   <p className="gsap-reveal text-primary font-cursive text-3xl lg:text-4xl capitalize mb-2 drop-shadow-md">{section.subtitle}</p>
-                  <h2 className="gsap-reveal text-4xl md:text-5xl font-display text-white mb-6 font-bold leading-tight">{section.title}</h2>
-                  <p className="gsap-reveal text-zinc-400 font-body leading-relaxed mb-10 text-lg md:text-xl">{section.description}</p>
+                  <h2 className="gsap-reveal text-4xl md:text-5xl font-display text-on-surface mb-6 font-bold leading-tight">{section.title}</h2>
+                  <p className="gsap-reveal text-on-surface-variant font-body leading-relaxed mb-10 text-lg md:text-xl">{section.description}</p>
                   <div className="gsap-reveal">
                     <Link to={section.buttonLink} className="inline-block px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-colors shadow-lg">
                       {section.buttonText}
@@ -920,21 +1220,22 @@ export function Home() {
       </section>
 
       {/* Career Opportunities — Redesigned */}
-      <section className="relative z-[20] py-24 bg-transparent overflow-hidden">
+      <section className="relative z-[20] py-32 bg-white overflow-hidden">
+        {/* Wave matches Campus Life (Off-white) */}
+        <WavyDivider type="wave3" color="var(--color-surface)" position="top" flipped={true} />
+
         {/* Decorative accent */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
 
         <div className="container mx-auto px-6">
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
             <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-5 border border-primary/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
               Placements
             </div>
-            <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-white leading-tight mb-5">
+            <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-on-surface leading-tight mb-5">
               Career <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Opportunities</span>
             </h2>
-            <p className="gsap-reveal text-zinc-400 font-body text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="gsap-reveal text-on-surface-variant font-body text-lg leading-relaxed max-w-2xl mx-auto">
               Our students are consistently recruited by top-tier companies. Here's a glimpse of the success stories that define our placement track record.
             </p>
           </div>
@@ -943,16 +1244,16 @@ export function Home() {
           <div className="gsap-stagger-parent flex flex-col md:flex-row items-stretch justify-center gap-0 max-w-4xl mx-auto mb-20">
             {[
               { value: 80, suffix: '+', label: 'Students in Single Drive', color: 'from-blue-500 to-blue-400' },
-              { value: 10, suffix: ' LPA', label: 'Top Salary Package', color: 'from-amber-500 to-amber-400' },
+              { value: 32, suffix: ' LPA', label: 'Top Salary Package', color: 'from-amber-500 to-amber-400' },
               { value: 100, suffix: '%', label: 'Placement Assistance', color: 'from-emerald-500 to-emerald-400' },
             ].map((stat, idx) => (
               <div key={idx} className="gsap-stagger-child group relative flex-1 text-center py-10 px-6">
                 {/* Top accent line */}
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-12 h-[3px] rounded-full bg-gradient-to-r ${stat.color} group-hover:w-20 transition-all duration-500`}></div>
-                <div className="text-5xl md:text-6xl font-display font-bold text-white mb-3">
+                <div className="text-5xl md:text-6xl font-display font-bold text-on-surface mb-3">
                   <StatCounter end={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="text-xs font-body text-zinc-500 uppercase tracking-[0.2em]">{stat.label}</div>
+                <div className="text-xs font-body text-on-surface-variant/60 uppercase tracking-[0.2em]">{stat.label}</div>
                 {/* Vertical divider (not on last) */}
                 {idx < 2 && <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-16 bg-white/10"></div>}
               </div>
@@ -1010,42 +1311,66 @@ export function Home() {
                 img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
                 quote: 'The design thinking workshops and hackathons sharpened my skills and built my portfolio.'
               },
-            ].map((student, idx) => {
-              const isExpanded = expandedStudentCard === idx;
-              return (
-                <div
-                  key={idx}
-                  className={`gsap-stagger-child group relative bg-white/[0.03] border rounded-2xl p-5 transition-all duration-500 cursor-pointer ${isExpanded ? 'border-primary/30' : 'border-white/10 hover:border-primary/30'}`}
-                  onClick={() => setExpandedStudentCard(isExpanded ? null : idx)}
-                >
-                  {/* Top row: Photo + Info + CTC */}
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={student.img}
-                      alt={student.name}
-                      className={`w-12 h-12 rounded-full object-cover ring-2 transition-all duration-500 flex-shrink-0 ${isExpanded ? 'ring-primary/40' : 'ring-white/10 group-hover:ring-primary/40'}`}
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-white font-display font-semibold text-sm truncate">{student.name}</h4>
-                      <p className="text-zinc-500 font-body text-xs">{student.role} · <span className="text-primary">{student.company}</span></p>
-                    </div>
-                    <span className="text-xs font-bold text-accent bg-accent/10 px-3 py-1 rounded-full flex-shrink-0">{student.ctc}</span>
+            ].map((student, idx) => (
+              <div key={idx} className="gsap-stagger-child group relative bg-white border border-primary/10 rounded-2xl p-6 hover:border-primary/40 hover:shadow-xl transition-all duration-500 cursor-pointer">
+                {/* Top row: Photo + Info + CTC */}
+                <div className="flex items-center gap-4">
+                  <img
+                    src={student.img}
+                    alt={student.name}
+                    className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/5 group-hover:ring-primary/20 transition-all duration-500 flex-shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-on-surface font-display font-bold text-base truncate">{student.name}</h4>
+                    <p className="text-on-surface-variant/60 font-body text-xs">{student.role} | <span className="text-primary font-bold">{student.company}</span></p>
                   </div>
-
-                  {/* Expandable quote — hover on desktop, tap on mobile */}
-                  <div className={`overflow-hidden transition-all duration-500 ease-out ${isExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100'}`}>
-                    <div className="pt-4 mt-4 border-t border-white/5">
-                      <p className="text-zinc-400 font-body text-sm leading-relaxed italic">"{student.quote}"</p>
-                    </div>
-                  </div>
+                  <span className="text-[10px] font-black text-accent bg-accent/10 px-3 py-1.5 rounded-full flex-shrink-0 border border-accent/20 uppercase tracking-tighter">{student.ctc}</span>
                 </div>
-              );
-            })}
+
+                {/* Quote details */}
+                <div className="mt-4 pt-4 border-t border-primary/5">
+                  <p className="text-on-surface-variant font-body text-sm leading-relaxed italic line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
+                    "{student.quote}"
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Career Mobile Carousel (Single focused card, 2s shift) */}
+          <div className="flex md:hidden overflow-hidden w-full relative z-10">
+             <div 
+               className="flex transition-transform duration-500 ease-in-out w-full"
+               style={{ transform: `translateX(-${activeCareer * 100}%)` }}
+             >
+               {careerSuccessData.map((student, i) => (
+                  <div key={i} className="w-full flex-shrink-0 px-4">
+                     <div className="bg-white border border-primary/10 p-6 rounded-[1.5rem] shadow-lg">
+                        <div className="flex items-center justify-between mb-4">
+                           <div className="flex items-center gap-3">
+                              <img src={student.img} alt={student.name} className="w-10 h-10 rounded-full object-cover border border-primary/20" />
+                              <div>
+                                 <h4 className="text-on-surface font-display font-bold text-base leading-tight">{student.name}</h4>
+                                 <p className="text-[10px] text-on-surface-variant/60 font-body uppercase">{student.company}</p>
+                              </div>
+                           </div>
+                           <span className="text-[10px] font-bold text-accent bg-accent/10 px-2 py-0.5 rounded-full">{student.ctc}</span>
+                        </div>
+                        <p className="text-on-surface-variant font-body text-sm leading-relaxed italic">"{student.quote}"</p>
+                     </div>
+                  </div>
+               ))}
+             </div>
+          </div>
+          <div className="flex md:hidden justify-center gap-2 mt-6">
+            {careerSuccessData.map((_, i) => (
+              <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === activeCareer ? 'w-4 bg-primary' : 'w-1.5 bg-primary/20'}`}></div>
+            ))}
           </div>
 
           {/* Bottom CTA */}
           <div className="gsap-reveal mt-16 text-center">
-            <p className="text-zinc-500 font-body italic mb-6 max-w-2xl mx-auto">
+            <p className="text-on-surface-variant font-body italic mb-6 max-w-2xl mx-auto">
               "We are proud of our 2026 Batch achievement: over 80 students successfully placed at RINEX driving innovation."
             </p>
             <Link to="/placements" className="inline-flex items-center gap-2 group px-8 py-4 bg-primary text-white font-bold tracking-wide rounded-lg shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1">
@@ -1056,121 +1381,199 @@ export function Home() {
         </div>
       </section>
 
-      {/* Top Recruitment Partners Section */}
-      <section className="relative overflow-hidden border-t mx-4 sm:mx-8 md:mx-16 lg:mx-28 xl:mx-40 rounded-3xl border-white/5" style={{ zIndex: 20 }}>
-        {/* Background: dark building photo with overlay */}
+      {/* Top Recruitment Partners Section - Redesigned to Full-Width with Dividers */}
+      <section className="relative z-[20] py-32 md:py-40 bg-black overflow-hidden">
+        {/* Top Wave matches Career (White) */}
+        <WavyDivider type="wave2" color="white" position="top" flipped={true} />
+
+        {/* Background Layer */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1800&q=80"
-            alt="Campus building"
-            className="w-full h-full object-cover object-center"
+          <img 
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80" 
+            alt="Corporate Environment" 
+            className="w-full h-full object-cover opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-80"></div>
         </div>
 
-        <div className="relative z-10 w-[92%] sm:w-[90%] lg:w-[70%] max-w-5xl mx-auto py-14 sm:py-20 md:py-28">
+        <div className="container mx-auto px-6 relative z-10">
           {/* Heading */}
-          <div className="mb-10 sm:mb-16">
-            <p className="gsap-reveal text-xs sm:text-sm font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase text-zinc-400 mb-3">Our Network</p>
-            <h2 className="gsap-reveal text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-black leading-none">
+          <div className="max-w-4xl mb-16 md:mb-24">
+            <p className="gsap-reveal text-[10px] md:text-sm font-bold tracking-[0.3em] uppercase text-emerald-400 mb-4 bg-emerald-400/10 w-fit px-3 py-1 rounded-full border border-emerald-400/20">Our Global Network</p>
+            <h2 className="gsap-reveal text-5xl md:text-8xl lg:text-9xl font-display font-black leading-tight md:leading-none">
               <span className="text-white">RECRUITMENT</span><br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">PARTNERS</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-500">PARTNERS</span>
             </h2>
           </div>
 
-          {/* Logo Grid — 2 cols mobile, 3 cols sm, 4 cols md, 6 cols lg */}
-          <div className="gsap-stagger-parent grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-px bg-white/[0.06] border border-white/[0.06] rounded-xl sm:rounded-2xl overflow-hidden">
+          {/* Logo Grid - Original Colors on White Cards */}
+          <div className="gsap-stagger-parent grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
             {[
-              { name: "TCS", logo: null, url: "https://www.tcs.com" },
-              { name: "Infosys", logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg", url: "https://www.infosys.com" },
-              { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", url: "https://www.amazon.jobs" },
-              { name: "Deloitte", logo: null, url: "https://www.deloitte.com" },
-              { name: "PwC", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/PricewaterhouseCoopers_Logo.svg", url: "https://www.pwc.com" },
-              { name: "Accenture", logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg", url: "https://www.accenture.com" },
-              { name: "KPMG", logo: null, url: "https://www.kpmg.com" },
-              { name: "NatWest", logo: null, url: "https://www.natwestgroup.com" },
-              { name: "EY", logo: "https://upload.wikimedia.org/wikipedia/commons/3/34/EY_logo_2019.svg", url: "https://www.ey.com" },
-              { name: "Capgemini", logo: null, url: "https://www.capgemini.com" },
-              { name: "D E Shaw", logo: null, url: "https://www.deshaw.com" },
-              { name: "Wipro", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg", url: "https://www.wipro.com" },
-              { name: "Nestlé", logo: null, url: "https://www.nestle.com" },
-              { name: "Cipla", logo: null, url: "https://www.cipla.com" },
-              { name: "Unilever", logo: null, url: "https://www.unilever.com" },
-              { name: "Barclays", logo: null, url: "https://www.barclays.com" },
-              { name: "UST", logo: null, url: "https://www.ust.com" },
-              { name: "& more", logo: null, url: "/placements" },
+              { name: "TCS", logo: null },
+              { name: "Infosys", logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" },
+              { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+              { name: "Deloitte", logo: null },
+              { name: "PwC", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/PricewaterhouseCoopers_Logo.svg" },
+              { name: "Accenture", logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg" },
+              { name: "KPMG", logo: null },
+              { name: "NatWest", logo: null },
+              { name: "EY", logo: "https://upload.wikimedia.org/wikipedia/commons/3/34/EY_logo_2019.svg" },
+              { name: "Capgemini", logo: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg" },
+              { name: "D E Shaw", logo: null },
+              { name: "Wipro", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg" },
+              { name: "Nestlé", logo: null },
+              { name: "Cipla", logo: null },
+              { name: "Unilever", logo: null },
+              { name: "Barclays", logo: null },
+              { name: "UST", logo: null },
+              { name: "& more", logo: null },
             ].map((partner, idx) => (
-              <a
+              <div
                 key={idx}
-                href={partner.url}
-                target={partner.url.startsWith('/') ? '_self' : '_blank'}
-                rel={partner.url.startsWith('/') ? undefined : 'noopener noreferrer'}
-                className="gsap-stagger-child group relative bg-black/40 hover:bg-white/[0.06] transition-colors duration-300 flex items-center justify-center p-4 sm:p-6 min-h-[80px] sm:min-h-[100px] md:min-h-[120px] cursor-pointer"
+                className="gsap-stagger-child group relative bg-white transition-all duration-300 flex items-center justify-center p-4 md:p-8 min-h-[100px] md:min-h-[140px] cursor-pointer hover:bg-slate-50"
               >
-                {partner.logo ? (
+                 {partner.logo ? (
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="max-h-8 sm:max-h-10 md:max-h-12 max-w-[90px] sm:max-w-[120px] object-contain filter brightness-0 invert opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                    className="max-h-8 md:max-h-12 max-w-[120px] object-contain transition-all duration-500 group-hover:scale-110"
                   />
                 ) : (
-                  <span className="text-white/50 font-display font-bold text-sm sm:text-lg md:text-2xl group-hover:text-white transition-colors duration-300 text-center">
+                  <span className="text-slate-400 font-display font-bold text-lg md:text-2xl group-hover:text-primary transition-colors duration-300">
                     {partner.name}
                   </span>
                 )}
-                {/* Subtle corner accent on hover */}
-                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-emerald-400 to-teal-300 group-hover:w-full transition-all duration-500 rounded-full" />
-              </a>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-primary transition-all duration-500 rounded-full group-hover:w-full" />
+              </div>
             ))}
           </div>
 
           {/* Bottom note */}
-          <p className="gsap-reveal mt-6 sm:mt-8 text-center text-zinc-500 font-body text-xs sm:text-sm tracking-wide">
-            500+ companies recruit annually from our campuses across the Nehru Group of Institutions.
+          <p className="gsap-reveal mt-12 text-center text-zinc-500 font-body text-sm tracking-widest uppercase opacity-60">
+            500+ global recruitment partners across our campus network
           </p>
         </div>
       </section>
 
+      {/* Alumni Testimonials - Auto Scrolling Marquee */}
+      <section className="relative z-[20] py-40 bg-white overflow-hidden">
+        {/* Transition to Alumni - Clean Cut */}
+
+        <div className="container mx-auto px-6 mb-16">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="gsap-reveal text-4xl md:text-5xl font-display font-bold text-on-surface mb-6">
+              Voices of our <span className="text-amber-500 font-cursive text-5xl">Alumni</span>
+            </h2>
+            <p className="gsap-reveal text-on-surface-variant font-body text-lg">
+              Hear from our graduates who are making an impact across the globe.
+            </p>
+          </div>
+        </div>
+
+        {/* Alumni Desktop Marquee (Visible on sm and up) */}
+        <div className="hidden sm:flex relative overflow-x-hidden">
+          <div className="animate-marquee whitespace-nowrap flex gap-8 py-4">
+            {[...Array(2)].flatMap(() => alumniReviews).map((review, i) => (
+              <div key={i} className="w-[400px] flex-shrink-0 bg-white border border-primary/10 p-8 rounded-[2rem] shadow-xl hover:shadow-2xl hover:border-primary/30 transition-all duration-300">
+                <div className="flex items-center gap-4 mb-6">
+                  <img src={review.img} alt={review.name} className="w-14 h-14 rounded-full object-cover border-2 border-primary/20" />
+                  <div>
+                    <h4 className="text-on-surface font-display font-bold text-lg">{review.name}</h4>
+                    <p className="text-primary text-sm font-body">Class of {review.batch} • {review.dept}</p>
+                  </div>
+                </div>
+                <p className="text-on-surface-variant font-body leading-relaxed text-balance whitespace-normal italic">
+                  "{review.text}"
+                </p>
+                <div className="mt-6 flex text-blue-400 gap-1 text-xs">
+                  {Array(5).fill(0).map((_, iconIdx) => (
+                    <svg key={iconIdx} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Alumni Mobile Carousel (Single focused card, 2s shift) */}
+        <div className="flex sm:hidden overflow-hidden px-6">
+          <div 
+            className="flex transition-transform duration-500 ease-in-out w-full"
+            style={{ transform: `translateX(-${activeAlumni * 100}%)` }}
+          >
+            {alumniReviews.map((review, i) => (
+              <div key={i} className="w-full flex-shrink-0 px-2 transition-all duration-300">
+                <div className="bg-white border border-primary/10 p-6 rounded-[1.5rem] shadow-lg">
+                  <div className="flex items-center gap-3 mb-4">
+                    <img src={review.img} alt={review.name} className="w-10 h-10 rounded-full object-cover border-2 border-primary/20" />
+                    <div>
+                      <h4 className="text-on-surface font-display font-bold text-base leading-tight">{review.name}</h4>
+                      <p className="text-primary text-[10px] font-body">Class of {review.batch} | {review.dept}</p>
+                    </div>
+                  </div>
+                  <p className="text-on-surface-variant font-body leading-relaxed text-sm italic">
+                    "{review.text}"
+                  </p>
+                  <div className="mt-4 flex text-blue-400 gap-0.5 text-[10px]">
+                    {Array(5).fill(0).map((_, iconIdx) => (
+                      <svg key={iconIdx} className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Page Indicators */}
+        <div className="flex sm:hidden justify-center gap-2 mt-6">
+          {alumniReviews.map((_, i) => (
+            <div 
+              key={i} 
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === activeAlumni ? 'w-6 bg-primary' : 'w-1.5 bg-primary/20'}`}
+            ></div>
+          ))}
+        </div>
+
+
+      </section>
+
       {/* Premium CTA Section */}
-      <section className="relative z-[20] bg-transparent overflow-hidden border-t border-white/5 mt-0 md:mt-10">
+      <section className="relative z-[20] bg-transparent overflow-hidden border-t border-black/5 mt-0 md:mt-10">
         <div className="relative z-10 w-full">
-          <div className="gsap-reveal relative overflow-hidden border-y border-white/10 bg-black/40 py-24 md:py-32 px-8 text-center group shadow-2xl backdrop-blur-xl w-full">
+          <div className="gsap-reveal relative overflow-hidden border-y border-black/5 bg-white py-16 md:py-32 px-6 md:px-8 text-center group shadow-2xl w-full">
             
             {/* Animated Background Mesh/Glow */}
-            <div className="absolute inset-0 opacity-50 group-hover:opacity-70 transition-opacity duration-1000 pointer-events-none">
-              <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse"></div>
-              <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity duration-1000 pointer-events-none">
             </div>
             
             {/* Noise Texture to make it look premium */}
-            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none mix-blend-overlay"></div>
+            <div className="absolute inset-0 premium-noise"></div>
 
             <div className="relative z-10 max-w-4xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-bold tracking-widest uppercase mb-8 backdrop-blur-md shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Admissions 2026–2027
+              <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] md:text-sm font-bold tracking-widest uppercase mb-6 md:mb-8 backdrop-blur-md shadow-sm">
+                Admissions 2026-2027
               </div>
               
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight drop-shadow-xl">
-                Shape Your Future With <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-accent">PKDAS University</span>
+              <h2 className="gsap-reveal text-3xl md:text-5xl lg:text-7xl font-display font-bold text-on-surface mb-6 leading-tight drop-shadow-sm">
+                Shape Your Future With <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-600 to-blue-800">PKDAS University</span>
               </h2>
               
-              <p className="text-xl md:text-2xl font-body text-zinc-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+              <p className="gsap-reveal text-lg md:text-2xl font-body text-on-surface-variant mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed font-light">
                 Join a legacy of excellence. Embark on a transformative educational journey that prepares you for global success.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <Link to="/contact" className="relative group/btn overflow-hidden rounded-full inline-flex items-center justify-center animate-[pulse_2s_infinite] hover:animate-none hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-100 group-hover/btn:opacity-90 transition-opacity duration-300"></div>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent blur-xl opacity-40 group-hover/btn:opacity-70 transition-opacity duration-300"></div>
-                  <span className="relative z-10 px-10 py-5 text-white font-bold text-lg tracking-wide flex items-center gap-3">
+              <div className="gsap-reveal flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full">
+                <Link to="/contact" className="relative group overflow-hidden rounded-full inline-flex items-center justify-center hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20 w-full sm:w-auto">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-700 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></div>
+                  <span className="relative z-10 px-6 py-4 md:px-10 md:py-5 text-white font-bold text-base md:text-lg tracking-wide flex items-center justify-center gap-3 w-full">
                     Start Your Application
-                    <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </span>
                 </Link>
                 
-                <Link to="/brochure" className="px-10 py-5 rounded-full border border-white/20 text-white font-bold text-lg hover:bg-white/10 transition-colors duration-300 backdrop-blur-sm cursor-pointer">
+                <Link to="/brochure" className="px-6 py-4 md:px-10 md:py-5 rounded-full border border-primary/20 text-primary font-bold text-base md:text-lg hover:bg-primary/5 transition-colors duration-300 backdrop-blur-sm cursor-pointer shadow-lg w-full sm:w-auto text-center">
                   Download Brochure
                 </Link>
               </div>
