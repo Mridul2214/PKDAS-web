@@ -1,31 +1,32 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import { StatCounter } from '../components/StatCounter';
 import { LogosCarousel } from '../components/LogosCarousel';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const placementServices = [
-  {
-    title: "Career Guidance",
-    desc: "Personalized mentorship and roadmap planning for every student to reach their dream career destination.",
-    icon: "🎯"
-  },
-  {
-    title: "Recruiter Interface",
-    desc: "Direct access to 500+ global industry partners and Fortune 500 companies in a single integrated platform.",
-    icon: "🤝"
-  },
-  {
-    title: "Internship Programs",
-    desc: "Early industry exposure with paid internships and project-based learning for industrial readiness.",
-    icon: "💼"
-  }
-];
-
 export default function Placements() {
   const containerRef = useRef(null);
+
+  const placementServices = [
+    {
+      title: "Career Guidance",
+      desc: "Personalized mentorship and roadmap planning for every student to reach their dream career destination.",
+      icon: "🎯"
+    },
+    {
+      title: "Recruiter Interface",
+      desc: "Direct access to 500+ global industry partners and Fortune 500 companies in a single integrated platform.",
+      icon: "🤝"
+    },
+    {
+      title: "Internship Programs",
+      desc: "Early industry exposure with paid internships and project-based learning for industrial readiness.",
+      icon: "💼"
+    }
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -37,17 +38,17 @@ export default function Placements() {
         ease: "power4.out"
       });
 
-      gsap.from(".service-card", {
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".service-grid",
-          start: "top 85%",
-        }
-      });
+      // gsap.from(".service-card", {
+      //   y: 60,
+      //   opacity: 0,
+      //   duration: 1,
+      //   stagger: 0.2,
+      //   ease: "power3.out",
+      //   scrollTrigger: {
+      //     trigger: ".service-grid",
+      //     start: "top 85%",
+      //   }
+      // });
     }, containerRef);
 
     return () => ctx.revert();
@@ -56,7 +57,7 @@ export default function Placements() {
   return (
     <main ref={containerRef} className="bg-surface overflow-hidden">
       {/* Premium Hero with Subtle Animation */}
-      <section className="relative pt-48 pb-32 bg-white">
+      <section className="relative pt-32 pb-16 bg-white">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl placements-hero">
             <h1 className="text-display-lg md:text-8xl font-display text-on-surface leading-tight tracking-tighter mb-8 italic">
@@ -78,7 +79,7 @@ export default function Placements() {
       </section>
 
       {/* Core Statistics Multi-Column */}
-      <section className="py-32 bg-[#050505] text-white">
+      <section className="py-20 bg-[#050505] text-white">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
             <div>
@@ -110,19 +111,20 @@ export default function Placements() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-40 bg-surface">
+      <section className="py-24 bg-surface">
         <div className="container mx-auto px-6">
-          <div className="flex items-center space-x-6 mb-24">
+          <div className="flex items-center space-x-6 mb-16">
             <h2 className="text-5xl font-display text-on-surface italic">Our Ecosystem</h2>
             <div className="flex-grow h-[1px] bg-black/5"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 service-grid">
+            {/* <h1 className="text-red-500 text-5xl">TEST: CARDS SHOULD BE BELOW THIS</h1> */}
             {placementServices.map((service, idx) => (
-              <div key={idx} className="service-card group bg-white p-12 rounded-[2.5rem] shadow-ambient hover:shadow-2xl transition-all duration-700 hover:-translate-y-4">
+              <div key={idx} className="service-card group bg-white p-8 rounded-[2.5rem] shadow-ambient hover:shadow-2xl transition-all duration-700 hover:-translate-y-4">
                 <div className="text-6xl mb-8 transform group-hover:scale-110 transition-transform duration-500">{service.icon}</div>
-                <h3 className="text-3xl font-display text-on-surface mb-6 group-hover:text-primary transition-colors duration-300 italic">{service.title}</h3>
-                <p className="text-on-surface-variant font-display text-lg leading-relaxed italic opacity-70">
+                <h3 className="text-3xl font-display text-on-surface mb-6 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
+                <p className="text-on-surface-variant font-display text-lg leading-relaxed opacity-100">
                   {service.desc}
                 </p>
               </div>
@@ -132,7 +134,7 @@ export default function Placements() {
       </section>
 
       {/* Recruiters Carousel Section */}
-      <section className="py-40 bg-white border-y border-black/5">
+      <section className="py-24 bg-white border-y border-black/5">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mb-16 mx-auto text-center">
              <h2 className="text-5xl font-display text-on-surface mb-6 italic">Top Tier Recruiters</h2>

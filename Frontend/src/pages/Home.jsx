@@ -211,8 +211,8 @@ export function Home() {
     if (aboutImages.length > 0) {
       aboutImages.forEach((img) => {
         const isCentered = img.classList.contains('-translate-x-1/2');
-        gsap.set(img, { 
-          opacity: 0, 
+        gsap.set(img, {
+          opacity: 0,
           y: 120, // Reduced from 200 for smoother feel
           ...(isCentered ? { xPercent: -50, yPercent: -50 } : {})
         });
@@ -269,16 +269,16 @@ export function Home() {
     if (sectionBlobs.length > 0) {
       gsap.set(sectionBlobs, { opacity: 0, scale: 0.8 });
       sectionBlobs.forEach((blob) => {
-          gsap.to(blob, {
-            opacity: 1,
-            scale: 1,
-            duration: 3,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: blob,
-              start: 'top 95%',
-            }
-          });
+        gsap.to(blob, {
+          opacity: 1,
+          scale: 1,
+          duration: 3,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: blob,
+            start: 'top 95%',
+          }
+        });
       });
     }
 
@@ -392,95 +392,95 @@ export function Home() {
     }
   ];
 
-const topStudents = [
-  {
-    name: "Aisha Rahman",
-    course: "B.Sc Computer Science",
-    achievement: "Secured University 1st Rank and recruited by Google as a Software Engineer.",
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
-  },
-  {
-    name: "Rahul Menon",
-    course: "BBA",
-    achievement: "Founded a successful tech startup while in his final year of studies.",
-    img: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=300&q=80"
-  },
-  {
-    name: "Sneha Krishnan",
-    course: "BA English",
-    achievement: "Published author and winner of the National Youth Literary Award.",
-    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
-  },
-  {
-    name: "Priya Sharma",
-    course: "M.Sc Data Science",
-    achievement: "Published a research paper on predictive AI models in a top ACM journal.",
-    img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80"
-  },
-  {
-    name: "David Chen",
-    course: "B.Tech Aerospace",
-    achievement: "Won the National Robotics Competition and interned at ISRO.",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
-  },
-  {
-    name: "Anita Desai",
-    course: "B.Sc Nursing",
-    achievement: "Awarded 'Best Student Nurse' for exemplary service during clinicals.",
-    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
-  }
-];
+  const topStudents = [
+    {
+      name: "Aisha Rahman",
+      course: "B.Sc Computer Science",
+      achievement: "Secured University 1st Rank and recruited by Google as a Software Engineer.",
+      img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+    },
+    {
+      name: "Rahul Menon",
+      course: "BBA",
+      achievement: "Founded a successful tech startup while in his final year of studies.",
+      img: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=300&q=80"
+    },
+    {
+      name: "Sneha Krishnan",
+      course: "BA English",
+      achievement: "Published author and winner of the National Youth Literary Award.",
+      img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
+    },
+    {
+      name: "Priya Sharma",
+      course: "M.Sc Data Science",
+      achievement: "Published a research paper on predictive AI models in a top ACM journal.",
+      img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80"
+    },
+    {
+      name: "David Chen",
+      course: "B.Tech Aerospace",
+      achievement: "Won the National Robotics Competition and interned at ISRO.",
+      img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+    },
+    {
+      name: "Anita Desai",
+      course: "B.Sc Nursing",
+      achievement: "Awarded 'Best Student Nurse' for exemplary service during clinicals.",
+      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+    }
+  ];
 
-const careerSuccessData = [
-  {
-    name: 'Arjun Nair',
-    role: 'Software Engineer',
-    company: 'TCS',
-    ctc: '₹6.5 LPA',
-    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
-    quote: 'The placement cell prepared me with mock interviews and resume workshops that made all the difference.'
-  },
-  {
-    name: 'Meera Krishnan',
-    role: 'Data Analyst',
-    company: 'Infosys',
-    ctc: '₹5.8 LPA',
-    img: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80',
-    quote: 'From campus to corporate — the transition was seamless thanks to the industry exposure I received here.'
-  },
-  {
-    name: 'Rahul Menon',
-    role: 'Associate Consultant',
-    company: 'Deloitte',
-    ctc: '₹8.2 LPA',
-    img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80',
-    quote: 'The practical learning approach and expert mentors gave me a competitive edge in every interview.'
-  },
-  {
-    name: 'Sneha Das',
-    role: 'Cloud Engineer',
-    company: 'Amazon',
-    ctc: '₹10 LPA',
-    img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80',
-    quote: 'Landing a role at Amazon was a dream — the college\'s placement support made it a reality.'
-  },
-  {
-    name: 'Vishnu Prasad',
-    role: 'Business Analyst',
-    company: 'Capgemini',
-    ctc: '₹7 LPA',
-    img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80',
-    quote: 'The internship program was the gateway that connected me directly to my first corporate role.'
-  },
-  {
-    name: 'Ananya Roy',
-    role: 'UI/UX Designer',
-    company: 'Wipro',
-    ctc: '₹6 LPA',
-    img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80',
-    quote: 'Being creative is one thing, but the college taught me how to apply that creativity to solve business problems.'
-  }
-];
+  const careerSuccessData = [
+    {
+      name: 'Arjun Nair',
+      role: 'Software Engineer',
+      company: 'TCS',
+      ctc: '₹6.5 LPA',
+      img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+      quote: 'The placement cell prepared me with mock interviews and resume workshops that made all the difference.'
+    },
+    {
+      name: 'Meera Krishnan',
+      role: 'Data Analyst',
+      company: 'Infosys',
+      ctc: '₹5.8 LPA',
+      img: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80',
+      quote: 'From campus to corporate — the transition was seamless thanks to the industry exposure I received here.'
+    },
+    {
+      name: 'Rahul Menon',
+      role: 'Associate Consultant',
+      company: 'Deloitte',
+      ctc: '₹8.2 LPA',
+      img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80',
+      quote: 'The practical learning approach and expert mentors gave me a competitive edge in every interview.'
+    },
+    {
+      name: 'Sneha Das',
+      role: 'Cloud Engineer',
+      company: 'Amazon',
+      ctc: '₹10 LPA',
+      img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80',
+      quote: 'Landing a role at Amazon was a dream — the college\'s placement support made it a reality.'
+    },
+    {
+      name: 'Vishnu Prasad',
+      role: 'Business Analyst',
+      company: 'Capgemini',
+      ctc: '₹7 LPA',
+      img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80',
+      quote: 'The internship program was the gateway that connected me directly to my first corporate role.'
+    },
+    {
+      name: 'Ananya Roy',
+      role: 'UI/UX Designer',
+      company: 'Wipro',
+      ctc: '₹6 LPA',
+      img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80',
+      quote: 'Being creative is one thing, but the college taught me how to apply that creativity to solve business problems.'
+    }
+  ];
 
   const cultureSections = [
     {
@@ -531,14 +531,14 @@ const careerSuccessData = [
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <div className="about-bg-shape absolute -top-20 -left-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"></div>
           <div className="about-bg-shape absolute bottom-0 -right-40 w-[500px] h-[500px] bg-accent/20 rounded-full blur-[100px]"></div>
-          
+
           {/* Decorative Pattern - Enhanced visibility */}
           <div className="about-bg-dots absolute top-40 right-10 flex flex-wrap w-32 gap-3 opacity-0">
-             {[...Array(24)].map((_, i) => (
-                <div key={i} className="w-2 h-2 rounded-full bg-primary/30"></div>
-             ))}
+            {[...Array(24)].map((_, i) => (
+              <div key={i} className="w-2 h-2 rounded-full bg-primary/30"></div>
+            ))}
           </div>
-          
+
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-px h-80 bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
         </div>
 
@@ -630,18 +630,18 @@ const careerSuccessData = [
       <section className="relative z-[20] py-40 bg-white overflow-hidden">
         {/* Section-Wide Background Image Slot */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-           <img 
-             src="/backgrounds/3rd%20section.jpg" 
-             className="w-full h-full object-cover opacity-100" 
-             alt="Background"
-           />
-           {/* Semi-transparent overlay to ensure text contrast while keeping image visible */}
-           <div className="absolute inset-0 bg-white/70"></div>
+          <img
+            src="/backgrounds/3rd%20section.jpg"
+            className="w-full h-full object-cover opacity-100"
+            alt="Background"
+          />
+          {/* Semi-transparent overlay to ensure text contrast while keeping image visible */}
+          <div className="absolute inset-0 bg-white/70"></div>
         </div>
-        
+
         {/* Top Wave (matching Hero surface) */}
         <WavyDivider type="wave1" color="var(--color-surface)" position="top" flipped={true} />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
@@ -772,19 +772,19 @@ const careerSuccessData = [
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <div className="section-bg-blob absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px]"></div>
           <div className="section-bg-blob absolute top-1/2 -left-40 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]"></div>
-          
+
           <div className="absolute bottom-20 left-10 opacity-20 hidden md:block">
-             <div className="grid grid-cols-4 gap-4">
-                {[...Array(12)].map((_, i) => (
-                   <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
-                ))}
-             </div>
+            <div className="grid grid-cols-4 gap-4">
+              {[...Array(12)].map((_, i) => (
+                <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Wave matches Achievements (White) */}
         <WavyDivider type="wave1" color="white" position="top" flipped={true} />
-        
+
         <div className="container mx-auto px-6 relative z-10 gsap-stagger-parent">
           <div className="max-w-3xl mb-10 mx-auto text-center">
             <h2 className="gsap-reveal text-3xl md:text-display-md lg:text-5xl font-display mb-4 md:mb-6 text-on-surface">Our Institutions</h2>
@@ -1047,7 +1047,7 @@ const careerSuccessData = [
       <section className="relative z-[20] py-40 bg-[var(--color-section-dark)] text-white overflow-hidden">
         {/* Wave matches Interests (White) */}
         <WavyDivider type="wave3" color="white" position="top" flipped={true} />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mb-12 mx-auto text-center">
             <h2 className="gsap-reveal text-display-md md:text-5xl font-display mb-6 text-white">Our Top Scholars</h2>
@@ -1078,25 +1078,41 @@ const careerSuccessData = [
             ))}
           </div>
 
-          {/* Scholars Mobile Carousel (Single focused card, 2s shift) */}
-          <div className="flex md:hidden overflow-hidden w-full relative z-10 mb-8 pt-4">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out w-full"
-              style={{ transform: `translateX(-${activeScholar * 100}%)` }}
+          <div className="md:hidden relative z-10 mb-8 pt-4">
+            {/* Navigation Arrows */}
+            <button 
+              onClick={() => setActiveScholar((prev) => (prev - 1 + topStudents.length) % topStudents.length)}
+              className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
+              aria-label="Previous Scholar"
             >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button 
+              onClick={() => setActiveScholar((prev) => (prev + 1) % topStudents.length)}
+              className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
+              aria-label="Next Scholar"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            <div className="overflow-hidden px-6">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out w-full"
+                style={{ transform: `translateX(-${activeScholar * 100}%)` }}
+              >
               {topStudents.map((student, idx) => (
                 <div key={idx} className="w-full flex-shrink-0 px-4">
-                   <div className="flex flex-col group relative bg-white/5 border border-white/10 p-6 rounded-[2rem] backdrop-blur-sm">
-                      <div className="flex justify-center mb-6">
-                        <img src={student.img} alt={student.name} className="w-32 h-40 object-cover rounded-t-full rounded-b-2xl border border-white/20" />
-                      </div>
-                      <div className="text-center">
-                        <div className="inline-block px-3 py-1 bg-primary text-[10px] font-bold text-white rounded-full mb-3 uppercase tracking-wider">{student.course}</div>
-                        <h3 className="text-xl font-display font-medium text-white mb-2">{student.name}</h3>
-                        <p className="font-body text-sm text-white/70 leading-relaxed mb-4">{student.achievement}</p>
-                        <button className="text-[10px] font-bold text-amber-400 tracking-widest uppercase flex items-center gap-1 mx-auto">LEARN MORE<span>→</span></button>
-                      </div>
-                   </div>
+                  <div className="flex flex-col group relative bg-white/5 border border-white/10 p-6 rounded-[2rem] backdrop-blur-sm">
+                    <div className="flex justify-center mb-6">
+                      <img src={student.img} alt={student.name} className="w-32 h-40 object-cover rounded-t-full rounded-b-2xl border border-white/20" />
+                    </div>
+                    <div className="text-center">
+                      <div className="inline-block px-3 py-1 bg-primary text-[10px] font-bold text-white rounded-full mb-3 uppercase tracking-wider">{student.course}</div>
+                      <h3 className="text-xl font-display font-medium text-white mb-2">{student.name}</h3>
+                      <p className="font-body text-sm text-white/70 leading-relaxed mb-4">{student.achievement}</p>
+                      <button className="text-[10px] font-bold text-amber-400 tracking-widest uppercase flex items-center gap-1 mx-auto">LEARN MORE<span>→</span></button>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1105,6 +1121,7 @@ const careerSuccessData = [
             {topStudents.map((_, i) => (
               <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === activeScholar ? 'w-4 bg-primary' : 'w-1 bg-white/20'}`}></div>
             ))}
+          </div>
           </div>
         </div>
       </section>
@@ -1156,7 +1173,7 @@ const careerSuccessData = [
       <section className="relative z-[20] py-32 bg-surface overflow-hidden">
         {/* Wave matches Highlights (White) */}
         <WavyDivider type="wave2" color="white" position="top" flipped={true} />
-        
+
         <div className="container mx-auto px-6 relative z-10">
 
 
@@ -1261,7 +1278,7 @@ const careerSuccessData = [
           </div>
 
           {/* Student Success Cards */}
-          <div className="gsap-stagger-parent grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="gsap-stagger-parent hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               {
                 name: 'Arjun Nair',
@@ -1337,38 +1354,55 @@ const careerSuccessData = [
             ))}
           </div>
 
-          {/* Career Mobile Carousel (Single focused card, 2s shift) */}
-          <div className="flex md:hidden overflow-hidden w-full relative z-10">
-             <div 
-               className="flex transition-transform duration-500 ease-in-out w-full"
-               style={{ transform: `translateX(-${activeCareer * 100}%)` }}
-             >
-               {careerSuccessData.map((student, i) => (
-                  <div key={i} className="w-full flex-shrink-0 px-4">
-                     <div className="bg-white border border-primary/10 p-6 rounded-[1.5rem] shadow-lg">
-                        <div className="flex items-center justify-between mb-4">
-                           <div className="flex items-center gap-3">
-                              <img src={student.img} alt={student.name} className="w-10 h-10 rounded-full object-cover border border-primary/20" />
-                              <div>
-                                 <h4 className="text-on-surface font-display font-bold text-base leading-tight">{student.name}</h4>
-                                 <p className="text-[10px] text-on-surface-variant/60 font-body uppercase">{student.company}</p>
-                              </div>
-                           </div>
-                           <span className="text-[10px] font-bold text-accent bg-accent/10 px-2 py-0.5 rounded-full">{student.ctc}</span>
+          <div className="md:hidden relative z-10">
+            {/* Navigation Arrows */}
+            <button 
+              onClick={() => setActiveCareer((prev) => (prev - 1 + careerSuccessData.length) % careerSuccessData.length)}
+              className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
+              aria-label="Previous Career Success"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button 
+              onClick={() => setActiveCareer((prev) => (prev + 1) % careerSuccessData.length)}
+              className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
+              aria-label="Next Career Success"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            <div className="overflow-hidden px-6">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out w-full"
+                style={{ transform: `translateX(-${activeCareer * 100}%)` }}
+              >
+              {careerSuccessData.map((student, i) => (
+                <div key={i} className="w-full flex-shrink-0 px-4">
+                  <div className="bg-white border border-primary/10 p-6 rounded-[1.5rem] shadow-lg">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <img src={student.img} alt={student.name} className="w-10 h-10 rounded-full object-cover border border-primary/20" />
+                        <div>
+                          <h4 className="text-on-surface font-display font-bold text-base leading-tight">{student.name}</h4>
+                          <p className="text-[10px] text-on-surface-variant/60 font-body uppercase">{student.company}</p>
                         </div>
-                        <p className="text-on-surface-variant font-body text-sm leading-relaxed italic">"{student.quote}"</p>
-                     </div>
+                      </div>
+                      <span className="text-[10px] font-bold text-accent bg-accent/10 px-2 py-0.5 rounded-full">{student.ctc}</span>
+                    </div>
+                    <p className="text-on-surface-variant font-body text-sm leading-relaxed italic">"{student.quote}"</p>
                   </div>
-               ))}
-             </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="flex md:hidden justify-center gap-2 mt-6">
             {careerSuccessData.map((_, i) => (
               <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === activeCareer ? 'w-4 bg-primary' : 'w-1.5 bg-primary/20'}`}></div>
             ))}
           </div>
+        </div>
 
-          {/* Bottom CTA */}
+          {/* Bottom CTA body */}
           <div className="gsap-reveal mt-16 text-center">
             <p className="text-on-surface-variant font-body italic mb-6 max-w-2xl mx-auto">
               "We are proud of our 2026 Batch achievement: over 80 students successfully placed at RINEX driving innovation."
@@ -1388,9 +1422,9 @@ const careerSuccessData = [
 
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80" 
-            alt="Corporate Environment" 
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80"
+            alt="Corporate Environment"
             className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-80"></div>
@@ -1432,7 +1466,7 @@ const careerSuccessData = [
                 key={idx}
                 className="gsap-stagger-child group relative bg-white transition-all duration-300 flex items-center justify-center p-4 md:p-8 min-h-[100px] md:min-h-[140px] cursor-pointer hover:bg-slate-50"
               >
-                 {partner.logo ? (
+                {partner.logo ? (
                   <img
                     src={partner.logo}
                     alt={partner.name}
@@ -1487,7 +1521,7 @@ const careerSuccessData = [
                 </p>
                 <div className="mt-6 flex text-blue-400 gap-1 text-xs">
                   {Array(5).fill(0).map((_, iconIdx) => (
-                    <svg key={iconIdx} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg key={iconIdx} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                   ))}
                 </div>
               </div>
@@ -1495,12 +1529,28 @@ const careerSuccessData = [
           </div>
         </div>
 
-        {/* Alumni Mobile Carousel (Single focused card, 2s shift) */}
-        <div className="flex sm:hidden overflow-hidden px-6">
-          <div 
-            className="flex transition-transform duration-500 ease-in-out w-full"
-            style={{ transform: `translateX(-${activeAlumni * 100}%)` }}
+        <div className="sm:hidden relative z-10">
+          {/* Navigation Arrows */}
+          <button 
+            onClick={() => setActiveAlumni((prev) => (prev - 1 + alumniReviews.length) % alumniReviews.length)}
+            className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
+            aria-label="Previous Testimonial"
           >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button 
+            onClick={() => setActiveAlumni((prev) => (prev + 1) % alumniReviews.length)}
+            className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
+            aria-label="Next Testimonial"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <div className="overflow-hidden px-6">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out w-full"
+              style={{ transform: `translateX(-${activeAlumni * 100}%)` }}
+            >
             {alumniReviews.map((review, i) => (
               <div key={i} className="w-full flex-shrink-0 px-2 transition-all duration-300">
                 <div className="bg-white border border-primary/10 p-6 rounded-[1.5rem] shadow-lg">
@@ -1516,7 +1566,7 @@ const careerSuccessData = [
                   </p>
                   <div className="mt-4 flex text-blue-400 gap-0.5 text-[10px]">
                     {Array(5).fill(0).map((_, iconIdx) => (
-                      <svg key={iconIdx} className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      <svg key={iconIdx} className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                     ))}
                   </div>
                 </div>
@@ -1528,13 +1578,13 @@ const careerSuccessData = [
         {/* Mobile Page Indicators */}
         <div className="flex sm:hidden justify-center gap-2 mt-6">
           {alumniReviews.map((_, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className={`h-1.5 rounded-full transition-all duration-300 ${i === activeAlumni ? 'w-6 bg-primary' : 'w-1.5 bg-primary/20'}`}
             ></div>
           ))}
         </div>
-
+      </div>
 
       </section>
 
@@ -1542,11 +1592,11 @@ const careerSuccessData = [
       <section className="relative z-[20] bg-transparent overflow-hidden border-t border-black/5 mt-0 md:mt-10">
         <div className="relative z-10 w-full">
           <div className="gsap-reveal relative overflow-hidden border-y border-black/5 bg-white py-16 md:py-32 px-6 md:px-8 text-center group shadow-2xl w-full">
-            
+
             {/* Animated Background Mesh/Glow */}
             <div className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity duration-1000 pointer-events-none">
             </div>
-            
+
             {/* Noise Texture to make it look premium */}
             <div className="absolute inset-0 premium-noise"></div>
 
@@ -1554,16 +1604,16 @@ const careerSuccessData = [
               <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] md:text-sm font-bold tracking-widest uppercase mb-6 md:mb-8 backdrop-blur-md shadow-sm">
                 Admissions 2026-2027
               </div>
-              
+
               <h2 className="gsap-reveal text-3xl md:text-5xl lg:text-7xl font-display font-bold text-on-surface mb-6 leading-tight drop-shadow-sm">
                 Shape Your Future With <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-600 to-blue-800">PKDAS University</span>
               </h2>
-              
+
               <p className="gsap-reveal text-lg md:text-2xl font-body text-on-surface-variant mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed font-light">
                 Join a legacy of excellence. Embark on a transformative educational journey that prepares you for global success.
               </p>
-              
+
               <div className="gsap-reveal flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full">
                 <Link to="/contact" className="relative group overflow-hidden rounded-full inline-flex items-center justify-center hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20 w-full sm:w-auto">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-700 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></div>
@@ -1572,7 +1622,7 @@ const careerSuccessData = [
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </span>
                 </Link>
-                
+
                 <Link to="/brochure" className="px-6 py-4 md:px-10 md:py-5 rounded-full border border-primary/20 text-primary font-bold text-base md:text-lg hover:bg-primary/5 transition-colors duration-300 backdrop-blur-sm cursor-pointer shadow-lg w-full sm:w-auto text-center">
                   Download Brochure
                 </Link>
