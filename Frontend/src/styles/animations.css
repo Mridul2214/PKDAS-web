@@ -1,0 +1,44 @@
+/* Premium Mega Menu Content Transitions */
+@keyframes megaMenuFlow {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+    filter: blur(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+.mega-menu-content-animate {
+  /* No animation on the parent container itself to keep children perfectly stable */
+}
+
+/* Animate the individual columns for a staggered flow effect */
+.mega-menu-content-animate > div {
+  opacity: 0;
+  animation: megaMenuFlow 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Column 1 delay */
+.mega-menu-content-animate > div:nth-child(1) > div:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+/* Stagger the inner categories of the left side (Column 8 is the parent) */
+.mega-menu-content-animate .col-span-8 > div:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.mega-menu-content-animate .col-span-8 > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.mega-menu-content-animate .col-span-8 > div:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Animate the Right Side Spotlight with even more delay */
+.mega-menu-content-animate .col-span-4 {
+  animation-delay: 0.4s;
+}
