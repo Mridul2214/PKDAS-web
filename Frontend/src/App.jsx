@@ -15,6 +15,7 @@ import Institutions from './pages/Institutions';
 import Placements from './pages/Placements';
 import FacultyPage from './pages/FacultyPage';
 import College3DView from './pages/College3DView';
+import HighlightDetail from './pages/HighlightDetail';
 
 // Layout Components
 import { Navbar } from './components/layout/Navbar';
@@ -60,6 +61,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/interest/:slug" element={<InterestPage />} />
             <Route path="/college/:slug" element={<College3DView />} />
+            <Route path="/highlights/:slug" element={<HighlightDetail />} />
           </Routes>
         </div>
 

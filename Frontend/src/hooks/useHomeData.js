@@ -104,6 +104,7 @@ export function useHomeData() {
   const highlights = [
     {
       title: "Industry-Oriented Curriculum",
+      slug: "industry-oriented-curriculum",
       desc: "Stay ahead with a curriculum co-created by industry giants and top corporate partners.",
       images: [
         "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
@@ -115,6 +116,7 @@ export function useHomeData() {
     },
     {
       title: "Expert Faculty",
+      slug: "expert-faculty",
       desc: "Learn from Ph.D. scholars and industry veterans with decades of global experience.",
       images: [
         "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
@@ -126,6 +128,7 @@ export function useHomeData() {
     },
     {
       title: "World-Class Infrastructure",
+      slug: "world-class-infrastructure",
       desc: "Experience learning in high-tech labs, digital libraries, and modern smart classrooms.",
       images: [
         "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80",
@@ -137,6 +140,7 @@ export function useHomeData() {
     },
     {
       title: "Global Placements",
+      slug: "global-placements",
       desc: "Join the elite league with placements in Fortune 500 companies and global tech firms.",
       images: [
         "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1200&q=80",
@@ -148,6 +152,7 @@ export function useHomeData() {
     },
     {
       title: "Skill-Based Training",
+      slug: "skill-based-training",
       desc: "Master your craft through hands-on workshops, advanced labs, and real-time industry projects.",
       images: [
         "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=90",
