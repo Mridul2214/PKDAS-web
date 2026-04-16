@@ -14,8 +14,11 @@ const WavyDivider = ({ type = 'wave1', color = 'white', position = 'top', flippe
     };
   
     return (
-      <div className={`section-wave wave-${position} ${flipped ? 'wave-flipped' : ''}`} style={{ opacity, position: 'absolute', width: '100%', left: 0, zIndex: 5 }}>
-        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" style={{ height: '100%', width: '100%' }}>
+      <div 
+        className={`absolute left-0 w-full overflow-hidden pointer-events-none z-0 ${position === 'top' ? 'top-0' : 'bottom-0'} ${flipped ? 'rotate-180' : ''}`}
+        style={{ opacity }}
+      >
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="block w-full h-[120px] md:h-[180px]">
           <path fill={color} fillOpacity="1" d={waves[type]}></path>
         </svg>
       </div>
@@ -68,7 +71,7 @@ export function About() {
     <main ref={container} className="bg-white min-h-screen overflow-hidden relative">
       
       {/* ── HERO SECTION ── */}
-      <section className="relative pt-32 pb-48 bg-[#EDF1F5] overflow-hidden">
+      <section className="relative pt-24 pb-40 lg:pt-32 lg:pb-48 bg-[#EDF1F5] overflow-hidden">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#0145F2]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
         
         <div className="container mx-auto px-6 relative z-10 text-center">
@@ -87,8 +90,8 @@ export function About() {
       </section>
 
       {/* ── ACCREDITATIONS SECTION ── */}
-      <section id="accreditations" className="relative py-32 bg-white z-10">
-        <div className="container mx-auto px-6">
+      <section id="accreditations" className="relative pt-24 pb-48 lg:pt-32 lg:pb-56 bg-white z-10 flex flex-col">
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row items-end justify-between gap-6 mb-16">
               <div className="max-w-2xl">
@@ -105,7 +108,7 @@ export function About() {
                 { title: 'UGC 12-B', desc: 'Recognized by University Grants Commission for excellence.', icon: '🎓', tag: 'Status' },
                 { title: 'ISO Certified', desc: '9001:2015 Certification for quality management.', icon: '✅', tag: 'Standard' },
               ].map((item, idx) => (
-                <div key={idx} className="gsap-stagger-child group p-8 rounded-[2rem] bg-[#EDF1F5] hover:bg-[#0145F2] transition-all duration-500 cursor-default shadow-sm hover:shadow-2xl hover:shadow-[#0145F2]/20 hover:-translate-y-2">
+                <div key={idx} className="gsap-stagger-child group p-8 rounded-[2rem] bg-[#EDF1F5] hover:bg-[#0145F2] transition-all duration-500 cursor-default shadow-sm hover:shadow-2xl hover:shadow-[#0145F2]/20 hover:-translate-y-2 relative z-10">
                   <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform duration-500 shadow-sm">
                     {item.icon}
                   </div>
@@ -122,17 +125,17 @@ export function About() {
       </section>
 
       {/* ── MISSION & VISION ── */}
-      <section id="mission" className="relative py-40 bg-[#EDF1F5] z-0">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto">
-            <div className="gsap-reveal p-12 bg-white rounded-[3rem] shadow-xl border border-black/5">
+      <section id="mission" className="relative py-24 lg:py-32 bg-[#EDF1F5] z-10">
+        <div className="container mx-auto px-6 relative z-10 border-t border-transparent">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
+            <div className="gsap-reveal p-10 lg:p-12 bg-white rounded-[2rem] lg:rounded-[3rem] shadow-xl border border-black/5 relative z-10">
               <div className="text-3xl mb-6">🎯</div>
               <h2 className="text-3xl font-display font-bold text-on-surface mb-6">Our Mission</h2>
               <p className="text-lg font-body text-on-surface-variant leading-relaxed">
                 To provide high-quality education and training to students to excel in their chosen fields. To foster a culture of research and innovation to address societal challenges.
               </p>
             </div>
-            <div className="gsap-reveal p-12 bg-[#0145F2] rounded-[3rem] shadow-xl shadow-[#0145F2]/10">
+            <div className="gsap-reveal p-10 lg:p-12 bg-[#0145F2] rounded-[2rem] lg:rounded-[3rem] shadow-xl shadow-[#0145F2]/10 relative z-10">
               <div className="text-3xl mb-6">👁️</div>
               <h2 className="text-3xl font-display font-bold text-white mb-6">Our Vision</h2>
               <p className="text-lg font-body text-white/80 leading-relaxed">
@@ -144,10 +147,10 @@ export function About() {
       </section>
 
       {/* ── LEADERSHIP SECTION ── */}
-      <section id="leadership" className="relative py-32 bg-white z-10 overflow-hidden">
+      <section id="leadership" className="relative py-24 lg:py-32 bg-white z-10 overflow-hidden">
         <WavyDivider type="wave3" color="#EDF1F5" position="top" flipped />
         
-        <div className="container mx-auto px-6 pt-20">
+        <div className="container mx-auto px-6 pt-16 lg:pt-24 relative z-10">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <h2 className="gsap-reveal text-4xl md:text-5xl font-display font-bold text-on-surface mb-4">Eminent Leadership</h2>
             <p className="gsap-reveal text-on-surface-variant font-body text-lg">Guided by visionaries who have dedicated their lives to institutional building.</p>

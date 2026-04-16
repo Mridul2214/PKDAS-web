@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Pages
 import { Home } from './pages/Home';
@@ -27,14 +31,17 @@ function App() {
   useEffect(() => {
     const lenis = new Lenis();
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    lenis.on('scroll', ScrollTrigger.update);
 
-    requestAnimationFrame(raf);
+    const raf = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(raf);
       lenis.destroy();
     };
   }, []);
