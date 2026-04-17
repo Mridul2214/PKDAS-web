@@ -133,10 +133,13 @@ export function Home() {
   const [instView, setInstView] = useState('categories'); // 'categories' | 'all' | category title
   const [instSearch, setInstSearch] = useState('');
 
-  // Mobile Carousel States
+  // Mobile & Desktop Carousel States
   const [activeAlumni, setActiveAlumni] = useState(0);
   const [activeScholar, setActiveScholar] = useState(0);
   const [activeCareer, setActiveCareer] = useState(0);
+  const [activeAchievement, setActiveAchievement] = useState(0);
+
+  const achievementCount = 4; // Number of cards in total
 
   // Auto-slide effect for mobile carousels
   useEffect(() => {
@@ -144,9 +147,10 @@ export function Home() {
       setActiveAlumni((prev) => (prev + 1) % alumniReviews.length);
       setActiveScholar((prev) => (prev + 1) % topStudents.length);
       setActiveCareer((prev) => (prev + 1) % careerSuccessData.length);
+      setActiveAchievement((prev) => (prev + 1) % achievementCount);
     }, 2000);
     return () => clearInterval(timer);
-  }, []);
+  }, [achievementCount]);
 
   useGSAP(() => {
     // ── Use gsap.set() + gsap.to() pattern instead of gsap.from() ──
@@ -204,6 +208,26 @@ export function Home() {
         ease: 'back.out(1.2)',
         scrollTrigger: { trigger: parent, start: 'top 85%' }
       });
+    });
+
+    // Parallax effect for image cards
+    gsap.utils.toArray('.parallax-img-container').forEach((container) => {
+      const img = container.querySelector('img');
+      if (!img) return;
+      gsap.fromTo(img, 
+        { yPercent: -12 },
+        {
+          yPercent: 12,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          },
+          force3D: true
+        }
+      );
     });
 
     // Empowering Next Gen Images (Right side)
@@ -526,7 +550,7 @@ export function Home() {
       <Hero />
 
       {/* About Preview Section */}
-      <section className="relative z-[20] py-24 bg-transparent overflow-hidden about-section-trigger">
+      <section className="relative z-[20] pt-24 pb-8 bg-white overflow-hidden about-section-trigger">
         {/* Background Decorative Elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <div className="about-bg-shape absolute -top-20 -left-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"></div>
@@ -546,11 +570,11 @@ export function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left Content */}
             <div className="max-w-2xl">
-              <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-widest uppercase mb-6 border border-primary/20">
+              {/* <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-widest uppercase mb-6 border border-primary/20">
                 Discover PKDAS
-              </div>
-              <h2 className="gsap-reveal text-display-md md:text-5xl lg:text-6xl font-display text-on-surface mb-6 leading-tight">
-                Empowering the <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Next Generation</span>
+              </div> */}
+              <h2 className="gsap-reveal text-5xl md:text-6xl lg:text-6xl font-sans font-black text-on-surface mb-6 leading-tight">
+                Empowering the <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-primary to-accent font-bold">Next Generation</span>
               </h2>
               <p className="gsap-reveal text-lg font-body text-on-surface-variant leading-relaxed mb-8">
                 Nehru Arts and Science College (NASC) is a leading autonomous institution dedicated to academic excellence. We provide a dynamic learning environment that nurtures creativity, critical thinking, and leadership skills.
@@ -580,38 +604,38 @@ export function Home() {
             {/* Right Interactive Image Grid */}
             <div className="relative h-[600px] w-full hidden md:block about-image-grid-trigger">
               {/* Center Main Image */}
-              <div className="about-floating-img absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-80 z-20">
+              <div className="about-floating-img parallax-img-container absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-80 z-20 overflow-hidden rounded-2xl border-[6px] border-surface-container-lowest shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                   alt="Students collaborating"
-                  className="w-full h-full object-cover rounded-2xl shadow-2xl border-[6px] border-surface-container-lowest hover:scale-105 transition-transform duration-500 cursor-pointer"
+                  className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover hover:scale-110 transition-transform duration-500 cursor-pointer will-change-transform"
                 />
               </div>
 
               {/* Floating Image Top Left */}
-              <div className="about-floating-img absolute top-[10%] left-[5%] w-48 h-56 z-10 hover:z-40">
+              <div className="about-floating-img parallax-img-container absolute top-[10%] left-[5%] w-48 h-56 z-10 hover:z-40 overflow-hidden rounded-2xl border-4 border-surface-container-lowest shadow-xl">
                 <img
                   src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                   alt="Campus Life"
-                  className="w-full h-full object-cover rounded-2xl shadow-xl border-4 border-surface-container-lowest hover:rotate-3 transition-transform duration-500 hover:scale-105 cursor-pointer"
+                  className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover hover:scale-110 transition-transform duration-500 cursor-pointer will-change-transform"
                 />
               </div>
 
               {/* Floating Image Bottom Right */}
-              <div className="about-floating-img absolute bottom-[10%] right-[0%] w-60 h-48 z-30 hover:z-40">
+              <div className="about-floating-img parallax-img-container absolute bottom-[10%] right-[0%] w-60 h-48 z-30 hover:z-40 overflow-hidden rounded-2xl border-4 border-surface-container-lowest shadow-xl">
                 <img
                   src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                   alt="University students"
-                  className="w-full h-full object-cover rounded-2xl shadow-xl border-4 border-surface-container-lowest hover:-rotate-3 transition-transform duration-500 hover:scale-105 cursor-pointer"
+                  className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover hover:scale-110 transition-transform duration-500 cursor-pointer will-change-transform"
                 />
               </div>
 
               {/* Floating Image Bottom Left */}
-              <div className="about-floating-img absolute bottom-[5%] left-[20%] w-40 h-40 z-10 hover:z-40">
+              <div className="about-floating-img parallax-img-container absolute bottom-[5%] left-[20%] w-40 h-40 z-10 hover:z-40 overflow-hidden rounded-2xl border-4 border-surface-container-lowest shadow-lg">
                 <img
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                   alt="Study group"
-                  className="w-full h-full object-cover rounded-2xl shadow-lg border-4 border-surface-container-lowest hover:rotate-6 transition-transform duration-500 hover:scale-105 cursor-pointer"
+                  className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover hover:scale-110 transition-transform duration-500 cursor-pointer will-change-transform"
                 />
               </div>
             </div>
@@ -627,7 +651,7 @@ export function Home() {
       </section>
 
       {/* ── Achievements Section ── */}
-      <section className="relative z-[20] py-40 bg-white overflow-hidden">
+      <section className="relative z-[20] pt-24 pb-40 bg-white overflow-hidden">
         {/* Section-Wide Background Image Slot */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
@@ -640,108 +664,109 @@ export function Home() {
         </div>
 
         {/* Top Wave (matching Hero surface) */}
-        <WavyDivider type="wave1" color="var(--color-surface)" position="top" flipped={true} />
+        <WavyDivider type="wave1" color="white" position="top" flipped={true} />
 
         <div className="container mx-auto px-6 relative z-10">
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0145F2]/10 text-[#0145F2] text-xs font-bold tracking-widest uppercase mb-5 border border-[#0145F2]/20">
+            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-slate-700 text-sm font-semibold mb-5 border border-blue-100">
               Milestones
             </div>
-            <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-on-surface leading-tight mb-5">
-              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Achievements</span>
+            <h2 className="gsap-reveal text-5xl md:text-6xl font-sans font-bold text-on-surface leading-tight mb-5">
+              Our <span className="text-transparent bg-clip-text bg-primary">Achievements</span>
             </h2>
-            <p className="gsap-reveal text-on-surface-variant font-display text-xl leading-relaxed max-w-2xl mx-auto italic opacity-80">
+            <p className="gsap-reveal text-on-surface-variant font-sans text-xl leading-relaxed max-w-2xl mx-auto italic opacity-80">
               Decades of excellence reflected in the accomplishments of our students, faculty, and institution. Every milestone fuels our mission to empower the next generation.
             </p>
           </div>
 
 
-          {/* Achievement Cards — Asymmetric Grid */}
-          <div className="gsap-stagger-parent grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
-
-            {/* Card 1: Graduation — Wide */}
-            <div className="gsap-stagger-child md:col-span-7 group relative rounded-3xl overflow-hidden min-h-[380px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer">
-              <img
-                src="/achievements/graduates_celebration.png"
-                alt="Graduation Celebration"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/95 transition-all duration-500"></div>
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
-                  <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Convocation 2025</div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3 leading-tight">
-                    3,500+ Graduates Every Year
-                  </h3>
-                  <p className="text-zinc-300 font-body text-sm leading-relaxed max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    Our graduates go on to become industry leaders, entrepreneurs, and innovators — carrying forward a legacy of excellence across the globe.
-                  </p>
-                </div>
+          {/* Desktop View: Asymmetric Grid */}
+          <div className="hidden md:grid gsap-stagger-parent grid-cols-12 gap-6 mb-20">
+            {/* Card 1 */}
+            <div className="md:col-span-7 group relative rounded-3xl overflow-hidden min-h-[380px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl parallax-img-container">
+              <img src="/achievements/graduates_celebration.png" alt="Graduation" className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover group-hover:scale-105 transition-all will-change-transform" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
+              <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
+                <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Convocation 2025</div>
+                <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">3,500+ Graduates Every Year</h3>
+                <p className="text-zinc-200 text-sm font-body leading-relaxed max-w-lg">Our graduates go on to become industry leaders, entrepreneurs, and innovators across the globe.</p>
               </div>
             </div>
-
-            {/* Card 2: Gold Medalist — Tall */}
-            <div className="gsap-stagger-child md:col-span-5 group relative rounded-3xl overflow-hidden min-h-[380px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer">
-              <img
-                src="/achievements/gold_medalist.png"
-                alt="Gold Medalist"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/95 transition-all duration-500"></div>
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
-                  <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Academic Excellence</div>
-                  <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight">
-                    150+ University Gold Medals
-                  </h3>
-                  <p className="text-zinc-300 font-body text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    Our students consistently secure top university ranks and gold medals across all disciplines — a testament to our academic rigor.
-                  </p>
-                </div>
+            {/* Card 2 */}
+            <div className="md:col-span-5 group relative rounded-3xl overflow-hidden min-h-[380px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl parallax-img-container">
+              <img src="/achievements/gold_medalist.png" alt="Gold Medalist" className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover group-hover:scale-105 transition-all will-change-transform" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
+              <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
+                <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Academic Excellence</div>
+                <h3 className="text-2xl md:text-4xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">150+ University Gold Medals</h3>
+                <p className="text-zinc-200 text-sm font-body leading-relaxed">Securing top university ranks and gold medals across all disciplines year after year.</p>
               </div>
             </div>
-
-            {/* Card 3: Award Ceremony — Medium */}
-            <div className="gsap-stagger-child md:col-span-5 group relative rounded-3xl overflow-hidden min-h-[360px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer">
-              <img
-                src="/achievements/award_ceremony.png"
-                alt="Award Ceremony"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/95 transition-all duration-500"></div>
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
-                  <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">National Recognition</div>
-                  <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight">
-                    NAAC A++ Accredited
-                  </h3>
-                  <p className="text-zinc-300 font-body text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    Nationally recognized for our outstanding institutional standards, governance, and commitment to quality education.
-                  </p>
-                </div>
+            {/* Card 3 */}
+            <div className="md:col-span-5 group relative rounded-3xl overflow-hidden min-h-[360px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl parallax-img-container">
+              <img src="/achievements/award_ceremony.png" alt="Award Ceremony" className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover group-hover:scale-105 transition-all will-change-transform" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
+              <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
+                <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">National Recognition</div>
+                <h3 className="text-2xl md:text-4xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">NAAC  A+ Accredited</h3>
+                <p className="text-zinc-200 text-sm font-body leading-relaxed">Recognized for outstanding institutional standards, governance, and commitment to quality.</p>
               </div>
             </div>
-
-            {/* Card 4: Placement Success — Wide */}
-            <div className="gsap-stagger-child md:col-span-7 group relative rounded-3xl overflow-hidden min-h-[360px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer">
-              <img
-                src="/achievements/placement_success.png"
-                alt="Placement Success"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/95 transition-all duration-500"></div>
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
-                  <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Industry Connect</div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3 leading-tight">
-                    95% Placement Record
-                  </h3>
-                  <p className="text-zinc-300 font-body text-sm leading-relaxed max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    Students placed in Fortune 500 companies including TCS, Infosys, Wipro, Amazon, and Deloitte — with packages reaching ₹10 LPA.
-                  </p>
-                </div>
+            {/* Card 4 */}
+            <div className="md:col-span-7 group relative rounded-3xl overflow-hidden min-h-[360px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl parallax-img-container">
+              <img src="/achievements/placement_success.png" alt="Placement" className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover group-hover:scale-105 transition-all will-change-transform" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
+              <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
+                <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Industry Connect</div>
+                <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">95% Placement Record</h3>
+                <p className="text-zinc-200 text-sm font-body leading-relaxed max-w-lg">Students placed in Fortune 500 companies including Amazon, Google, and Deloitte.</p>
               </div>
+            </div>
+          </div>
+
+          {/* Mobile View: Auto-Scrolling Carousel */}
+          <div className="md:hidden relative mb-20 overflow-hidden rounded-3xl shadow-2xl group/achievements">
+            {/* Mobile Navigation Arrows */}
+            <button 
+              onClick={() => setActiveAchievement((prev) => (prev - 1 + achievementCount) % achievementCount)}
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-md rounded-full text-white transition-opacity opacity-0 group-hover/achievements:opacity-100"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button 
+              onClick={() => setActiveAchievement((prev) => (prev + 1) % achievementCount)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-md rounded-full text-white transition-opacity opacity-0 group-hover/achievements:opacity-100"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            <div 
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{ transform: `translateX(-${activeAchievement * 100}%)` }}
+            >
+              {[
+                { img: "/achievements/graduates_celebration.png", tag: "Convocation 2025", title: "3,500+ Graduates", desc: "Our graduates go on to become industry leaders across the globe." },
+                { img: "/achievements/gold_medalist.png", tag: "Academic Excellence", title: "150+ Gold Medals", desc: "Consistent top ranks and university recognition for research." },
+                { img: "/achievements/award_ceremony.png", tag: "National Recognition", title: "NAAC A+ Accredited", desc: "Recognized for institutional excellence and quality governance." },
+                { img: "/achievements/placement_success.png", tag: "Industry Connect", title: "95% Placements", desc: "Connecting talent with top-tier Fortune 500 companies." }
+              ].map((card, i) => (
+                <div key={i} className="w-full flex-shrink-0 relative h-[400px]">
+                  <img src={card.img} alt={card.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                  <div className="absolute inset-x-0 bottom-0 p-8 text-center bg-black/20 backdrop-blur-sm">
+                    <div className="text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-1">{card.tag}</div>
+                    <h3 className="text-2xl font-display font-bold text-white mb-2 drop-shadow-md">{card.title}</h3>
+                    <p className="text-zinc-100 text-xs font-body leading-relaxed">{card.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* Indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {[...Array(achievementCount)].map((_, i) => (
+                <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === activeAchievement ? 'w-6 bg-primary' : 'w-1.5 bg-white/30'}`} />
+              ))}
             </div>
           </div>
 
@@ -787,8 +812,10 @@ export function Home() {
 
         <div className="container mx-auto px-6 relative z-10 gsap-stagger-parent">
           <div className="max-w-3xl mb-10 mx-auto text-center">
-            <h2 className="gsap-reveal text-3xl md:text-display-md lg:text-5xl font-display mb-4 md:mb-6 text-on-surface">Our Institutions</h2>
-            <p className="gsap-reveal text-lg md:text-xl text-on-surface-variant font-display italic opacity-80">
+           <h2 className="gsap-reveal text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight mb-4 md:mb-6 text-primary">
+  Our Institutions
+</h2>
+            <p className="gsap-reveal text-lg md:text-xl text-on-surface-variant font-sans  opacity-90">
               Explore our diverse ecosystem of specialized colleges and institutes, operating across multiple cutting-edge domains.
             </p>
           </div>
@@ -983,7 +1010,7 @@ export function Home() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-14">
             <div>
               <h2 className="gsap-reveal text-4xl md:text-5xl lg:text-7xl font-display font-bold text-on-surface leading-tight">
-                What's Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Interest?</span>
+                What's Your <span className="text-transparent bg-clip-text bg-primary">Interest?</span>
               </h2>
               <p className="gsap-reveal text-on-surface-variant font-body text-lg mt-3 max-w-xl">
                 Explore our diverse range of academic disciplines and find your perfect path.
@@ -1044,13 +1071,15 @@ export function Home() {
       </section>
 
       {/* Top Students Spotlight - DARK BREAK SECTION */}
-      <section className="relative z-[20] py-40 bg-[var(--color-section-dark)] text-white overflow-hidden">
+      <section className="relative z-[20] pt-40 pb-20 bg-[var(--color-section-dark)] text-white overflow-hidden">
         {/* Wave matches Interests (White) */}
         <WavyDivider type="wave3" color="white" position="top" flipped={true} />
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mb-12 mx-auto text-center">
-            <h2 className="gsap-reveal text-display-md md:text-5xl font-display mb-6 text-white">Our Top Scholars</h2>
+            <h2 className="gsap-reveal text-4xl md:text-6xl lg:text-6xl font-sans font-bold mb-6 text-white">
+  Our Top Scholars
+</h2>
             <p className="gsap-reveal text-lg text-white/70 font-body">
               Meet some of our brightest minds who are setting new benchmarks in academics, leadership, and innovation.
             </p>
@@ -1064,8 +1093,8 @@ export function Home() {
                   <div className="absolute inset-x-0 bottom-0 top-12 bg-white border border-primary/10 rounded-[2.5rem] z-0 overflow-hidden shadow-xl transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-primary/15 hover:border-primary/30">
                     <div className="absolute inset-0 opacity-[0.02] text-primary font-display text-9xl font-black flex items-center justify-center whitespace-nowrap overflow-hidden tracking-[0.5em] pointer-events-none select-none">P K D A S</div>
                   </div>
-                  <div className="relative z-10 flex justify-center h-[260px]">
-                    <img src={student.img} alt={student.name} className="w-full max-w-[220px] h-full object-cover rounded-t-[140px] rounded-b-[40px] transition-all duration-700 ease-out group-hover:scale-105 group-hover:rounded-t-[100px]" />
+                  <div className="relative z-10 flex justify-center h-[260px] parallax-img-container overflow-hidden rounded-t-[140px] rounded-b-[40px]">
+                    <img src={student.img} alt={student.name} className="absolute inset-0 w-full mb-[-20%] h-[120%] object-cover transition-all duration-700 ease-out group-hover:scale-110 will-change-transform" />
                   </div>
                   <div className="absolute top-[40%] -left-2 z-20 bg-primary/95 backdrop-blur-md border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-lg transform -rotate-[5deg] shadow-lg group-hover:-rotate-[2deg] group-hover:bg-primary transition-all duration-300">{student.course}</div>
                 </div>
@@ -1127,9 +1156,9 @@ export function Home() {
       </section>
 
       {/* Highlights Section - Bento Redesign */}
-      <section className="relative py-40 bg-white overflow-hidden" style={{ isolation: 'isolate', zIndex: 20 }}>
-        {/* Wave matches Scholar Spotlight (Off-white) */}
-        <WavyDivider type="wave1" color="var(--color-surface)" position="top" flipped={true} />
+      <section className="relative pt-24 pb-40 bg-white overflow-hidden" style={{ isolation: 'isolate', zIndex: 20 }}>
+        {/* Wave matches Scholar Spotlight (White) */}
+        <WavyDivider type="wave1" color="white" position="top" flipped={true} />
 
         <div className="container mx-auto px-6 relative z-10">
 
@@ -1246,11 +1275,11 @@ export function Home() {
         <div className="container mx-auto px-6">
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-5 border border-primary/20">
+            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-slate-700 text-sm font-semibold mb-5 border border-blue-100">
               Placements
             </div>
             <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-on-surface leading-tight mb-5">
-              Career <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Opportunities</span>
+              Career <span className="text-transparent bg-clip-text bg-primary to-accent">Opportunities</span>
             </h2>
             <p className="gsap-reveal text-on-surface-variant font-body text-lg leading-relaxed max-w-2xl mx-auto">
               Our students are consistently recruited by top-tier companies. Here's a glimpse of the success stories that define our placement track record.
@@ -1490,13 +1519,13 @@ export function Home() {
       </section>
 
       {/* Alumni Testimonials - Auto Scrolling Marquee */}
-      <section className="relative z-[20] py-40 bg-white overflow-hidden">
+      <section className="relative z-[20] pt-32 pb-12 bg-white overflow-hidden">
         {/* Transition to Alumni - Clean Cut */}
 
         <div className="container mx-auto px-6 mb-16">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="gsap-reveal text-4xl md:text-5xl font-display font-bold text-on-surface mb-6">
-              Voices of our <span className="text-amber-500 font-cursive text-5xl">Alumni</span>
+              Voices of our <span className="text-amber-500 text-primary font-cursive text-6xl">Alumni</span>
             </h2>
             <p className="gsap-reveal text-on-surface-variant font-body text-lg">
               Hear from our graduates who are making an impact across the globe.
@@ -1505,24 +1534,43 @@ export function Home() {
         </div>
 
         {/* Alumni Desktop Marquee (Visible on sm and up) */}
-        <div className="hidden sm:flex relative overflow-x-hidden">
-          <div className="animate-marquee whitespace-nowrap flex gap-8 py-4">
-            {[...Array(2)].flatMap(() => alumniReviews).map((review, i) => (
-              <div key={i} className="w-[400px] flex-shrink-0 bg-white border border-primary/10 p-8 rounded-[2rem] shadow-xl hover:shadow-2xl hover:border-primary/30 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-6">
-                  <img src={review.img} alt={review.name} className="w-14 h-14 rounded-full object-cover border-2 border-primary/20" />
-                  <div>
-                    <h4 className="text-on-surface font-display font-bold text-lg">{review.name}</h4>
-                    <p className="text-primary text-sm font-body">Class of {review.batch} • {review.dept}</p>
+        <div className="hidden sm:block relative overflow-hidden group/marquee">
+          {/* Desktop Manual Controls */}
+          <button 
+            onClick={() => setActiveAlumni((prev) => (prev - 1 + alumniReviews.length) % alumniReviews.length)}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center bg-white/20 hover:bg-white/80 hover:text-primary backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover/marquee:opacity-100 shadow-xl"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button 
+            onClick={() => setActiveAlumni((prev) => (prev + 1) % alumniReviews.length)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center bg-white/20 hover:bg-white/80 hover:text-primary backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover/marquee:opacity-100 shadow-xl"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <div 
+            className="flex transition-transform duration-1000 ease-in-out py-4 px-10"
+            style={{ transform: `translateX(-${activeAlumni * (100 / 3)}%)` }} // Shows roughly 3 at a time
+          >
+            {[...alumniReviews, ...alumniReviews].map((review, i) => (
+              <div key={i} className="w-1/3 flex-shrink-0 px-4">
+                <div className="bg-white border border-primary/10 p-8 rounded-[2rem] shadow-xl hover:shadow-2xl hover:border-primary/30 transition-all duration-300 h-full">
+                  <div className="flex items-center gap-4 mb-6">
+                    <img src={review.img} alt={review.name} className="w-14 h-14 rounded-full object-cover border-2 border-primary/20" />
+                    <div>
+                      <h4 className="text-on-surface font-display font-bold text-lg">{review.name}</h4>
+                      <p className="text-primary text-sm font-body">Class of {review.batch} • {review.dept}</p>
+                    </div>
                   </div>
-                </div>
-                <p className="text-on-surface-variant font-body leading-relaxed text-balance whitespace-normal italic">
-                  "{review.text}"
-                </p>
-                <div className="mt-6 flex text-blue-400 gap-1 text-xs">
-                  {Array(5).fill(0).map((_, iconIdx) => (
-                    <svg key={iconIdx} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                  ))}
+                  <p className="text-on-surface-variant font-body leading-relaxed whitespace-normal italic">
+                    "{review.text}"
+                  </p>
+                  <div className="mt-6 flex text-blue-400 gap-1 text-xs">
+                    {Array(5).fill(0).map((_, iconIdx) => (
+                      <svg key={iconIdx} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
@@ -1589,9 +1637,9 @@ export function Home() {
       </section>
 
       {/* Premium CTA Section */}
-      <section className="relative z-[20] bg-transparent overflow-hidden border-t border-black/5 mt-0 md:mt-10">
+      <section className="relative z-[20] bg-transparent overflow-hidden border-t border-black/5">
         <div className="relative z-10 w-full">
-          <div className="gsap-reveal relative overflow-hidden border-y border-black/5 bg-white py-16 md:py-32 px-6 md:px-8 text-center group shadow-2xl w-full">
+          <div className="gsap-reveal relative overflow-hidden border-y border-black/5 bg-white py-12 md:py-20 px-6 md:px-8 text-center group shadow-2xl w-full">
 
             {/* Animated Background Mesh/Glow */}
             <div className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity duration-1000 pointer-events-none">
