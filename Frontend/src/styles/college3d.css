@@ -1,0 +1,343 @@
+/* =============================================
+   College 3D View – Full Page Styles
+   ============================================= */
+
+/* ── Page base ── */
+.college3d-page {
+  background: #f9fafb;
+  min-height: 100vh;
+  color: #1f2937;
+  font-family: var(--font-body, 'Poppins', sans-serif);
+}
+
+/* ── Hero ── */
+.college3d-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 5rem 0;
+  overflow: hidden;
+}
+
+.college3d-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: hero-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes hero-drift {
+  from { transform: scale(1.06) translateX(0); }
+  to   { transform: scale(1.10) translateX(-2%); }
+}
+
+.college3d-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    #050a14 0%,
+    #050a14 6%,
+    rgba(5,10,20,0.75) 40%,
+    rgba(5,10,20,0.35) 70%,
+    rgba(5,10,20,0.55) 100%
+  );
+}
+
+/* Particles */
+.college3d-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.college3d-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--college-color, #0145F2);
+  opacity: 0;
+  left: calc(var(--i) * 5.5%);
+  bottom: 20%;
+  animation: particle-rise calc(5s + var(--i) * 0.4s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.25s);
+}
+
+@keyframes particle-rise {
+  0%   { opacity: 0; transform: translateY(0) scale(1); }
+  20%  { opacity: 0.9; }
+  80%  { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-200px) scale(0.3); }
+}
+
+/* Hero content */
+.college3d-hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  color: #fff;
+}
+
+
+
+.c3d-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 9999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 1.25rem;
+}
+
+.c3d-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.c3d-title-short {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: clamp(5rem, 14vw, 10rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.c3d-title-full {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.02em;
+  font-style: italic;
+}
+
+.c3d-sub {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+}
+
+/* Stats */
+.c3d-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 3rem;
+}
+
+.c3d-stat { display: flex; flex-direction: column; gap: 0.15rem; }
+
+.c3d-stat-value {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.c3d-stat-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── Viewer Section ── */
+.college3d-viewer-section {
+  background: #f8f9fa;
+  padding: 5rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.college3d-viewer-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.college3d-viewer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.college3d-viewer-title {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.college3d-viewer-desc {
+  font-size: 1rem;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+}
+
+/* Campus Image Container */
+.college3d-campus-img-container {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Info Section ── */
+.college3d-info-section {
+  background: #eef2f6;
+  padding: 5rem 2rem 7rem;
+}
+
+.college3d-info-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.college3d-info-card {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 1.5rem;
+  padding: 2.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  transition: transform 0.35s, box-shadow 0.35s;
+}
+
+.college3d-info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+}
+
+.college3d-info-card--wide {
+  grid-column: 1 / -1;
+}
+
+.college3d-info-card--cta {
+  background: #ffffff;
+}
+
+.college3d-info-card-icon {
+  margin-bottom: 1.25rem;
+}
+
+.college3d-info-card h3 {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.college3d-info-card p {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.8;
+}
+
+/* Highlights */
+.college3d-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.c3d-highlight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.c3d-highlight-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* CTA */
+.college3d-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.college3d-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.6rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.college3d-cta-btn--primary {
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.college3d-cta-btn--primary:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+}
+
+.college3d-cta-btn--outline {
+  background: transparent;
+  border: 1.5px solid;
+}
+.college3d-cta-btn--outline:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .college3d-info-grid {
+    grid-template-columns: 1fr;
+  }
+  .college3d-info-card--wide {
+    grid-column: 1;
+  }
+  .c3d-title-short {
+    font-size: clamp(3.5rem, 22vw, 5.5rem);
+  }
+}

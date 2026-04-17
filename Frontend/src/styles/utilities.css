@@ -1,0 +1,40 @@
+@layer utilities {
+  .shadow-ambient {
+    box-shadow: 0 20px 40px rgba(0, 45, 69, 0.05);
+  }
+
+  .glass {
+    background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    backdrop-filter: blur(20px);
+  }
+
+  .ghost-border {
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 15%, transparent);
+  }
+
+  .text-display-lg {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .text-display-md {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+
+  .text-display-sm {
+    font-size: 1.875rem;
+    line-height: 1.25;
+  }
+
+  .bg-gradient-primary {
+    background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-container));
+  }
+
+  .premium-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,57 @@
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Wavy Separators */
+.section-wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+}
+
+.wave-top {
+  top: 0;
+}
+
+.wave-bottom {
+  bottom: 0;
+}
+
+.section-wave svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+  /* Increased height for better visibility */
+}
+
+.section-wave.wave-flipped {
+  transform: rotate(180deg);
+}
+
+/* Decorative Bubbles */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.6;
+}

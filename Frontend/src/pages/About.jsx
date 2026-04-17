@@ -7,22 +7,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 // --- Wave Divider Component ---
 const WavyDivider = ({ type = 'wave1', color = 'white', position = 'top', flipped = false, opacity = 1 }) => {
-  const waves = {
-    wave1: "M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,112C960,139,1056,181,1152,176C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
-    wave2: "M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,80C960,64,1056,96,1152,101.3C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
-    wave3: "M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-  };
-
-  return (
-    <div
-      className={`absolute left-0 w-full overflow-hidden pointer-events-none z-0 ${position === 'top' ? 'top-0' : 'bottom-0'} ${flipped ? 'rotate-180' : ''}`}
-      style={{ opacity }}
-    >
-      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="block w-full h-[120px] md:h-[180px]">
-        <path fill={color} fillOpacity="1" d={waves[type]}></path>
-      </svg>
-    </div>
-  );
+    const waves = {
+      wave1: "M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,112C960,139,1056,181,1152,176C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+      wave2: "M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,80C960,64,1056,96,1152,101.3C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+      wave3: "M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+    };
+  
+    return (
+      <div 
+        className={`absolute left-0 w-full overflow-hidden pointer-events-none z-0 ${position === 'top' ? 'top-0' : 'bottom-0'} ${flipped ? 'rotate-180' : ''}`}
+        style={{ opacity }}
+      >
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="block w-full h-[120px] md:h-[180px]">
+          <path fill={color} fillOpacity="1" d={waves[type]}></path>
+        </svg>
+      </div>
+    );
 };
 
 export function About() {
@@ -100,7 +100,7 @@ export function About() {
         <div className="absolute inset-0 premium-noise opacity-20"></div>
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#0145F2]/10 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/3"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 border-[1px] border-[#0145F2]/10 rounded-full -translate-x-1/2 translate-y-1/2"></div>
-
+        
         <div className="container mx-auto px-6 relative z-10 text-center">
           <div className="inline-block px-4 py-2 bg-[#0145F2]/10 border border-[#0145F2]/20 rounded-full mb-6 gsap-reveal">
             <span className="text-[10px] font-black tracking-[0.2em] text-[#0145F2] uppercase">Legacy of Excellence</span>
