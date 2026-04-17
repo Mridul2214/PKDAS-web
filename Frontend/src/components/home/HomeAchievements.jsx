@@ -25,7 +25,7 @@ export const HomeAchievements = () => {
             Milestones
           </div>
           <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-on-surface leading-tight mb-5">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Achievements</span>
+            Our <span className="text-transparent bg-clip-text bg-primary">Achievements</span>
           </h2>
           <p className="gsap-reveal text-on-surface-variant font-display text-xl leading-relaxed max-w-2xl mx-auto italic opacity-80">
             Decades of excellence reflected in the accomplishments of our students, faculty, and institution. Every milestone fuels our mission to empower the next generation.
@@ -44,7 +44,7 @@ export const HomeAchievements = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
             <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
-              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
+              <div>
                 <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Convocation 2025</div>
                 <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">
                   3,500+ Graduates Every Year
@@ -65,12 +65,12 @@ export const HomeAchievements = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
             <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
-              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
+              <div>
                 <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Academic Excellence</div>
                 <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">
                   150+ University Gold Medals
                 </h3>
-                <p className="text-zinc-200 text-sm font-body leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <p className="text-zinc-200 text-sm font-body leading-relaxed transition-all duration-500">
                   Our students consistently secure top university ranks and gold medals across all disciplines.
                 </p>
               </div>
@@ -86,12 +86,12 @@ export const HomeAchievements = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
             <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
-              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
+              <div>
                 <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">National Recognition</div>
                 <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">
                   NAAC A++ Accredited
                 </h3>
-                <p className="text-zinc-200 text-sm font-body leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <p className="text-zinc-200 text-sm font-body leading-relaxed transition-all duration-500">
                   Nationally recognized for our outstanding institutional standards and governance.
                 </p>
               </div>
@@ -107,12 +107,12 @@ export const HomeAchievements = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
             <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
-              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
+              <div>
                 <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Industry Connect</div>
                 <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">
                   95% Placement Record
                 </h3>
-                <p className="text-zinc-200 text-sm font-body leading-relaxed max-w-lg opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <p className="text-zinc-200 text-sm font-body leading-relaxed max-w-lg transition-all duration-500">
                   Students placed in Fortune 500 companies with packages reaching ₹10 LPA.
                 </p>
               </div>

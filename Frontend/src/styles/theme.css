@@ -114,3 +114,13 @@
     letter-spacing: -0.02em;
   }
 }
+@layer utilities {
+  .modal-open nav,
+  .modal-open main,
+  .modal-open footer {
+    filter: blur(12px) grayscale(20%);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}

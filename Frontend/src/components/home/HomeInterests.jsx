@@ -18,7 +18,7 @@ export const HomeInterests = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-14">
           <div>
             <h2 className="gsap-reveal text-4xl md:text-5xl lg:text-7xl font-display font-bold text-on-surface leading-tight">
-              What's Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Interest?</span>
+              What's Your <span className="text-transparent bg-clip-text bg-primary">Interest?</span>
             </h2>
             <p className="gsap-reveal text-on-surface-variant font-body text-lg mt-3 max-w-xl">
               Explore our diverse range of academic disciplines and find your perfect path.
