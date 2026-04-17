@@ -30,7 +30,7 @@ const ScholarDialog = ({ student, onClose }) => {
   const dialogContent = (
     <div
       className="fixed inset-0 z-[10000] flex items-start justify-center p-4 overflow-y-auto pt-20 pb-12 cursor-pointer"
-      style={{ backgroundColor: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(20px)' }}
+      style={{ backgroundColor: 'transparent', backdropFilter: 'blur(20px)' }}
       onClick={onClose}
     >
       <div
@@ -72,13 +72,6 @@ const ScholarDialog = ({ student, onClose }) => {
 
         {/* Content */}
         <div className="pt-14 px-8 pb-8">
-          <div className="mb-2">
-            <span
-              className="inline-block text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 bg-primary text-white shadow-md shadow-primary/20"
-            >
-              {student.course}
-            </span>
-          </div>
           <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-1 leading-tight">{student.name}</h2>
           <p className="text-amber-400 text-sm font-bold mb-6">Class of {student.batch}</p>
 
@@ -145,10 +138,10 @@ export const HomeScholars = ({ topStudents, activeScholar, setActiveScholar }) =
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl mb-12 mx-auto text-center">
-          <div className="gsap-reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-widest uppercase mb-6 border border-primary/20">
+          <div className="gsap-reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-primary text-[10px] font-black tracking-widest uppercase mb-6 border border-primary/20">
             Excellence personified
           </div>
-          <h2 className="gsap-reveal text-6xl md:text-7xl font-display font-black mb-6 text-white leading-tight">Our Top <span className="text-primary italic">Scholars</span></h2>
+          <h2 className="gsap-reveal text-6xl md:text-7xl font-display font-black mb-6 text-white leading-tight">Our Top <span className="text-white italic">Scholars</span></h2>
           <p className="gsap-reveal text-lg md:text-xl text-white/70 font-body max-w-2xl mx-auto opacity-80">
             Meet the visionaries and leaders who are setting global standards in academics, research, and corporate excellence.
           </p>
@@ -166,7 +159,6 @@ export const HomeScholars = ({ topStudents, activeScholar, setActiveScholar }) =
                   <img src={student.img} alt={student.name} className="absolute inset-0 w-full h-[120%] object-cover transition-all duration-1000 ease-out group-hover:scale-110 will-change-transform" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent group-hover:opacity-0 transition-opacity duration-500"></div>
                 </div>
-                <div className="absolute top-[45%] -left-3 z-20 bg-primary text-white text-[9px] font-black px-5 py-2 rounded-lg shadow-xl transform -rotate-12 group-hover:-rotate-6 transition-all duration-500 tracking-widest uppercase">{student.course}</div>
               </div>
               <div className="px-4 text-center">
                 <h3 className="text-xl md:text-2xl font-display font-black text-white mb-2 transition-colors group-hover:text-primary">{student.name}</h3>
@@ -202,7 +194,6 @@ export const HomeScholars = ({ topStudents, activeScholar, setActiveScholar }) =
                       </div>
                     </div>
                     <div className="text-center">
-                      <div className="inline-block px-3 py-1 bg-primary text-[9px] font-black text-white rounded-full mb-3 uppercase tracking-widest shadow-lg shadow-primary/20">{student.course}</div>
                       <h3 className="text-xl font-display font-black text-white mb-2">{student.name}</h3>
                       <p className="font-body text-sm text-white/60 leading-relaxed mb-4">{student.achievement}</p>
                       <button
