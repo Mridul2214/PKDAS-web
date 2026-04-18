@@ -22,20 +22,18 @@ export const HomeAbout = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
-          <div className="max-w-2xl">
-            <div className="gsap-reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-widest uppercase mb-6 border border-primary/20">
-              Discover PKDAS
-            </div>
-            <h2 className="gsap-reveal text-display-md md:text-5xl lg:text-6xl font-display text-on-surface mb-6 leading-tight">
-              Empowering the <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Next Generation</span>
+          <div className="max-w-4xl">
+            <h2 className="gsap-reveal font-display text-on-surface mb-6 leading-[1.1]">
+              <span className="text-2xl md:text-3xl lg:text-4xl block mb-2 font-medium opacity-80">Empowering the</span>
+              <span className="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl block">Next Generation</span>
             </h2>
-            <p className="gsap-reveal text-lg font-body text-on-surface-variant leading-relaxed mb-8">
+            <p className="gsap-reveal text-lg font-body text-on-surface-variant leading-relaxed mb-8 max-w-2xl">
               Nehru Arts and Science College (NASC) is a leading autonomous institution dedicated to academic excellence. We provide a dynamic learning environment that nurtures creativity, critical thinking, and leadership skills.
               <br /><br />
               With state-of-the-art facilities and a curriculum co-created with industry leaders, we are shaping the future of over 3,500 students every year.
             </p>
 
-            <div className="gsap-stagger-parent grid grid-cols-2 gap-6 mb-10">
+            <div className="gsap-stagger-parent grid grid-cols-2 gap-6 mb-10 max-w-md">
               <div className="gsap-stagger-child border-l-2 border-primary pl-4">
                 <div className="text-3xl font-display font-medium text-on-surface mb-1">20+</div>
                 <div className="text-xs font-display text-on-surface-variant uppercase tracking-widest">Years of Heritage</div>
