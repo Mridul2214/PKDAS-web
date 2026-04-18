@@ -190,8 +190,8 @@ export const HomeInstitutions = ({
       <div className="container mx-auto px-6 relative z-10 gsap-stagger-parent">
         {/* Heading */}
         <div className="max-w-3xl mb-10 mx-auto text-center">
-          <h2 className="gsap-reveal text-3xl md:text-display-md lg:text-6xl font-bold mb-4 md:mb-6 text-on-surface">Our Institutions</h2>
-          <p className="gsap-reveal text-lg md:text-xl text-on-surface-variant font-display  opacity-90">
+          <h2 className="gsap-reveal text-3xl md:text-display-md lg:text-5xl font-display mb-4 md:mb-6 text-on-surface">Our Institutions</h2>
+          <p className="gsap-reveal text-lg md:text-xl text-on-surface-variant font-display italic opacity-80">
             Explore our diverse ecosystem of specialized colleges and institutes, operating across multiple cutting-edge domains.
           </p>
         </div>

@@ -1,17 +1,13 @@
 import React from 'react';
 
-export const HomeAlumni = ({ reviews, activeAlumni, setActiveAlumni }) => {
-  // Use 'reviews' from props (mapped to alumniReviews in Home.jsx)
+export const HomeAlumni = ({ alumniReviews, activeAlumni, setActiveAlumni }) => {
   return (
     <section className="relative z-[20] py-40 bg-white overflow-hidden">
       <div className="container mx-auto px-6 mb-16">
         <div className="max-w-3xl mx-auto text-center">
-         <h2 className="gsap-reveal text-4xl md:text-5xl font-display font-bold text-on-surface mb-6">
-  Voices of our{" "}
-  <span className="bg-primary text-transparent bg-clip-text font-cursive text-6xl">
-    Alumni
-  </span>
-</h2>
+          <h2 className="gsap-reveal text-4xl md:text-5xl font-display font-bold text-on-surface mb-6">
+            Voices of our <span className="text-amber-500 font-cursive text-5xl">Alumni</span>
+          </h2>
           <p className="gsap-reveal text-on-surface-variant font-body text-lg">
             Hear from our graduates who are making an impact across the globe.
           </p>
@@ -21,12 +17,10 @@ export const HomeAlumni = ({ reviews, activeAlumni, setActiveAlumni }) => {
       {/* Alumni Desktop Marquee (Visible on sm and up) */}
       <div className="hidden sm:flex relative overflow-x-hidden">
         <div className="animate-marquee whitespace-nowrap flex gap-8 py-4">
-          {[...Array(2)].flatMap(() => reviews).map((review, i) => (
+          {[...Array(2)].flatMap(() => alumniReviews).map((review, i) => (
             <div key={i} className="w-[400px] flex-shrink-0 bg-white border border-primary/10 p-8 rounded-[2rem] shadow-xl hover:shadow-2xl hover:border-primary/30 transition-all duration-300">
               <div className="flex items-center gap-4 mb-6">
-                <div className="parallax-img-container w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary/20">
-                  <img src={review.img} alt={review.name} className="w-full h-[120%] -top-[10%] relative object-cover will-change-transform" />
-                </div>
+                <img src={review.img} alt={review.name} className="w-14 h-14 rounded-full object-cover border-2 border-primary/20" />
                 <div>
                   <h4 className="text-on-surface font-display font-bold text-lg">{review.name}</h4>
                   <p className="text-primary text-sm font-body">Class of {review.batch} • {review.dept}</p>
@@ -47,14 +41,14 @@ export const HomeAlumni = ({ reviews, activeAlumni, setActiveAlumni }) => {
 
       <div className="sm:hidden relative z-10">
         <button 
-          onClick={() => setActiveAlumni((prev) => (prev - 1 + reviews.length) % reviews.length)}
+          onClick={() => setActiveAlumni((prev) => (prev - 1 + alumniReviews.length) % alumniReviews.length)}
           className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
           aria-label="Previous Testimonial"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/></svg>
         </button>
         <button 
-          onClick={() => setActiveAlumni((prev) => (prev + 1) % reviews.length)}
+          onClick={() => setActiveAlumni((prev) => (prev + 1) % alumniReviews.length)}
           className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
           aria-label="Next Testimonial"
         >
@@ -66,7 +60,7 @@ export const HomeAlumni = ({ reviews, activeAlumni, setActiveAlumni }) => {
             className="flex transition-transform duration-500 ease-in-out w-full"
             style={{ transform: `translateX(-${activeAlumni * 100}%)` }}
           >
-          {reviews.map((review, i) => (
+          {alumniReviews.map((review, i) => (
             <div key={i} className="w-full flex-shrink-0 px-2 transition-all duration-300">
               <div className="bg-white border border-primary/10 p-6 rounded-[1.5rem] shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
@@ -92,7 +86,7 @@ export const HomeAlumni = ({ reviews, activeAlumni, setActiveAlumni }) => {
 
       {/* Mobile Page Indicators */}
       <div className="flex sm:hidden justify-center gap-2 mt-6">
-        {reviews.map((_, i) => (
+        {alumniReviews.map((_, i) => (
           <div
             key={i}
             className={`h-1.5 rounded-full transition-all duration-300 ${i === activeAlumni ? 'w-6 bg-primary' : 'w-1.5 bg-primary/20'}`}

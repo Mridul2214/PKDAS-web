@@ -56,26 +56,6 @@ export function useHomeAnimations(container) {
       });
     });
 
-    // Parallax effect for image cards
-    gsap.utils.toArray('.parallax-img-container').forEach((container) => {
-      const img = container.querySelector('img');
-      if (!img) return;
-      gsap.fromTo(img, 
-        { yPercent: -12 },
-        {
-          yPercent: 12,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: container,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1
-          },
-          force3D: true
-        }
-      );
-    });
-
     // Empowering Next Gen Images (Right side)
     const aboutImages = gsap.utils.toArray('.about-floating-img');
     if (aboutImages.length > 0) {

@@ -23,30 +23,26 @@ export function Home() {
   const { alumniReviews, institutionCategories, highlights } = useHomeData();
   const { topStudents, careerSuccessData, cultureSections } = useStudentData();
 
-  // Institutions State
+  // State
   const [activeCard, setActiveCard] = useState(null);
   const hoverTimer = useRef(null);
-  const [instView, setInstView] = useState('categories'); 
+  const [instView, setInstView] = useState('categories'); // 'categories' | 'all' | category title
   const [instSearch, setInstSearch] = useState('');
 
-  // Mobile & Desktop Carousel States
+  // Mobile Carousel States
   const [activeAlumni, setActiveAlumni] = useState(0);
   const [activeScholar, setActiveScholar] = useState(0);
   const [activeCareer, setActiveCareer] = useState(0);
-  const [activeAchievement, setActiveAchievement] = useState(0);
-
-  const achievementCount = 4; // Number of cards in total
 
   // Auto-slide effect for mobile carousels
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveAlumni((prev) => (prev + 1) % (alumniReviews?.length || 1));
-      setActiveScholar((prev) => (prev + 1) % (topStudents?.length || 1));
-      setActiveCareer((prev) => (prev + 1) % (careerSuccessData?.length || 1));
-      setActiveAchievement((prev) => (prev + 1) % achievementCount);
+      setActiveAlumni((prev) => (prev + 1) % alumniReviews.length);
+      setActiveScholar((prev) => (prev + 1) % topStudents.length);
+      setActiveCareer((prev) => (prev + 1) % careerSuccessData.length);
     }, 2000);
     return () => clearInterval(timer);
-  }, [alumniReviews?.length, topStudents?.length, careerSuccessData?.length, achievementCount]);
+  }, [alumniReviews.length, topStudents.length, careerSuccessData.length]);
 
   // GSAP Animations
   useHomeAnimations(container);
@@ -54,17 +50,12 @@ export function Home() {
   return (
     <main ref={container} className="bg-surface">
       <Hero />
-      
       <HomeAbout />
-      
-      <HomeAchievements 
-        activeAchievement={activeAchievement} 
-        setActiveAchievement={setActiveAchievement} 
-      />
+      <HomeAchievements />
       
       <HomeInstitutions 
-        institutionCategories={institutionCategories || []}
-        instView={instView}
+        institutionCategories={institutionCategories}
+        instView={instView} 
         setInstView={setInstView}
         instSearch={instSearch}
         setInstSearch={setInstSearch}
@@ -76,31 +67,26 @@ export function Home() {
       <HomeInterests />
       
       <HomeScholars 
-        topStudents={topStudents || []} 
-        activeScholar={activeScholar} 
-        setActiveScholar={setActiveScholar} 
+        topStudents={topStudents}
+        activeScholar={activeScholar}
+        setActiveScholar={setActiveScholar}
       />
       
-      <HomeHighlights 
-        highlights={highlights || []} 
-      />
-      
-      <HomeCulture 
-        cultureSections={cultureSections || []} 
-      />
+      <HomeHighlights highlights={highlights} />
+      <HomeCulture cultureSections={cultureSections} />
       
       <HomeCareers 
-        careerSuccessData={careerSuccessData || []} 
-        activeCareer={activeCareer} 
-        setActiveCareer={setActiveCareer} 
+        careerSuccessData={careerSuccessData}
+        activeCareer={activeCareer}
+        setActiveCareer={setActiveCareer}
       />
       
       <HomePartners />
       
       <HomeAlumni 
-        reviews={alumniReviews || []} 
-        activeAlumni={activeAlumni} 
-        setActiveAlumni={setActiveAlumni} 
+        alumniReviews={alumniReviews}
+        activeAlumni={activeAlumni}
+        setActiveAlumni={setActiveAlumni}
       />
       
       <HomeCTA />
