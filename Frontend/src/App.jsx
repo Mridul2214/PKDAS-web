@@ -30,7 +30,6 @@ import { BackToTop } from './components/layout/BackToTop';
 function App() {
   useEffect(() => {
     const lenis = new Lenis();
-    window.lenis = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -44,7 +43,6 @@ function App() {
     return () => {
       gsap.ticker.remove(raf);
       lenis.destroy();
-      window.lenis = null;
     };
   }, []);
 

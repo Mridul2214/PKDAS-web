@@ -25,7 +25,7 @@ export const HomeAchievements = () => {
             Milestones
           </div>
           <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-on-surface leading-tight mb-5">
-            Our <span className="text-transparent bg-clip-text bg-primary">Achievements</span>
+            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Achievements</span>
           </h2>
           <p className="gsap-reveal text-on-surface-variant font-display text-xl leading-relaxed max-w-2xl mx-auto italic opacity-80">
             Decades of excellence reflected in the accomplishments of our students, faculty, and institution. Every milestone fuels our mission to empower the next generation.
@@ -36,84 +36,84 @@ export const HomeAchievements = () => {
         <div className="gsap-stagger-parent grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
 
           {/* Card 1: Graduation — Wide */}
-          <div className="gsap-stagger-child md:col-span-7 group relative rounded-3xl overflow-hidden min-h-[380px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl parallax-img-container">
+          <div className="gsap-stagger-child md:col-span-7 group relative rounded-3xl overflow-hidden min-h-[380px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer">
             <img
               src="/achievements/graduates_celebration.png"
               alt="Graduation Celebration"
-              className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover group-hover:scale-105 transition-all will-change-transform"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
-            <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
-              <div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/95 transition-all duration-500"></div>
+            <div className="absolute inset-0 p-8 flex flex-col justify-end">
+              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
                 <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Convocation 2025</div>
-                <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">
+                <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3 leading-tight">
                   3,500+ Graduates Every Year
                 </h3>
-                <p className="text-zinc-200 text-sm font-body leading-relaxed max-w-lg">
-                  Our graduates go on to become industry leaders, entrepreneurs, and innovators across the globe.
+                <p className="text-zinc-300 font-body text-sm leading-relaxed max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  Our graduates go on to become industry leaders, entrepreneurs, and innovators — carrying forward a legacy of excellence across the globe.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Card 2: Gold Medalist — Tall */}
-          <div className="gsap-stagger-child md:col-span-5 group relative rounded-3xl overflow-hidden min-h-[380px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl parallax-img-container">
+          <div className="gsap-stagger-child md:col-span-5 group relative rounded-3xl overflow-hidden min-h-[380px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer">
             <img
               src="/achievements/gold_medalist.png"
               alt="Gold Medalist"
-              className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover group-hover:scale-105 transition-all will-change-transform"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
-            <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
-              <div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/95 transition-all duration-500"></div>
+            <div className="absolute inset-0 p-8 flex flex-col justify-end">
+              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
                 <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Academic Excellence</div>
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight">
                   150+ University Gold Medals
                 </h3>
-                <p className="text-zinc-200 text-sm font-body leading-relaxed transition-all duration-500">
-                  Our students consistently secure top university ranks and gold medals across all disciplines.
+                <p className="text-zinc-300 font-body text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  Our students consistently secure top university ranks and gold medals across all disciplines — a testament to our academic rigor.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Card 3: Award Ceremony — Medium */}
-          <div className="gsap-stagger-child md:col-span-5 group relative rounded-3xl overflow-hidden min-h-[360px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl parallax-img-container">
+          <div className="gsap-stagger-child md:col-span-5 group relative rounded-3xl overflow-hidden min-h-[360px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer">
             <img
               src="/achievements/award_ceremony.png"
               alt="Award Ceremony"
-              className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover group-hover:scale-105 transition-all will-change-transform"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
-            <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
-              <div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/95 transition-all duration-500"></div>
+            <div className="absolute inset-0 p-8 flex flex-col justify-end">
+              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
                 <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">National Recognition</div>
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight">
                   NAAC A++ Accredited
                 </h3>
-                <p className="text-zinc-200 text-sm font-body leading-relaxed transition-all duration-500">
-                  Nationally recognized for our outstanding institutional standards and governance.
+                <p className="text-zinc-300 font-body text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  Nationally recognized for our outstanding institutional standards, governance, and commitment to quality education.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Card 4: Placement Success — Wide */}
-          <div className="gsap-stagger-child md:col-span-7 group relative rounded-3xl overflow-hidden min-h-[360px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer shadow-lg hover:shadow-2xl parallax-img-container">
+          <div className="gsap-stagger-child md:col-span-7 group relative rounded-3xl overflow-hidden min-h-[360px] border border-white/10 hover:border-amber-400/30 transition-all duration-700 cursor-pointer">
             <img
               src="/achievements/placement_success.png"
               alt="Placement Success"
-              className="absolute inset-x-0 -top-[10%] w-full h-[120%] object-cover group-hover:scale-105 transition-all will-change-transform"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-black/60 to-black/20 group-hover:from-black/100 group-hover:via-black/70 transition-all duration-500"></div>
-            <div className="absolute inset-0 p-8 flex flex-col justify-end text-left">
-              <div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/95 transition-all duration-500"></div>
+            <div className="absolute inset-0 p-8 flex flex-col justify-end">
+              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
                 <div className="text-amber-400 text-sm font-bold tracking-widest uppercase mb-2">Industry Connect</div>
-                <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3 leading-tight drop-shadow-md">
+                <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3 leading-tight">
                   95% Placement Record
                 </h3>
-                <p className="text-zinc-200 text-sm font-body leading-relaxed max-w-lg transition-all duration-500">
-                  Students placed in Fortune 500 companies with packages reaching ₹10 LPA.
+                <p className="text-zinc-300 font-body text-sm leading-relaxed max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  Students placed in Fortune 500 companies including TCS, Infosys, Wipro, Amazon, and Deloitte — with packages reaching ₹10 LPA.
                 </p>
               </div>
             </div>

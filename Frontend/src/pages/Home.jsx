@@ -23,30 +23,26 @@ export function Home() {
   const { alumniReviews, institutionCategories, highlights } = useHomeData();
   const { topStudents, careerSuccessData, cultureSections } = useStudentData();
 
-  // Institutions State
+  // State
   const [activeCard, setActiveCard] = useState(null);
   const hoverTimer = useRef(null);
-  const [instView, setInstView] = useState('categories'); 
+  const [instView, setInstView] = useState('categories'); // 'categories' | 'all' | category title
   const [instSearch, setInstSearch] = useState('');
 
-  // Mobile & Desktop Carousel States
+  // Mobile Carousel States
   const [activeAlumni, setActiveAlumni] = useState(0);
   const [activeScholar, setActiveScholar] = useState(0);
   const [activeCareer, setActiveCareer] = useState(0);
-  const [activeAchievement, setActiveAchievement] = useState(0);
-
-  const achievementCount = 4; // Number of cards in total
 
   // Auto-slide effect for mobile carousels
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveAlumni((prev) => (prev + 1) % (alumniReviews?.length || 1));
-      setActiveScholar((prev) => (prev + 1) % (topStudents?.length || 1));
-      setActiveCareer((prev) => (prev + 1) % (careerSuccessData?.length || 1));
-      setActiveAchievement((prev) => (prev + 1) % achievementCount);
+      setActiveAlumni((prev) => (prev + 1) % alumniReviews.length);
+      setActiveScholar((prev) => (prev + 1) % topStudents.length);
+      setActiveCareer((prev) => (prev + 1) % careerSuccessData.length);
     }, 2000);
     return () => clearInterval(timer);
-  }, [alumniReviews?.length, topStudents?.length, careerSuccessData?.length, achievementCount]);
+  }, [alumniReviews.length, topStudents.length, careerSuccessData.length]);
 
   // GSAP Animations
   useHomeAnimations(container);
@@ -55,35 +51,12 @@ export function Home() {
     <main ref={container} className="bg-surface">
       <Hero />
       
-      {/* ANNOUNCEMENT MARQUEE */}
-      <div className="w-full bg-[#0145F2] text-white overflow-hidden flex items-center h-10 md:h-12 border-y border-white/10 shadow-inner z-[50] relative">
-         <div className="flex whitespace-nowrap animate-slide-left w-max hover:[animation-play-state:paused] cursor-default">
-            <div className="flex items-center">
-              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">✨ Admissions Open for 2026-2027 Academic Year</span>
-              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">• Upcoming Tech Symposium 'Decoode' on March 15th</span>
-              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">🏆 Ranked #1 in Engineering Excellence Awards 2025</span>
-              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">• Campus Placement Drive starts next Monday</span>
-            </div>
-            {/* Duplicate for infinite seamless scroll */}
-            <div className="flex items-center">
-              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">✨ Admissions Open for 2026-2027 Academic Year</span>
-              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">• Upcoming Tech Symposium 'Decoode' on March 15th</span>
-              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">🏆 Ranked #1 in Engineering Excellence Awards 2025</span>
-              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">• Campus Placement Drive starts next Monday</span>
-            </div>
-         </div>
-      </div>
-
       <HomeAbout />
-      
-      <HomeAchievements 
-        activeAchievement={activeAchievement} 
-        setActiveAchievement={setActiveAchievement} 
-      />
+      <HomeAchievements />
       
       <HomeInstitutions 
-        institutionCategories={institutionCategories || []}
-        instView={instView}
+        institutionCategories={institutionCategories}
+        instView={instView} 
         setInstView={setInstView}
         instSearch={instSearch}
         setInstSearch={setInstSearch}
@@ -95,31 +68,26 @@ export function Home() {
       <HomeInterests />
       
       <HomeScholars 
-        topStudents={topStudents || []} 
-        activeScholar={activeScholar} 
-        setActiveScholar={setActiveScholar} 
+        topStudents={topStudents}
+        activeScholar={activeScholar}
+        setActiveScholar={setActiveScholar}
       />
       
-      <HomeHighlights 
-        highlights={highlights || []} 
-      />
-      
-      <HomeCulture 
-        cultureSections={cultureSections || []} 
-      />
+      <HomeHighlights highlights={highlights} />
+      <HomeCulture cultureSections={cultureSections} />
       
       <HomeCareers 
-        careerSuccessData={careerSuccessData || []} 
-        activeCareer={activeCareer} 
-        setActiveCareer={setActiveCareer} 
+        careerSuccessData={careerSuccessData}
+        activeCareer={activeCareer}
+        setActiveCareer={setActiveCareer}
       />
       
       <HomePartners />
       
       <HomeAlumni 
-        reviews={alumniReviews || []} 
-        activeAlumni={activeAlumni} 
-        setActiveAlumni={setActiveAlumni} 
+        alumniReviews={alumniReviews}
+        activeAlumni={activeAlumni}
+        setActiveAlumni={setActiveAlumni}
       />
       
       <HomeCTA />
