@@ -6,41 +6,80 @@ const slides = [
     id: 1,
     type: 'image',
     src: '/banner.png',
-    heading: 'Empowering Minds, Inspiring Futures',
-    subheading: 'A premier arts and science college offering innovative programs, industry-focused learning, and holistic development.'
+    heading: 'Top-Ranking Deemed University in India',
+    subheading: 'A premier institute offering innovative programs in Science, Technology, and holistic development.'
   },
   {
     id: 2,
     type: 'image',
     src: '/Buildings/NGI-aerial view - NASC- Front view (2).JPG',
-    heading: 'Excellence in Education',
-    subheading: 'Fostering a culture of academic rigor and creative exploration.'
+    heading: 'Excellence in Engineering & Technology',
+    subheading: 'Fostering a culture of academic rigor and cutting-edge research to build tomorrow\'s leaders.'
   },
   {
     id: 3,
     type: 'image',
     src: '/Buildings/NGI-aerial view - NIET- Entrance.JPG',
-    heading: 'Innovation at Heart',
-    subheading: 'State-of-the-art infrastructure designed to inspire the next generation of engineers.'
+    heading: 'World-Class Science & Management Programs',
+    subheading: 'State-of-the-art infrastructure designed to inspire and shape the next generation of global professionals.'
   },
   {
     id: 4,
     type: 'image',
     src: '/Buildings/NGI-aerial view - NASC- front view low angle - birds eye view.JPG',
-    heading: 'Global Perspectives',
-    subheading: 'Preparing versatile leaders equipped for the dynamic challenges of tomorrow.'
+    heading: 'Global Perspectives & Research Innovation',
+    subheading: 'Preparing versatile and visionary leaders equipped for the dynamic challenges of a globalized world.'
   },
   {
     id: 5,
     type: 'video',
     src: '/campus_video.mp4',
-    heading: 'Experience Our Campus',
-    subheading: 'Take a virtual tour of our world-class facilities and vibrant campus life.'
+    heading: 'Experience Our Vibrant Campus Life',
+    subheading: 'Take a virtual tour of our world-class facilities and discover an environment built for success.'
+  }
+];
+
+const admissionCourses = [
+  {
+    title: "B.Tech Computing",
+    subtitle: "ADMISSIONS 2026",
+    badge: "100% Placement",
+    desc: "\"The practical learning approach and expert mentors gave me a competitive edge in every interview.\"",
+    avatar: "https://ui-avatars.com/api/?name=CS&background=e0e7ff&color=0145F2&rounded=true&bold=true"
+  },
+  {
+    title: "MBA Analytics",
+    subtitle: "ADMISSIONS 2026",
+    badge: "Top Ranked",
+    desc: "\"Developing strategic leadership skills here completely transformed my approach to corporate challenges.\"",
+    avatar: "https://ui-avatars.com/api/?name=MA&background=fff7ed&color=ea580c&rounded=true&bold=true"
+  },
+  {
+    title: "B.Sc AI & Robotics",
+    subtitle: "ADMISSIONS 2026",
+    badge: "Future Ready",
+    desc: "\"Diving deep into next-generation technologies equipped me with the skills to build the future.\"",
+    avatar: "https://ui-avatars.com/api/?name=AI&background=ecfdf5&color=059669&rounded=true&bold=true"
+  },
+  {
+    title: "B.Pharm Health",
+    subtitle: "ADMISSIONS 2026",
+    badge: "Clinical Labs",
+    desc: "\"State-of-the-art labs and extensive clinical exposure prepared me perfectly for the healthcare industry.\"",
+    avatar: "https://ui-avatars.com/api/?name=PH&background=fdf2f8&color=db2777&rounded=true&bold=true"
   }
 ];
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [courseIndex, setCourseIndex] = useState(0);
+
+  useEffect(() => {
+    const courseTimer = setInterval(() => {
+      setCourseIndex((prev) => (prev + 1) % admissionCourses.length);
+    }, 5000);
+    return () => clearInterval(courseTimer);
+  }, []);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -100,15 +139,18 @@ export function Hero() {
       <div className="container mx-auto px-6 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col items-start space-y-8 min-h-[300px] justify-center">
+            {/* Visually hidden h1 for SEO */}
+            <h1 className="sr-only">PKDAS Institute of Science and Technology - One of India's Best Ranked Universities</h1>
+
             {/* We use a key trick here to re-trigger animations on slide change for text ONLY */}
             <div key={currentSlide} className="space-y-6 min-h-[220px]">
-              <h1 className="text-white text-display-lg md:text-6xl lg:text-7xl font-display font-medium leading-tight">
+              <h2 className="text-white text-display-lg md:text-5xl lg:text-6xl font-display font-medium leading-tight">
                 <span className="block overflow-hidden pb-2">
                   <span className="block animate-mask-reveal">
                     {slides[currentSlide].heading}
                   </span>
                 </span>
-              </h1>
+              </h2>
               <p className="overflow-hidden">
                 <span className="block text-white text-xl md:text-2xl font-display italic leading-relaxed animate-mask-reveal" style={{ animationDelay: '300ms' }}>
                   {slides[currentSlide].subheading}
@@ -129,11 +171,69 @@ export function Hero() {
         </div>
       </div>
 
+      {/* Right Side Floating Popup */}
+      <div className="hidden lg:block absolute right-12 top-[40%] -translate-y-1/2 z-30 w-[360px] bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-[2rem] shadow-2xl animate-fade-in-up" style={{ animationDelay: '500ms' }}>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2 px-3 py-1 bg-[#0145F2] rounded-full border border-white/20 shadow-sm shadow-[#0145F2]/30">
+             <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+              </span>
+             <span className="text-[9px] font-bold text-white uppercase tracking-widest">Live Updates</span>
+          </div>
+        </div>
+        
+        <h3 className="text-2xl font-display font-bold text-white leading-tight mb-5">Admissions Open 2026</h3>
+
+        {/* The INNER changing card */}
+        <div className="relative h-[150px] mb-4 overflow-hidden rounded-2xl">
+          <div key={courseIndex} className="absolute inset-0 w-full bg-white p-5 shadow-xl border border-slate-100 animate-[slide-in-right_0.6s_ease-out_forwards]">
+             {/* Testimonial layout inside */}
+             <div className="flex items-start gap-3">
+               <img src={admissionCourses[courseIndex].avatar} alt="Icon" className="w-10 h-10 rounded-full object-cover shadow-sm" />
+               <div className="flex-1 pt-0.5">
+                 <h4 className="text-slate-900 font-bold text-[14px] leading-tight tracking-tight">{admissionCourses[courseIndex].title}</h4>
+                 <p className="text-slate-400 text-[9px] font-semibold uppercase tracking-widest mt-0.5">{admissionCourses[courseIndex].subtitle}</p>
+               </div>
+               <div className="bg-orange-50 text-orange-500 font-bold text-[9px] px-2 py-0.5 rounded-md whitespace-nowrap">
+                 {admissionCourses[courseIndex].badge}
+               </div>
+             </div>
+             
+             <div className="mt-4">
+               <p className="text-slate-600 italic text-[12px] leading-relaxed font-body">
+                 {admissionCourses[courseIndex].desc}
+               </p>
+             </div>
+          </div>
+        </div>
+
+        {/* Carousel Dots */}
+        <div className="flex items-center justify-center gap-2 mb-5">
+          {admissionCourses.map((_, idx) => (
+            <div 
+              key={idx} 
+              className={`h-1.5 rounded-full transition-all duration-300 ${idx === courseIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/40'}`}
+            ></div>
+          ))}
+        </div>
+
+        {/* Small Apply Now button */}
+        <button className="w-full py-3 rounded-lg bg-white text-[#0145F2] font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform shadow-lg hover:shadow-[#0145F2]/20 flex justify-center items-center gap-2">
+          Apply Now
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </button>
+      </div>
+
       {/* Slide Indicators — Premium numbered progress bars */}
       <style>{`
         @keyframes indicator-fill {
           from { transform: scaleX(0); }
           to { transform: scaleX(1); }
+        }
+        @keyframes slide-in-right {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
         }
       `}</style>
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">

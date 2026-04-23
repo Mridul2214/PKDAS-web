@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigationData } from '../../hooks/useNavigationData';
 
@@ -9,63 +9,123 @@ export function Navbar() {
 
   const navigationData = useNavigationData();
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav 
-      className="sticky top-0 w-full z-[100] bg-[#EDF1F5] border-b border-black/5 shadow-sm transition-all duration-500 relative"
+    <header 
+      className="sticky top-0 w-full z-[100] flex flex-col shadow-sm transition-all duration-500 bg-[#EDF1F5]"
       onMouseLeave={() => setHoveredMenu(null)}
     >
-      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-        {/* Logo area */}
-        <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
-          <img 
-            src="/PKDAS-DEEMED-TO-BE-UNIVERSITY-image-vector.png" 
-            alt="PKDAS Deemed to be University"
-            className="h-10 md:h-12 w-auto"
-          />
-        </Link>
-        
-        {/* Main Nav Items */}
-        <div className="hidden lg:flex items-center space-x-8">
-          <Link to="/" className="relative group py-2 text-sm font-bold text-on-surface hover:text-[#0145F2] transition-colors">
-            Home
-            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0145F2] transition-all duration-300 group-hover:w-full rounded-full"></span>
-          </Link>
+      {/* TIER 1: Top Bar */}
+      <div className="w-full bg-[#1E293B] text-white">
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 h-10 flex items-center justify-between text-xs font-medium">
+          <div className="hidden lg:flex items-center space-x-6">
+            <Link to="#" className="hover:text-gray-300 transition-colors">Students</Link>
+            <Link to="#" className="hover:text-gray-300 transition-colors">Faculty & Staff</Link>
+            <Link to="#" className="hover:text-gray-300 transition-colors">Parents</Link>
+            <Link to="#" className="hover:text-gray-300 transition-colors">Visitors</Link>
+            <Link to="#" className="hover:text-gray-300 transition-colors">Alumni</Link>
+            <Link to="#" className="hover:text-gray-300 transition-colors">Examinations</Link>
+            <div className="flex items-center gap-1 cursor-pointer hover:text-gray-300 transition-colors group">
+              Campuses 
+              <svg className="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+            </div>
+          </div>
+          {/* <div className="flex items-center space-x-4 ml-auto">
+             <button className="bg-[#F59E0B] text-black px-4 py-1 rounded font-bold flex items-center gap-1 text-xs hover:bg-[#D97706] transition-colors">
+                Admissions 2026
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>
+             </button>
+             <button className="bg-[#F59E0B] text-black px-2 py-1 rounded font-bold text-xs flex items-center gap-1 hover:bg-[#D97706] transition-colors">
+                360°
+             </button>
+          </div> */}
+        </div>
+      </div>
 
-          {/* Mega Dropdowns Items */}
-          {Object.keys(navigationData).map((menuName) => (
-            <div 
-              key={menuName}
-              className="static group"
-              onMouseEnter={() => setHoveredMenu(menuName)}
+
+
+      {/* TIER 2 & 3: Main Navigation Area */}
+      <div className="w-full bg-[#EDF1F5] relative z-[90]">
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 py-3 flex items-center justify-between">
+          {/* Logo area */}
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <img 
+              src="/PKDAS-DEEMED-TO-BE-UNIVERSITY-image-vector.png" 
+              alt="PKDAS Deemed to be University"
+              className={`w-auto object-contain transition-all duration-500 ${isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-16'}`}
+            />
+          </Link>
+          
+          {/* Right Side Desktop Links */}
+          <div className="hidden lg:flex flex-col items-end justify-center w-full">
+            {/* Middle Tier (Tier 2) */}
+            <div className={`flex items-center space-x-6 text-[13px] font-semibold text-on-surface-variant transition-all duration-500 overflow-hidden ${isScrolled ? 'h-0 opacity-0 mb-0' : 'h-6 opacity-100 mb-4'} mr-2`}>
+               <Link to="#" className="hover:text-[#0145F2] transition-colors">Library</Link>
+               <Link to="#" className="hover:text-[#0145F2] transition-colors">Career Centre</Link>
+               <Link to="#" className="hover:text-[#0145F2] transition-colors">News</Link>
+               <Link to="#" className="hover:text-[#0145F2] transition-colors">Events</Link>
+               <Link to="#" className="hover:text-[#0145F2] transition-colors">Blog</Link>
+               <Link to="#" className="hover:text-[#0145F2] transition-colors">Careers</Link>
+               <Link to="/contact" className="hover:text-[#0145F2] transition-colors">Contact us</Link>
+            </div>
+
+            {/* Bottom Tier (Tier 3) - Main Nav Items */}
+            <div className="flex items-center space-x-8">
+              <Link to="/" className="relative group py-2 text-sm font-bold text-on-surface hover:text-[#0145F2] transition-colors">
+                Home
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0145F2] transition-all duration-300 group-hover:w-full rounded-full"></span>
+              </Link>
+
+              {/* Mega Dropdowns Items */}
+              {Object.keys(navigationData).map((menuName) => (
+                <div 
+                  key={menuName}
+                  className="static group"
+                  onMouseEnter={() => setHoveredMenu(menuName)}
+                >
+                  <button className={`flex items-center gap-1 py-1 text-sm font-bold transition-all duration-300 ${hoveredMenu === menuName ? 'text-[#0145F2]' : 'text-on-surface hover:text-[#0145F2]'}`}>
+                    {menuName}
+                    <svg className={`w-3 h-3 transition-transform duration-300 ${hoveredMenu === menuName ? 'rotate-180 text-primary' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+
+              <div className="flex items-center space-x-4 ml-4">
+                <button className="bg-white text-on-surface p-2 shadow-sm rounded-md hover:text-[#0145F2] transition-colors border border-black/5">
+                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                </button>
+                <Link to="/contact" className="px-8 py-3 bg-[#0145F2] text-white text-sm font-black tracking-widest uppercase rounded-xl shadow-lg shadow-[#0145F2]/20 hover:scale-105 active:scale-95 transition-all">
+                  Apply Now
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Menu Button Group */}
+          <div className="lg:hidden flex items-center">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-on-surface hover:text-[#0145F2] focus:outline-none z-[110] transition-colors"
             >
-              <button className={`flex items-center gap-1 py-1 text-sm font-bold transition-all duration-300 ${hoveredMenu === menuName ? 'text-[#0145F2]' : 'text-on-surface hover:text-[#0145F2]'}`}>
-                {menuName}
-                <svg className={`w-3 h-3 transition-transform duration-300 ${hoveredMenu === menuName ? 'rotate-180 text-primary' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            </div>
-          ))}
-
-          <Link to="/contact" className="ml-4 px-8 py-3 bg-[#0145F2] text-white text-sm font-black tracking-widest uppercase rounded-xl shadow-lg shadow-[#0145F2]/20 hover:scale-105 active:scale-95 transition-all">
-            Apply Now
-          </Link>
+              <div className="w-6 h-5 relative flex flex-col justify-between">
+                <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+                <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
+                <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></span>
+              </div>
+            </button>
+          </div>
         </div>
-
-        {/* Mobile Menu Button Group */}
-        <div className="lg:hidden flex items-center">
-          <button 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-on-surface hover:text-[#0145F2] focus:outline-none z-[110] transition-colors"
-          >
-            <div className="w-6 h-5 relative flex flex-col justify-between">
-              <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-              <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></span>
-            </div>
-          </button>
-        </div>
-
       </div>
 
       {/* Mega Menu Panel - Absolute full width */}
@@ -183,6 +243,6 @@ export function Navbar() {
             </div>
          </div>
       </div>
-    </nav>
+    </header>
   );
 }

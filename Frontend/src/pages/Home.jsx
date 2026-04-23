@@ -55,6 +55,25 @@ export function Home() {
     <main ref={container} className="bg-surface">
       <Hero />
       
+      {/* ANNOUNCEMENT MARQUEE */}
+      <div className="w-full bg-[#0145F2] text-white overflow-hidden flex items-center h-10 md:h-12 border-y border-white/10 shadow-inner z-[50] relative">
+         <div className="flex whitespace-nowrap animate-slide-left w-max hover:[animation-play-state:paused] cursor-default">
+            <div className="flex items-center">
+              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">✨ Admissions Open for 2026-2027 Academic Year</span>
+              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">• Upcoming Tech Symposium 'Decoode' on March 15th</span>
+              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">🏆 Ranked #1 in Engineering Excellence Awards 2025</span>
+              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">• Campus Placement Drive starts next Monday</span>
+            </div>
+            {/* Duplicate for infinite seamless scroll */}
+            <div className="flex items-center">
+              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">✨ Admissions Open for 2026-2027 Academic Year</span>
+              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">• Upcoming Tech Symposium 'Decoode' on March 15th</span>
+              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">🏆 Ranked #1 in Engineering Excellence Awards 2025</span>
+              <span className="mx-10 text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase">• Campus Placement Drive starts next Monday</span>
+            </div>
+         </div>
+      </div>
+
       <HomeAbout />
       
       <HomeAchievements 
