@@ -1,0 +1,95 @@
+/* =============================================
+   About / Institutional Profile — Page Styles
+   ============================================= */
+
+/* ── CTA Section ── */
+.cta-btn-primary {
+  position: relative;
+  transition: all 0.25s ease;
+}
+.cta-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 28px rgba(255, 255, 255, 0.30),
+    0 10px 36px rgba(1, 69, 242, 0.45);
+}
+
+.cta-btn-outline {
+  position: relative;
+  transition: all 0.25s ease;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.cta-btn-outline:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+/* ── Leadership grid — equal-height cards ── */
+.leadership-grid {
+  align-items: stretch;
+}
+.leadership-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.leadership-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── Accreditation card hover ── */
+.accred-card {
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.accred-card:hover {
+  transform: translateY(-8px);
+}
+
+/* ── Mission / Vision cards ── */
+.mission-card,
+.vision-card {
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.mission-card:hover,
+.vision-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(1, 69, 242, 0.10);
+}
+
+/* ── Section smooth bg transitions ── */
+.about-section {
+  transition: background 0.3s ease;
+}
+
+/* ── CTA pulse animation ── */
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(1, 69, 242, 0.4); }
+  50%       { box-shadow: 0 0 0 12px rgba(1, 69, 242, 0); }
+}
+.cta-pulse {
+  animation: cta-pulse 2.5s ease infinite;
+}
+
+/* ── Recognition card tag badge ── */
+.recognition-tag {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(1, 69, 242, 0.10);
+  color: #0145F2;
+  margin-bottom: 0.75rem;
+  transition: all 0.25s ease;
+}
+.group:hover .recognition-tag {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.75);
+}

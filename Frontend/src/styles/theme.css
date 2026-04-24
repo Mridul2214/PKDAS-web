@@ -18,10 +18,10 @@
   --color-section-cool: #F8FAFC;
   --color-section-dark: #1E293B;
 
-  --font-display: "Playfair Display", serif;
+  --font-display: "Poppins", sans-serif;
   --font-body: "Poppins", sans-serif;
-  --font-editorial: "Instrument Serif", serif;
-  --font-cursive: "Dancing Script", cursive;
+  --font-editorial: "Poppins", sans-serif;
+  --font-cursive: "Poppins", sans-serif;
 
   --animate-fade-in: fade-in 1s ease-out forwards;
   --animate-slide-up: slide-up 0.8s ease-out forwards;

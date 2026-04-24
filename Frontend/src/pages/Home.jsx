@@ -50,6 +50,7 @@ export function Home() {
   return (
     <main ref={container} className="bg-surface">
       <Hero />
+      
       <HomeAbout />
       <HomeAchievements />
       

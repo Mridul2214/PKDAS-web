@@ -18,17 +18,16 @@ const ScholarDialog = ({ student, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-      style={{ backgroundColor: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(6px)' }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pt-24"
+      style={{ backgroundColor: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)' }}
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-2xl mt-20 rounded-3xl overflow-hidden shadow-2xl bg-white"
         style={{
-          background: 'linear-gradient(135deg, #0f1c2e 0%, #1a2f4a 60%, #0f1c2e 100%)',
-          border: '1px solid rgba(255,255,255,0.1)',
+          border: '1px solid rgba(0,0,0,0.05)',
           animation: 'dialogFadeIn 0.25s ease-out',
-          maxHeight: '90vh',
+          maxHeight: '85vh',
           overflowY: 'auto',
         }}
         onClick={(e) => e.stopPropagation()}
@@ -37,7 +36,7 @@ const ScholarDialog = ({ student, onClose }) => {
         <button
           onClick={onClose}
           aria-label="Close dialog"
-          className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+          className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors text-white"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
@@ -45,7 +44,7 @@ const ScholarDialog = ({ student, onClose }) => {
         </button>
 
         {/* Header */}
-        <div className="relative h-36 bg-gradient-to-br from-primary/80 via-primary/60 to-blue-900/80 flex items-end px-8 pb-4">
+        <div className="relative h-36 bg-gradient-to-br from-[#0145F2] via-[#0145F2]/80 to-[#0b1120] flex items-end px-8 pb-4">
           <div className="absolute inset-0 opacity-10 font-black text-8xl flex items-center justify-center tracking-[0.4em] text-white select-none pointer-events-none overflow-hidden">
             PKDAS
           </div>
@@ -53,8 +52,7 @@ const ScholarDialog = ({ student, onClose }) => {
             <img
               src={student.img}
               alt={student.name}
-              className="w-28 h-28 object-cover rounded-2xl border-4 shadow-xl"
-              style={{ borderColor: 'rgba(255,255,255,0.2)' }}
+              className="w-28 h-28 object-cover rounded-2xl border-4 shadow-xl border-white"
             />
           </div>
         </div>
@@ -62,50 +60,49 @@ const ScholarDialog = ({ student, onClose }) => {
         {/* Content */}
         <div className="pt-16 px-8 pb-8">
           {/* Name + course badge */}
-          <div className="mb-1">
+          <div className="mb-2">
             <span
-              className="inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3"
-              style={{ background: 'var(--color-primary, #1d4ed8)', color: '#fff' }}
+              className="inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-[#0145F2]/10 text-[#0145F2]"
             >
               {student.course}
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-1">{student.name}</h2>
-          <p className="text-amber-400 text-sm font-semibold mb-5">Batch of {student.batch}</p>
+          <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-1">{student.name}</h2>
+          <p className="text-[#0145F2] text-sm font-semibold mb-6">Batch of {student.batch}</p>
 
           {/* Stats row */}
-          <div className="flex gap-4 mb-6">
-            <div className="flex-1 rounded-2xl p-4 text-center" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div className="text-xl font-bold text-white">{student.gpa}</div>
-              <div className="text-xs text-white/50 mt-1 uppercase tracking-wider">GPA</div>
+          <div className="flex gap-4 mb-8">
+            <div className="flex-1 rounded-2xl p-4 text-center bg-gray-50 border border-gray-100">
+              <div className="text-xl font-bold text-gray-900">{student.gpa}</div>
+              <div className="text-xs text-gray-500 mt-1 uppercase tracking-wider font-bold">GPA</div>
             </div>
-            <div className="flex-1 rounded-2xl p-4 text-center" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div className="text-xl font-bold text-white">{student.batch}</div>
-              <div className="text-xs text-white/50 mt-1 uppercase tracking-wider">Graduation Year</div>
+            <div className="flex-1 rounded-2xl p-4 text-center bg-gray-50 border border-gray-100">
+              <div className="text-xl font-bold text-gray-900">{student.batch}</div>
+              <div className="text-xs text-gray-500 mt-1 uppercase tracking-wider font-bold">Graduation Year</div>
             </div>
-            <div className="flex-1 rounded-2xl p-4 text-center" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div className="text-xl font-bold text-amber-400">{(student.highlights || []).length}</div>
-              <div className="text-xs text-white/50 mt-1 uppercase tracking-wider">Milestones</div>
+            <div className="flex-1 rounded-2xl p-4 text-center bg-gray-50 border border-gray-100">
+              <div className="text-xl font-bold text-[#0145F2]">{(student.highlights || []).length}</div>
+              <div className="text-xs text-gray-500 mt-1 uppercase tracking-wider font-bold">Milestones</div>
             </div>
           </div>
 
           {/* Bio */}
-          <div className="mb-6">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3">About</h3>
-            <p className="text-white/75 text-sm leading-relaxed">{student.bio}</p>
+          <div className="mb-8">
+            <h3 className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-3">About</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">{student.bio}</p>
           </div>
 
           {/* Highlights */}
           {student.highlights && student.highlights.length > 0 && (
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3">Key Achievements</h3>
-              <ul className="space-y-2">
+              <h3 className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-3">Key Achievements</h3>
+              <ul className="space-y-3">
                 {student.highlights.map((hl, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-white/80">
-                    <span className="mt-1 w-5 h-5 flex-shrink-0 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ background: 'var(--color-primary, #1d4ed8)' }}>
+                  <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+                    <span className="mt-0.5 w-5 h-5 flex-shrink-0 rounded-full flex items-center justify-center text-[10px] font-bold bg-[#0145F2]/10 text-[#0145F2]">
                       {i + 1}
                     </span>
-                    {hl}
+                    <span className="leading-relaxed">{hl}</span>
                   </li>
                 ))}
               </ul>

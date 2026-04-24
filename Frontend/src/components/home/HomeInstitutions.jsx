@@ -173,7 +173,7 @@ export const HomeInstitutions = ({
   hoverTimer,
 }) => {
   return (
-    <section className="relative z-[20] py-40 bg-[#EDF1F5] text-on-surface overflow-hidden">
+    <section className="relative z-[20] pt-32 pb-40 bg-[#EDF1F5] text-on-surface overflow-hidden">
       {/* Decorative blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <div className="section-bg-blob absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px]" />
@@ -196,43 +196,46 @@ export const HomeInstitutions = ({
           </p>
         </div>
 
-        {/* Tabs + Search */}
-        <div className="gsap-reveal flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
-          <div className="flex flex-wrap items-center gap-2">
-            {[
-              { label: 'Categories', view: 'categories' },
-              { label: 'All Colleges', view: 'all' },
-            ].map(({ label, view }) => (
-              <button
-                key={view}
-                onClick={() => { setInstView(view); setInstSearch(''); }}
-                className={`px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === view ? 'bg-[#0145F2] text-white shadow-lg shadow-[#0145F2]/20' : 'bg-white text-on-surface-variant hover:bg-[#EDF1F5]'}`}
-              >
-                {label}
-              </button>
-            ))}
-            {institutionCategories.map((cat) => (
-              <button
-                key={cat.title}
-                onClick={() => { setInstView(cat.title); setInstSearch(''); }}
-                className={`hidden md:inline-block px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === cat.title ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-high/80'}`}
-              >
-                {cat.title}
-              </button>
-            ))}
-          </div>
-          <div className="relative w-full md:w-72 flex-shrink-0">
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        {/* Prominent Search Box */}
+        <div className="gsap-reveal relative w-full max-w-xl mx-auto mb-8 z-[30] group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+          <div className="relative">
+            <svg className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-primary pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
               type="text"
-              placeholder="Search colleges..."
+              placeholder="Search colleges, disciplines, programs..."
               value={instSearch}
               onChange={(e) => { setInstSearch(e.target.value); if (e.target.value.trim() && instView === 'categories') setInstView('all'); }}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-surface-container-high border border-surface-container-high text-on-surface text-sm font-body placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
+              className="w-full pl-16 pr-6 py-4 rounded-full bg-white shadow-2xl shadow-primary/10 border-2 border-transparent text-on-surface text-base md:text-lg font-bold placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all group-hover:scale-[1.02]"
             />
           </div>
+        </div>
+
+        {/* Tabs Below Search */}
+        <div className="gsap-reveal flex flex-wrap items-center justify-center gap-3 mb-12">
+          {[
+            { label: 'Categories', view: 'categories' },
+            { label: 'All Colleges', view: 'all' },
+          ].map(({ label, view }) => (
+            <button
+              key={view}
+              onClick={() => { setInstView(view); setInstSearch(''); }}
+              className={`px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === view ? 'bg-[#0145F2] text-white shadow-lg shadow-[#0145F2]/20 scale-105' : 'bg-white text-on-surface-variant hover:bg-[#EDF1F5] hover:scale-105 shadow-sm'}`}
+            >
+              {label}
+            </button>
+          ))}
+          {institutionCategories.map((cat) => (
+            <button
+              key={cat.title}
+              onClick={() => { setInstView(cat.title); setInstSearch(''); }}
+              className={`hidden md:inline-block px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === cat.title ? 'bg-[#0145F2] text-white shadow-lg shadow-[#0145F2]/20 scale-105' : 'bg-white text-on-surface-variant hover:bg-[#EDF1F5] hover:scale-105 shadow-sm'}`}
+            >
+              {cat.title}
+            </button>
+          ))}
         </div>
 
         {/* ── Categories View ── */}
