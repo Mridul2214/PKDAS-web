@@ -16,6 +16,7 @@ import { InterestPage } from './pages/InterestPage';
 import NewsEvents from './pages/NewsEvents';
 import International from './pages/International';
 import Institutions from './pages/Institutions';
+import InstitutionsList from './pages/InstitutionsList';
 import Placements from './pages/Placements';
 import FacultyPage from './pages/FacultyPage';
 import College3DView from './pages/College3DView';
@@ -59,6 +60,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/institutions" element={<Institutions />} />
+            <Route path="/institutions-list" element={<InstitutionsList />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/facilities" element={<Facilities />} />
             <Route path="/placements" element={<Placements />} />

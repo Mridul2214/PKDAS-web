@@ -196,124 +196,67 @@ export const HomeInstitutions = ({
           </p>
         </div>
 
-        {/* Prominent Search Box */}
-        <div className="gsap-reveal relative w-full max-w-xl mx-auto mb-8 z-[30] group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-          <div className="relative">
-            <svg className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-primary pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search colleges, disciplines, programs..."
-              value={instSearch}
-              onChange={(e) => { setInstSearch(e.target.value); if (e.target.value.trim() && instView === 'categories') setInstView('all'); }}
-              className="w-full pl-16 pr-6 py-4 rounded-full bg-white shadow-2xl shadow-primary/10 border-2 border-transparent text-on-surface text-base md:text-lg font-bold placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all group-hover:scale-[1.02]"
-            />
-          </div>
-        </div>
-
-        {/* Tabs Below Search */}
-        <div className="gsap-reveal flex flex-wrap items-center justify-center gap-3 mb-12">
-          {[
-            { label: 'Categories', view: 'categories' },
-            { label: 'All Colleges', view: 'all' },
-          ].map(({ label, view }) => (
-            <button
-              key={view}
-              onClick={() => { setInstView(view); setInstSearch(''); }}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === view ? 'bg-[#0145F2] text-white shadow-lg shadow-[#0145F2]/20 scale-105' : 'bg-white text-on-surface-variant hover:bg-[#EDF1F5] hover:scale-105 shadow-sm'}`}
-            >
-              {label}
-            </button>
-          ))}
-          {institutionCategories.map((cat) => (
-            <button
-              key={cat.title}
-              onClick={() => { setInstView(cat.title); setInstSearch(''); }}
-              className={`hidden md:inline-block px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer ${instView === cat.title ? 'bg-[#0145F2] text-white shadow-lg shadow-[#0145F2]/20 scale-105' : 'bg-white text-on-surface-variant hover:bg-[#EDF1F5] hover:scale-105 shadow-sm'}`}
-            >
-              {cat.title}
-            </button>
-          ))}
-        </div>
-
-        {/* ── Categories View ── */}
-        {instView === 'categories' && (
-          <>
-            {[institutionCategories.slice(0, 3), institutionCategories.slice(3)].map((row, rowIdx) => (
-              <div className="inst-row" key={rowIdx} style={{ marginBottom: rowIdx === 0 ? '8px' : 0 }}>
-                {row.map((group, colIdx) => {
-                  const idx = rowIdx * 3 + colIdx;
-                  return (
-                    <div
-                      key={idx}
-                      className={`gsap-stagger-child inst-panel ${activeCard === idx ? 'inst-panel--active' : ''}`}
-                      onClick={() => setActiveCard(activeCard === idx ? null : idx)}
-                      onMouseEnter={() => setActiveCard(idx)}
-                      onMouseLeave={() => { clearTimeout(hoverTimer.current); setActiveCard(null); }}
-                    >
-                      <div className="inst-panel-img" style={{ backgroundImage: `url('${group.img}')` }} />
-                      <div className="inst-panel-gradient" />
-                      <div className="inst-panel-content">
-                        <h3 className="inst-panel-title">{group.title}</h3>
-                        <div className="inst-panel-details">
-                          <p className="inst-panel-desc">{group.description}</p>
-                          <ul className="inst-panel-list">
-                            {group.colleges.map((college, i) => (
-                              <li key={i}>
-                                <CollegeListItem college={college} slug={college.slug} />
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+        {/* Brief Bio Content */}
+        <div className="gsap-reveal max-w-4xl mx-auto text-center mb-12">
+          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-white/20">
+            <h3 className="text-2xl md:text-3xl font-display text-on-surface mb-6 leading-tight">
+              A Legacy of Educational Excellence
+            </h3>
+            <p className="text-lg text-on-surface-variant leading-relaxed mb-8">
+              Our institution network spans across multiple disciplines, from cutting-edge engineering and technology to arts, sciences, and healthcare. Each college within our ecosystem is dedicated to fostering innovation, research, and holistic development, preparing students to become leaders in their chosen fields.
+            </p>
+            
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+              <div className="text-center">
+                <div className="text-3xl font-display font-bold text-primary mb-2">
+                  {institutionCategories.reduce((total, cat) => total + cat.colleges.length, 0)}
+                </div>
+                <div className="text-sm text-on-surface-variant uppercase tracking-wider">Institutions</div>
               </div>
-            ))}
-          </>
-        )}
+              <div className="text-center">
+                <div className="text-3xl font-display font-bold text-primary mb-2">{institutionCategories.length}</div>
+                <div className="text-sm text-on-surface-variant uppercase tracking-wider">Categories</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-display font-bold text-primary mb-2">50k+</div>
+                <div className="text-sm text-on-surface-variant uppercase tracking-wider">Students</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-display font-bold text-primary mb-2">100%</div>
+                <div className="text-sm text-on-surface-variant uppercase tracking-wider">Placement</div>
+              </div>
+            </div>
 
-        {/* ── Grid View ── */}
-        {instView !== 'categories' && (() => {
-          const allColleges = institutionCategories.flatMap((cat) =>
-            cat.colleges.map((c) => ({ name: c.name, slug: c.slug, category: cat.title, img: cat.img, description: cat.description }))
-          );
-          const filtered = instView === 'all' ? allColleges : allColleges.filter((c) => c.category === instView);
-          const searched = instSearch.trim() ? filtered.filter((c) => c.name.toLowerCase().includes(instSearch.toLowerCase())) : filtered;
-
-          return searched.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {searched.map((college, idx) => (
-                <Link
-                  to={`/college/${college.slug}`}
-                  key={idx}
-                  className="group relative rounded-2xl overflow-hidden border border-white/5 bg-surface-container hover:border-primary/30 transition-all duration-500 cursor-pointer hover:-translate-y-1"
-                >
-                  <div className="relative h-44 overflow-hidden">
-                    <img src={college.img} alt={college.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <span className="absolute top-3 left-3 text-[10px] font-bold text-white bg-primary/80 backdrop-blur-sm px-3 py-1 rounded-full uppercase tracking-wider">{college.category}</span>
-                  </div>
-                  <div className="p-5">
-                    <h4 className="text-lg font-display font-semibold text-on-surface mb-2 group-hover:text-primary transition-colors duration-300">{college.name}</h4>
-                    <p className="text-sm font-body text-on-surface-variant leading-relaxed line-clamp-2">{college.description}</p>
-                    <div className="mt-4 flex items-center gap-2 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <span>Explore in 3D</span>
-                      <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            {/* Featured Categories Preview */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+              {institutionCategories.slice(0, 3).map((category, index) => (
+                <div key={index} className="bg-gray-50 rounded-xl p-4 text-left">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+                      <img src={category.img} alt={category.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h4 className="font-display font-semibold text-on-surface text-sm">{category.title}</h4>
+                      <p className="text-xs text-on-surface-variant">{category.colleges.length} Institutions</p>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
-          ) : (
-            <div className="text-center py-20">
-              <p className="text-on-surface-variant font-body text-lg">No colleges found matching "<span className="text-primary">{instSearch}</span>"</p>
-            </div>
-          );
-        })()}
+
+            {/* CTA Button */}
+            <Link
+              to="/institutions-list"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold uppercase tracking-wider rounded-xl hover:bg-primary-dark transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Explore All Institutions
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

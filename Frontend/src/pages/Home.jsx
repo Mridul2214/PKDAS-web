@@ -4,6 +4,7 @@ import { useStudentData } from '../hooks/useStudentData';
 import { useHomeAnimations } from '../hooks/useHomeAnimations';
 
 import { Hero } from '../components/Hero';
+import { Marquee } from '../components/Marquee';
 import { HomeAbout } from '../components/home/HomeAbout';
 import { HomeAchievements } from '../components/home/HomeAchievements';
 import { HomeInstitutions } from '../components/home/HomeInstitutions';
@@ -50,6 +51,7 @@ export function Home() {
   return (
     <main ref={container} className="bg-surface">
       <Hero />
+      <Marquee />
       
       <HomeAbout />
       <HomeAchievements />

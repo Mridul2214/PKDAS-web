@@ -25,7 +25,7 @@ export const HomeAbout = () => {
           <div className="max-w-4xl">
             <h2 className="gsap-reveal font-display text-on-surface mb-6 leading-[1.1]">
               <span className="text-2xl md:text-3xl lg:text-4xl block mb-2 font-medium opacity-80">Empowering the</span>
-              <span className="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl block">Next Generation</span>
+              <span className="text-primary text-4xl md:text-2xl lg:text-6xl xl:text-7xl block">Next Generation</span>
             </h2>
             <p className="gsap-reveal text-lg font-body text-on-surface-variant leading-relaxed mb-8 max-w-2xl">
               Nehru Arts and Science College (NASC) is a leading autonomous institution dedicated to academic excellence. We provide a dynamic learning environment that nurtures creativity, critical thinking, and leadership skills.

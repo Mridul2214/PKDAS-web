@@ -40,25 +40,25 @@ export function useNavigationData() {
         { 
           title: 'PKDAS Group', 
           items: [
-            { name: 'Engineering (NIET/NCERC)', path: '/institutions', desc: 'Pioneering technical education' },
-            { name: 'Management (NCM/NIITM)', path: '/institutions', desc: 'Strategic business leadership' },
-            { name: 'Pharmacy & Nursing', path: '/institutions', desc: 'Healthcare and clinical expertise' },
-            { name: 'Arts & Science', path: '/institutions', desc: 'Liberal arts and science majors' }
+            { name: 'Engineering (NIET/NCERC)', path: '/institutions-list', desc: 'Pioneering technical education' },
+            { name: 'Management (NCM/NIITM)', path: '/institutions-list', desc: 'Strategic business leadership' },
+            { name: 'Pharmacy & Nursing', path: '/institutions-list', desc: 'Healthcare and clinical expertise' },
+            { name: 'Arts & Science', path: '/institutions-list', desc: 'Liberal arts and science majors' }
           ] 
         },
         { 
           title: 'Nehru Group', 
           items: [
-            { name: 'Aviation Technology', path: '/institutions', desc: 'Sky-high career pathways' },
-            { name: 'Hospitality & Management', path: '/institutions', desc: 'Global service industry standards' },
-            { name: 'Allied Health Sciences', path: '/institutions', desc: 'Comprehensive medical training' }
+            { name: 'Aviation Technology', path: '/institutions-list', desc: 'Sky-high career pathways' },
+            { name: 'Hospitality & Management', path: '/institutions-list', desc: 'Global service industry standards' },
+            { name: 'Allied Health Sciences', path: '/institutions-list', desc: 'Comprehensive medical training' }
           ] 
         },
         { 
           title: 'Specialized', 
           items: [
-             { name: 'Research Centers', path: '/institutions', desc: 'Innovative labs and facilities' },
-             { name: 'View All 25+ Institutions', path: '/institutions', desc: 'The complete PKDAS advantage' }
+             { name: 'Research Centers', path: '/institutions-list', desc: 'Innovative labs and facilities' },
+             { name: 'View All 25+ Institutions', path: '/institutions-list', desc: 'The complete PKDAS advantage' }
           ] 
         }
       ],
@@ -67,7 +67,7 @@ export function useNavigationData() {
         desc: 'Choose from over 25 specialized institutions focusing on cutting-edge research and career-driven degrees.',
         img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
         ctaLabel: 'Find Your College',
-        ctaPath: '/institutions',
+        ctaPath: '/institutions-list',
         badge: 'Top Ranked'
       }
     },
