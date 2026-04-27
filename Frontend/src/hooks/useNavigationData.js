@@ -3,20 +3,15 @@ export function useNavigationData() {
     'About': {
       categories: [
         { 
-          title: 'Core Identity', 
+          title: 'Leadership & Trust', 
           items: [
-            { name: 'Our Profile', path: '/about', desc: 'Brief overview of PKDAS' },
-            { name: 'Vision & Mission', path: '/about#mission', desc: 'The future we enlighten' },
-            { name: 'History & Heritage', path: '/about#heritage', desc: '50 years of academic excellence' },
-            { name: 'Core Values', path: '/about#values', desc: 'What drives our culture' }
-          ] 
-        },
-        { 
-          title: 'Leadership', 
-          items: [
-            { name: 'Chairman\'s Message', path: '/about#leadership', desc: 'A personal word from leadership' },
-            { name: 'Directors & Deans', path: '/about#leadership', desc: 'Expert governance and management' },
-            { name: 'Governing Council', path: '/about#leadership', desc: 'Operational excellence & strategy' }
+            { name: 'Founder Chairman', path: '/about#leadership', desc: 'Our visionary founder' },
+            { name: 'Managing Trustee', path: '/managing-trustee', desc: 'Leading the foundation' },
+            { name: 'CEO & Secretary', path: '/ceo-secretary', desc: 'Operational leadership' },
+            { name: 'Executive Director', path: '/executive-director', desc: 'Strategic direction' },
+            { name: 'Trust', path: '/trust', desc: 'The governing body' },
+            { name: 'Institutions Under The Trust', path: '/institutions', desc: 'Our family of colleges' },
+            { name: 'Unique Feature Of NGI', path: '/unique-features', desc: 'What sets us apart' }
           ] 
         },
         { 

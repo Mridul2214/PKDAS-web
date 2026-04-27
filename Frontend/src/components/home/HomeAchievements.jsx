@@ -3,7 +3,7 @@ import { WavyDivider } from './WavyDivider';
 
 export const HomeAchievements = () => {
   return (
-    <section className="relative z-[20] py-40 bg-white overflow-hidden">
+    <section className="relative z-[20] pt-40 pb-10 bg-white overflow-hidden">
       {/* Section-Wide Background Image Slot */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img

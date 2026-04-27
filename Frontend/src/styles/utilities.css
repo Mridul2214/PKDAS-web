@@ -1,3 +1,5 @@
+html { scroll-behavior: smooth; }
+
 @layer utilities {
   .shadow-ambient {
     box-shadow: 0 20px 40px rgba(0, 45, 69, 0.05);

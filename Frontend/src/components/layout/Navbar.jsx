@@ -1,13 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigationData } from '../../hooks/useNavigationData';
 
+/* ─── TIER 1: Top Bar (Students, Faculty, Alumni, etc.) ─── */
+function TopNavbar() {
+  return (
+    <div className="w-full bg-[#1E293B] text-white">
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 h-10 flex items-center justify-center text-xs font-medium">
+        <div className="hidden lg:flex items-center space-x-6">
+          <Link to="#" className="hover:text-gray-300 transition-colors">Students</Link>
+          <Link to="#" className="hover:text-gray-300 transition-colors">Faculty & Staff</Link>
+          <Link to="#" className="hover:text-gray-300 transition-colors">Parents</Link>
+          <Link to="#" className="hover:text-gray-300 transition-colors">Visitors</Link>
+          <Link to="#" className="hover:text-gray-300 transition-colors">Alumni</Link>
+          <Link to="#" className="hover:text-gray-300 transition-colors">Examinations</Link>
+          <div className="flex items-center gap-1 cursor-pointer hover:text-gray-300 transition-colors group">
+            Campuses 
+            <svg className="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── TIER 2: Middle Bar (Library, Career Centre, News, etc.) ─── */
+function MiddleNavbar() {
+  return (
+    <div className="hidden lg:flex items-center space-x-6 text-[13px] font-semibold text-on-surface-variant h-6 mr-2">
+      <Link to="#" className="hover:text-[#0145F2] transition-colors">Library</Link>
+      <Link to="#" className="hover:text-[#0145F2] transition-colors">Career Centre</Link>
+      <Link to="#" className="hover:text-[#0145F2] transition-colors">News</Link>
+      <Link to="#" className="hover:text-[#0145F2] transition-colors">Events</Link>
+      <Link to="#" className="hover:text-[#0145F2] transition-colors">Blog</Link>
+      <Link to="#" className="hover:text-[#0145F2] transition-colors">Careers</Link>
+      <Link to="/contact" className="hover:text-[#0145F2] transition-colors">Contact us</Link>
+    </div>
+  );
+}
+
+/* ─── MAIN NAVBAR COMPONENT ─── */
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [expandedMobileMenu, setExpandedMobileMenu] = useState(null);
 
   const navigationData = useNavigationData();
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const isHomePage = currentPath === '/';
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -19,42 +60,22 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setExpandedMobileMenu(null);
+  }, [currentPath]);
+
   return (
     <header 
-      className="sticky top-0 w-full z-[100] flex flex-col shadow-sm transition-all duration-500 bg-[#EDF1F5]"
+      className={`sticky top-0 w-full z-[100] flex flex-col transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-[#EDF1F5] shadow-sm'}`}
       onMouseLeave={() => setHoveredMenu(null)}
     >
-      {/* TIER 1: Top Bar */}
-      <div className="w-full bg-[#1E293B] text-white">
-        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 h-10 flex items-center justify-between text-xs font-medium">
-          <div className="hidden lg:flex items-center space-x-6">
-            <Link to="#" className="hover:text-gray-300 transition-colors">Students</Link>
-            <Link to="#" className="hover:text-gray-300 transition-colors">Faculty & Staff</Link>
-            <Link to="#" className="hover:text-gray-300 transition-colors">Parents</Link>
-            <Link to="#" className="hover:text-gray-300 transition-colors">Visitors</Link>
-            <Link to="#" className="hover:text-gray-300 transition-colors">Alumni</Link>
-            <Link to="#" className="hover:text-gray-300 transition-colors">Examinations</Link>
-            <div className="flex items-center gap-1 cursor-pointer hover:text-gray-300 transition-colors group">
-              Campuses 
-              <svg className="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-            </div>
-          </div>
-          {/* <div className="flex items-center space-x-4 ml-auto">
-             <button className="bg-[#F59E0B] text-black px-4 py-1 rounded font-bold flex items-center gap-1 text-xs hover:bg-[#D97706] transition-colors">
-                Admissions 2026
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>
-             </button>
-             <button className="bg-[#F59E0B] text-black px-2 py-1 rounded font-bold text-xs flex items-center gap-1 hover:bg-[#D97706] transition-colors">
-                360°
-             </button>
-          </div> */}
-        </div>
-      </div>
-
-
+      {/* TIER 1: Top Bar — HOME ONLY */}
+      {isHomePage && <TopNavbar />}
 
       {/* TIER 2 & 3: Main Navigation Area */}
-      <div className="w-full bg-[#EDF1F5] relative z-[90]">
+      <div className={`w-full relative z-[90] transition-colors duration-500 ${isScrolled ? 'bg-transparent' : 'bg-[#EDF1F5]'}`}>
         <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 py-3 flex items-center justify-between">
           {/* Logo area */}
           <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
@@ -67,29 +88,27 @@ export function Navbar() {
           
           {/* Right Side Desktop Links */}
           <div className="hidden lg:flex flex-col items-end justify-center w-full">
-            {/* Middle Tier (Tier 2) */}
-            <div className={`flex items-center space-x-6 text-[13px] font-semibold text-on-surface-variant transition-all duration-500 overflow-hidden ${isScrolled ? 'h-0 opacity-0 mb-0' : 'h-6 opacity-100 mb-4'} mr-2`}>
-               <Link to="#" className="hover:text-[#0145F2] transition-colors">Library</Link>
-               <Link to="#" className="hover:text-[#0145F2] transition-colors">Career Centre</Link>
-               <Link to="#" className="hover:text-[#0145F2] transition-colors">News</Link>
-               <Link to="#" className="hover:text-[#0145F2] transition-colors">Events</Link>
-               <Link to="#" className="hover:text-[#0145F2] transition-colors">Blog</Link>
-               <Link to="#" className="hover:text-[#0145F2] transition-colors">Careers</Link>
-               <Link to="/contact" className="hover:text-[#0145F2] transition-colors">Contact us</Link>
-            </div>
+            {/* TIER 2: Middle Bar — HOME ONLY (collapses on scroll) */}
+            {isHomePage && (
+              <div className={`transition-all duration-500 overflow-hidden ${isScrolled ? 'h-0 opacity-0 mb-0' : 'opacity-100 mb-4'}`}>
+                <MiddleNavbar />
+              </div>
+            )}
 
-            {/* Bottom Tier (Tier 3) - Main Nav Items */}
+            {/* TIER 3: Main Nav Items — ALWAYS VISIBLE */}
             <div className="flex items-center space-x-8">
-              <Link to="/" className="relative group py-2 text-sm font-bold text-on-surface hover:text-[#0145F2] transition-colors">
+              <Link to="/" className={`relative group py-2 text-sm font-bold transition-colors ${currentPath === '/' ? 'text-[#0145F2]' : 'text-on-surface hover:text-[#0145F2]'}`}>
                 Home
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0145F2] transition-all duration-300 group-hover:w-full rounded-full"></span>
+                <span className={`absolute bottom-0 left-0 h-[2px] bg-[#0145F2] transition-all duration-300 rounded-full ${currentPath === '/' ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
               </Link>
 
-              {/* Mega Dropdowns Items */}
-              {Object.keys(navigationData).map((menuName) => (
+              {/* Dropdown Items */}
+              {Object.keys(navigationData).map((menuName) => {
+                const isSimple = navigationData[menuName].simpleDropdown;
+                return (
                 <div 
                   key={menuName}
-                  className="static group"
+                  className={`${isSimple ? 'relative' : 'static'} group`}
                   onMouseEnter={() => setHoveredMenu(menuName)}
                 >
                   <button className={`flex items-center gap-1 py-1 text-sm font-bold transition-all duration-300 ${hoveredMenu === menuName ? 'text-[#0145F2]' : 'text-on-surface hover:text-[#0145F2]'}`}>
@@ -98,8 +117,28 @@ export function Navbar() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
+
+                  {/* Simple Dropdown Panel */}
+                  {isSimple && (
+                    <div 
+                      className={`absolute top-full left-0 mt-6 w-64 bg-white shadow-xl transition-all duration-300 z-[100] ${hoveredMenu === menuName ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible pointer-events-none'}`}
+                    >
+                       <div className="px-5 py-3 border-b-2 border-[#E67E22]">
+                          <span className="text-[#E67E22] font-bold text-[15px]">{navigationData[menuName].title || menuName}</span>
+                       </div>
+                       <ul className="flex flex-col bg-[#F9F9F9]">
+                          {navigationData[menuName].items.map((item, idx) => (
+                            <li key={idx} className="border-b border-gray-200/80 last:border-0">
+                               <Link to={item.path} className="block px-5 py-3 text-[14px] text-gray-500 hover:bg-gray-200/50 hover:text-gray-900 transition-colors">
+                                 {item.name}
+                               </Link>
+                            </li>
+                          ))}
+                       </ul>
+                    </div>
+                  )}
                 </div>
-              ))}
+              )})}
 
               <div className="flex items-center space-x-4 ml-4">
                 <button className="bg-white text-on-surface p-2 shadow-sm rounded-md hover:text-[#0145F2] transition-colors border border-black/5">
@@ -130,10 +169,10 @@ export function Navbar() {
 
       {/* Mega Menu Panel - Absolute full width */}
       <div 
-        className={`absolute top-full left-0 right-0 w-full bg-[#EDF1F5] border-b border-black/5 shadow-2x-strong transform origin-top transition-all duration-500 ease-out z-[90] ${hoveredMenu ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'}`}
+        className={`absolute top-full left-0 right-0 w-full bg-[#EDF1F5] border-b border-black/5 shadow-2x-strong transform origin-top transition-all duration-500 ease-out z-[90] ${hoveredMenu && !navigationData[hoveredMenu]?.simpleDropdown ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'}`}
         onMouseEnter={() => setHoveredMenu(hoveredMenu)}
       >
-        {hoveredMenu && (
+        {hoveredMenu && !navigationData[hoveredMenu].simpleDropdown && (
           <div 
             key={hoveredMenu} 
             className="max-w-[1400px] mx-auto px-12 py-12 grid grid-cols-12 gap-12 mega-menu-content-animate"
@@ -218,18 +257,28 @@ export function Navbar() {
                     </button>
                     <div className={`overflow-hidden transition-all duration-300 ${expandedMobileMenu === menuName ? 'max-h-[800px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
                        <div className="pl-4 space-y-4 pb-4">
-                          {navigationData[menuName].categories.map((cat, i) => (
-                            <div key={i}>
-                               <div className="text-[10px] font-black text-[#0145F2] uppercase tracking-[0.2em] mb-2">{cat.title}</div>
-                               <div className="space-y-3">
-                                  {cat.items.map((it, idx) => (
-                                    <Link key={idx} to={it.path} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-on-surface-variant">
-                                       {it.name}
-                                    </Link>
-                                  ))}
+                          {navigationData[menuName].simpleDropdown ? (
+                             <div className="space-y-3">
+                                {navigationData[menuName].items.map((it, idx) => (
+                                  <Link key={idx} to={it.path} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-on-surface-variant">
+                                     {it.name}
+                                  </Link>
+                                ))}
+                             </div>
+                          ) : (
+                             navigationData[menuName].categories.map((cat, i) => (
+                               <div key={i}>
+                                  <div className="text-[10px] font-black text-[#0145F2] uppercase tracking-[0.2em] mb-2">{cat.title}</div>
+                                  <div className="space-y-3">
+                                     {cat.items.map((it, idx) => (
+                                       <Link key={idx} to={it.path} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-on-surface-variant">
+                                          {it.name}
+                                       </Link>
+                                     ))}
+                                  </div>
                                </div>
-                            </div>
-                          ))}
+                             ))
+                          )}
                        </div>
                     </div>
                  </div>

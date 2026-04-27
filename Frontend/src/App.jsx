@@ -21,6 +21,11 @@ import Placements from './pages/Placements';
 import FacultyPage from './pages/FacultyPage';
 import College3DView from './pages/College3DView';
 import HighlightDetail from './pages/HighlightDetail';
+import { ManagingTrustee } from './pages/ManagingTrustee';
+import { CeoSecretary } from './pages/CeoSecretary';
+import { ExecutiveDirector } from './pages/ExecutiveDirector';
+import { Trust } from './pages/Trust';
+import { UniqueFeatures } from './pages/UniqueFeatures';
 
 // Layout Components
 import { Navbar } from './components/layout/Navbar';
@@ -59,6 +64,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/managing-trustee" element={<ManagingTrustee />} />
+            <Route path="/ceo-secretary" element={<CeoSecretary />} />
+            <Route path="/executive-director" element={<ExecutiveDirector />} />
+            <Route path="/trust" element={<Trust />} />
+            <Route path="/unique-features" element={<UniqueFeatures />} />
             <Route path="/institutions" element={<Institutions />} />
             <Route path="/institutions-list" element={<InstitutionsList />} />
             <Route path="/courses" element={<Courses />} />

@@ -173,7 +173,7 @@ export const HomeInstitutions = ({
   hoverTimer,
 }) => {
   return (
-    <section className="relative z-[20] py-40 bg-[#EDF1F5] text-on-surface overflow-hidden">
+    <section className="relative z-[20] pt-32 pb-40 bg-[#EDF1F5] text-on-surface overflow-hidden">
       {/* Decorative blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <div className="section-bg-blob absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px]" />
