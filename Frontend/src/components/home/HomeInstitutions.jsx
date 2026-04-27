@@ -173,91 +173,118 @@ export const HomeInstitutions = ({
   hoverTimer,
 }) => {
   return (
-    <section className="relative z-[20] pt-32 pb-40 bg-[#EDF1F5] text-on-surface overflow-hidden">
-      {/* Decorative blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="section-bg-blob absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px]" />
-        <div className="section-bg-blob absolute top-1/2 -left-40 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-20 left-10 opacity-20 hidden md:block">
-          <div className="grid grid-cols-4 gap-4">
-            {[...Array(12)].map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary/40" />)}
-          </div>
-        </div>
+    <section className="relative z-[20] pt-24 pb-32 bg-[#F8FAFC] text-on-surface overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -mr-96 -mt-96" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] -ml-72 -mb-72" />
       </div>
 
       <WavyDivider type="wave1" color="white" position="top" flipped={true} />
 
-      <div className="container mx-auto px-6 relative z-10 gsap-stagger-parent">
-        {/* Heading */}
-        <div className="max-w-3xl mb-10 mx-auto text-center">
-          <h2 className="gsap-reveal text-3xl md:text-display-md lg:text-5xl font-display mb-4 md:mb-6 text-on-surface">Our Institutions</h2>
-          <p className="gsap-reveal text-lg md:text-xl text-on-surface-variant font-display italic opacity-80">
-            Explore our diverse ecosystem of specialized colleges and institutes, operating across multiple cutting-edge domains.
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Header Section */}
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <span className="gsap-reveal inline-block px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.3em] rounded-full mb-6">
+            Educational Ecosystem
+          </span>
+          <h2 className="gsap-reveal text-4xl md:text-5xl lg:text-6xl font-display font-bold text-on-surface mb-8 leading-tight">
+            Our <span className="italic text-primary">Institutions</span>
+          </h2>
+          <p className="gsap-reveal text-lg md:text-xl text-on-surface-variant font-medium opacity-80 leading-relaxed max-w-2xl mx-auto">
+            Discover a diverse network of specialized colleges and research centers, each a leader in its respective field of excellence.
           </p>
         </div>
 
-        {/* Brief Bio Content */}
-        <div className="gsap-reveal max-w-4xl mx-auto text-center mb-12">
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-white/20">
-            <h3 className="text-2xl md:text-3xl font-display text-on-surface mb-6 leading-tight">
-              A Legacy of Educational Excellence
-            </h3>
-            <p className="text-lg text-on-surface-variant leading-relaxed mb-8">
-              Our institution network spans across multiple disciplines, from cutting-edge engineering and technology to arts, sciences, and healthcare. Each college within our ecosystem is dedicated to fostering innovation, research, and holistic development, preparing students to become leaders in their chosen fields.
-            </p>
-            
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">
-                  {institutionCategories.reduce((total, cat) => total + cat.colleges.length, 0)}
-                </div>
-                <div className="text-sm text-on-surface-variant uppercase tracking-wider">Institutions</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">{institutionCategories.length}</div>
-                <div className="text-sm text-on-surface-variant uppercase tracking-wider">Categories</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">50k+</div>
-                <div className="text-sm text-on-surface-variant uppercase tracking-wider">Students</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">100%</div>
-                <div className="text-sm text-on-surface-variant uppercase tracking-wider">Placement</div>
-              </div>
-            </div>
-
-            {/* Featured Categories Preview */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-              {institutionCategories.slice(0, 3).map((category, index) => (
-                <div key={index} className="bg-gray-50 rounded-xl p-4 text-left">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-                      <img src={category.img} alt={category.title} className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h4 className="font-display font-semibold text-on-surface text-sm">{category.title}</h4>
-                      <p className="text-xs text-on-surface-variant">{category.colleges.length} Institutions</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <Link
-              to="/institutions-list"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold uppercase tracking-wider rounded-xl hover:bg-primary-dark transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {institutionCategories.map((category, index) => (
+            <div 
+              key={index} 
+              className="gsap-reveal group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 bg-white"
             >
-              Explore All Institutions
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+              {/* Image Background */}
+              <div className="absolute inset-0">
+                <img 
+                  src={category.img} 
+                  alt={category.title} 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              </div>
+
+              {/* Content Overlay */}
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="w-10 h-[2px] bg-primary rounded-full" />
+                    <span className="text-white/80 text-[10px] font-bold uppercase tracking-widest">
+                      {category.colleges.length} Institutions
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-4 leading-tight group-hover:text-primary transition-colors">
+                    {category.title}
+                  </h3>
+                  
+                  <p className="text-white/70 text-sm leading-relaxed mb-8 opacity-0 group-hover:opacity-100 transition-all duration-500 max-h-0 group-hover:max-h-24 overflow-hidden italic">
+                    {category.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-8 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                    {category.colleges.slice(0, 3).map((college, idx) => (
+                      <span key={idx} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] text-white font-medium">
+                        {college.name}
+                      </span>
+                    ))}
+                    {category.colleges.length > 3 && (
+                      <span className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] text-white font-medium">
+                        +{category.colleges.length - 3} More
+                      </span>
+                    )}
+                  </div>
+
+                  <Link 
+                    to="/institutions-list" 
+                    className="inline-flex items-center gap-2 text-white text-xs font-black uppercase tracking-widest hover:text-primary transition-colors group/link"
+                  >
+                    Explore Category
+                    <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="gsap-reveal flex flex-col items-center justify-center space-y-8">
+          <div className="h-[1px] w-24 bg-primary/30" />
+          
+          <div className="text-center">
+            <h4 className="text-2xl font-display font-bold text-on-surface mb-4 italic">
+              Still looking for the perfect campus?
+            </h4>
+            <p className="text-on-surface-variant mb-10 max-w-lg mx-auto opacity-70">
+              Browse through our complete directory of 25+ specialized institutions across multiple cities and domains.
+            </p>
           </div>
+
+          <Link
+            to="/institutions-list"
+            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-primary text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-xl shadow-primary/20 hover:bg-primary-dark transition-all duration-500 hover:scale-105 active:scale-95 overflow-hidden"
+          >
+            <span className="relative z-10">View All Institutions</span>
+            <svg className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+          </Link>
         </div>
       </div>
     </section>
   );
 };
+

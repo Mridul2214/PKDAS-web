@@ -36,11 +36,14 @@ export default function InstitutionsList() {
     <main ref={containerRef} className="bg-surface min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-primary via-primary-dark to-primary-darker">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-white/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 opacity-30">
+          <img 
+            src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=2000&q=80" 
+            alt="Campus Background" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-darker/50"></div>
         </div>
-        
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-white mb-6 leading-tight">
             All <span className="text-yellow-300">Institutions</span>

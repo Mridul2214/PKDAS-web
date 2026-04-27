@@ -111,12 +111,24 @@ export function Navbar() {
                   className={`${isSimple ? 'relative' : 'static'} group`}
                   onMouseEnter={() => setHoveredMenu(menuName)}
                 >
-                  <button className={`flex items-center gap-1 py-1 text-sm font-bold transition-all duration-300 ${hoveredMenu === menuName ? 'text-[#0145F2]' : 'text-on-surface hover:text-[#0145F2]'}`}>
-                    {menuName}
-                    <svg className={`w-3 h-3 transition-transform duration-300 ${hoveredMenu === menuName ? 'rotate-180 text-primary' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
+                  {menuName === 'Institutions' ? (
+                    <Link 
+                      to="/institutions-list"
+                      className={`flex items-center gap-1 py-1 text-sm font-bold transition-all duration-300 ${hoveredMenu === menuName || currentPath === '/institutions-list' ? 'text-[#0145F2]' : 'text-on-surface hover:text-[#0145F2]'}`}
+                    >
+                      {menuName}
+                      <svg className={`w-3 h-3 transition-transform duration-300 ${hoveredMenu === menuName ? 'rotate-180 text-primary' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </Link>
+                  ) : (
+                    <button className={`flex items-center gap-1 py-1 text-sm font-bold transition-all duration-300 ${hoveredMenu === menuName ? 'text-[#0145F2]' : 'text-on-surface hover:text-[#0145F2]'}`}>
+                      {menuName}
+                      <svg className={`w-3 h-3 transition-transform duration-300 ${hoveredMenu === menuName ? 'rotate-180 text-primary' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  )}
 
                   {/* Simple Dropdown Panel */}
                   {isSimple && (
@@ -245,8 +257,9 @@ export function Navbar() {
          <div className="h-full overflow-y-auto p-6 pb-20 font-display">
             <div className="space-y-2">
                <Link onClick={() => setIsMobileMenuOpen(false)} to="/" className="block py-4 text-2xl font-bold border-b border-black/5 text-on-surface">Home</Link>
+               <Link onClick={() => setIsMobileMenuOpen(false)} to="/institutions-list" className="block py-4 text-2xl font-bold border-b border-black/5 text-on-surface">Institutions</Link>
                
-               {Object.keys(navigationData).map((menuName) => (
+               {Object.keys(navigationData).filter(key => key !== 'Institutions').map((menuName) => (
                  <div key={menuName} className="border-b border-black/5 pb-2">
                     <button 
                       onClick={() => setExpandedMobileMenu(expandedMobileMenu === menuName ? null : menuName)}
