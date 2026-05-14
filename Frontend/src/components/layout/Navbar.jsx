@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useNavigationData } from '../../hooks/useNavigationData';
 
 /* ─── TIER 1: Top Bar (Students, Faculty, Alumni, etc.) ─── */
@@ -39,14 +39,40 @@ function MiddleNavbar() {
   );
 }
 
+/* ─── MEGA MENU CATEGORY COMPONENT (Supports 1 or 2 columns) ─── */
+function MegaMenuCategory({ cat }) {
+  const isWide = cat.items.length > 10;
+
+  return (
+    <div className={`${isWide ? 'col-span-2' : 'col-span-1'} space-y-6`}>
+       <h4 className="text-[10px] font-black text-[#0145F2] uppercase tracking-[0.2em]">{cat.title}</h4>
+       <div className={`grid ${isWide ? 'grid-cols-2 gap-x-12' : 'grid-cols-1'} gap-y-1`}>
+          {cat.items.map((item, i) => (
+            <Link 
+              key={i} 
+              to={item.path} 
+              className="group/li py-2 border-b border-transparent hover:border-[#0145F2]/20 transition-all"
+            >
+               <div className="text-sm font-bold text-on-surface group-hover/li:text-[#0145F2] transition-colors">{item.name}</div>
+               <div className="text-[10px] text-on-surface-variant font-medium mt-1 line-clamp-1">{item.desc}</div>
+            </Link>
+          ))}
+       </div>
+    </div>
+  );
+}
+
 /* ─── MAIN NAVBAR COMPONENT ─── */
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [expandedMobileMenu, setExpandedMobileMenu] = useState(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [navSearchQuery, setNavSearchQuery] = useState('');
 
   const navigationData = useNavigationData();
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
   const isHomePage = currentPath === '/';
 
@@ -64,7 +90,17 @@ export function Navbar() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setExpandedMobileMenu(null);
+    setIsSearchOpen(false);
   }, [currentPath]);
+
+  const handleNavSearch = (e) => {
+    if (e) e.preventDefault();
+    if (navSearchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(navSearchQuery)}`);
+      setNavSearchQuery('');
+      setIsSearchOpen(false);
+    }
+  };
 
   return (
     <header 
@@ -153,7 +189,10 @@ export function Navbar() {
               )})}
 
               <div className="flex items-center space-x-4 ml-4">
-                <button className="bg-white text-on-surface p-2 shadow-sm rounded-md hover:text-[#0145F2] transition-colors border border-black/5">
+                <button 
+                  onClick={() => setIsSearchOpen(true)}
+                  className="bg-white text-on-surface p-2 shadow-sm rounded-md hover:text-[#0145F2] transition-colors border border-black/5"
+                >
                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </button>
                 <Link to="/contact" className="px-8 py-3 bg-[#0145F2] text-white text-sm font-black tracking-widest uppercase rounded-xl shadow-lg shadow-[#0145F2]/20 hover:scale-105 active:scale-95 transition-all">
@@ -181,7 +220,7 @@ export function Navbar() {
 
       {/* Mega Menu Panel - Absolute full width */}
       <div 
-        className={`absolute top-full left-0 right-0 w-full bg-[#EDF1F5] border-b border-black/5 shadow-2x-strong transform origin-top transition-all duration-500 ease-out z-[90] ${hoveredMenu && !navigationData[hoveredMenu]?.simpleDropdown ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'}`}
+        className={`absolute top-full left-0 right-0 w-full bg-[#EDF1F5] border-b border-black/5 shadow-2x-strong transform origin-top transition-all duration-500 ease-out z-[90] max-h-[calc(100vh-120px)] overflow-y-auto ${hoveredMenu && !navigationData[hoveredMenu]?.simpleDropdown ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'}`}
         onMouseEnter={() => setHoveredMenu(hoveredMenu)}
       >
         {hoveredMenu && !navigationData[hoveredMenu].simpleDropdown && (
@@ -192,21 +231,7 @@ export function Navbar() {
              {/* Left Side: Navigation Links (2 Columns within) */}
              <div className="col-span-8 grid grid-cols-3 gap-8 border-r border-black/5 pr-12">
                 {navigationData[hoveredMenu].categories.map((cat, idx) => (
-                  <div key={idx} className="space-y-6">
-                     <h4 className="text-[10px] font-black text-[#0145F2] uppercase tracking-[0.2em]">{cat.title}</h4>
-                     <div className="flex flex-col space-y-2">
-                        {cat.items.map((item, i) => (
-                          <Link 
-                            key={i} 
-                            to={item.path} 
-                            className="group/li py-2 border-b border-transparent hover:border-[#0145F2]/20 transition-all"
-                          >
-                             <div className="text-sm font-bold text-on-surface group-hover/li:text-[#0145F2] transition-colors">{item.name}</div>
-                             <div className="text-[10px] text-on-surface-variant font-medium mt-1 line-clamp-1">{item.desc}</div>
-                          </Link>
-                        ))}
-                     </div>
-                  </div>
+                  <MegaMenuCategory key={idx} cat={cat} />
                 ))}
              </div>
 
@@ -304,6 +329,59 @@ export function Navbar() {
                </div>
             </div>
          </div>
+      </div>
+      {/* Search Overlay */}
+      <div className={`fixed inset-0 bg-black/60 backdrop-blur-md z-[200] transition-all duration-500 flex items-center justify-center p-6 ${isSearchOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+        <button 
+          onClick={() => setIsSearchOpen(false)}
+          className="absolute top-8 right-8 text-white hover:text-primary transition-colors"
+        >
+          <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        
+        <div className="w-full max-w-4xl animate-in zoom-in-95 duration-500">
+           <div className="text-center mb-10">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">What are you <span className="text-primary italic">looking for?</span></h2>
+              <p className="text-white/60 font-body">Search across courses, colleges, news, and campus updates.</p>
+           </div>
+           
+           <form onSubmit={handleNavSearch} className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-[2.5rem] blur opacity-50 group-hover:opacity-100 transition duration-500"></div>
+              <div className="relative flex items-center bg-white rounded-[2.5rem] p-3 shadow-2xl">
+                 <input 
+                    type="text" 
+                    placeholder="Type to search..." 
+                    autoFocus={isSearchOpen}
+                    className="flex-grow px-8 py-4 bg-transparent border-none outline-none text-2xl font-body text-on-surface placeholder:text-gray-300"
+                    value={navSearchQuery}
+                    onChange={(e) => setNavSearchQuery(e.target.value)}
+                 />
+                 <button 
+                    type="submit"
+                    className="flex-shrink-0 w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center hover:scale-105 transition-all shadow-lg"
+                 >
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                 </button>
+              </div>
+           </form>
+           
+           <div className="mt-12 flex flex-wrap justify-center gap-4">
+              <span className="text-white/40 text-xs font-black uppercase tracking-widest my-auto mr-4">Quick Links:</span>
+              {['Engineering', 'Medical', 'Admissions', 'Rankings', 'Contact'].map((link) => (
+                <button 
+                  key={link}
+                  onClick={() => {
+                    navigate(`/search?q=${encodeURIComponent(link)}`);
+                    setIsSearchOpen(false);
+                    setNavSearchQuery('');
+                  }}
+                  className="px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10 transition-all"
+                >
+                  {link}
+                </button>
+              ))}
+           </div>
+        </div>
       </div>
     </header>
   );

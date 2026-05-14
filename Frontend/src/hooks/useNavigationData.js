@@ -2,8 +2,8 @@ export function useNavigationData() {
   const navigationData = {
     'About': {
       categories: [
-        { 
-          title: 'Leadership & Trust', 
+        {
+          title: 'Leadership & Trust',
           items: [
             { name: 'Founder Chairman', path: '/about#leadership', desc: 'Our visionary founder' },
             { name: 'Managing Trustee', path: '/managing-trustee', desc: 'Leading the foundation' },
@@ -12,14 +12,30 @@ export function useNavigationData() {
             { name: 'Trust', path: '/trust', desc: 'The governing body' },
             { name: 'Institutions Under The Trust', path: '/institutions', desc: 'Our family of colleges' },
             { name: 'Unique Feature Of NGI', path: '/unique-features', desc: 'What sets us apart' }
-          ] 
+          ]
         },
-        { 
-          title: 'Standards', 
+        {
+          title: 'Institutional Framework',
           items: [
-             { name: 'NAAC & UGC Accreditation', path: '/about#accreditation', desc: 'Quality recognized nationally' },
-             { name: 'Campus Map', path: '/about#map', desc: 'Find your way around' }
-          ] 
+            { name: 'Administrative Heads', path: '/about#admin-heads', desc: 'Leadership in administration' },
+            { name: 'Academic Heads', path: '/about#academic-heads', desc: 'Leadership in academics' },
+            { name: 'Campus Administration', path: '/about#campus-admin', desc: 'Campus operational management' },
+            { name: 'Controller of Examinations', path: '/about#exams', desc: 'Examination & assessment board' },
+            { name: 'Alumni Bodies', path: '/about#alumni', desc: 'Global alumni network' },
+            { name: 'Accreditations & Rankings', path: '/about#rankings', desc: 'Quality & excellence markers' },
+            { name: 'Internal Quality Assurance Cell', path: '/about#iqac', desc: 'IQAC quality standards' },
+            { name: 'Research', path: '/about#research', desc: 'Innovation & research cell' },
+            { name: 'Learning & Development', path: '/about#l-and-d', desc: 'Skill enhancement programs' },
+            { name: 'Admissions', path: '/about#admissions', desc: 'Entry & enrollment process' },
+            { name: 'NCPIR', path: '/about#ncpir', desc: 'Placement & corporate relations' },
+            { name: 'International Relations', path: '/about#international', desc: 'Global academic partnerships' },
+            { name: 'Policy', path: '/about#policy', desc: 'Institutional guidelines' },
+            { name: 'Infrastructure', path: '/about#infrastructure', desc: 'World-class facilities' },
+            { name: 'Facilities', path: '/about#facilities', desc: 'Student-centric amenities' },
+            { name: 'Feedback', path: '/about#feedback', desc: 'Constructive feedback system' },
+            { name: 'Holistic Model', path: '/about#holistic', desc: 'Integrated education approach' },
+            { name: 'Governance', path: '/about#governance', desc: 'Institutional governing board' }
+          ]
         }
       ],
       highlight: {
@@ -30,32 +46,46 @@ export function useNavigationData() {
         ctaPath: '/about#heritage'
       }
     },
-    'Institutions': {
+    'Academics': {
       categories: [
-        { 
-          title: 'PKDAS Group', 
+        {
+          title: 'PKDAS University',
           items: [
-            { name: 'Engineering (NIET/NCERC)', path: '/institutions-list', desc: 'Pioneering technical education' },
-            { name: 'Management (NCM/NIITM)', path: '/institutions-list', desc: 'Strategic business leadership' },
-            { name: 'Pharmacy & Nursing', path: '/institutions-list', desc: 'Healthcare and clinical expertise' },
-            { name: 'Arts & Science', path: '/institutions-list', desc: 'Liberal arts and science majors' }
-          ] 
+            { name: 'School of Engineering (NIET/NCERC)', path: '/institutions-list', desc: 'Pioneering technical education' },
+            { name: 'School of Management (NCM/NIITM)', path: '/institutions-list', desc: 'Strategic business leadership' },
+            { name: 'School of Pharmacy & Nursing', path: '/institutions-list', desc: 'Healthcare and clinical expertise' },
+            { name: 'School of Arts & Science', path: '/institutions-list', desc: 'Liberal arts and science majors' }
+          ]
         },
-        { 
-          title: 'Nehru Group', 
+        {
+          title: 'NGI Kerala',
           items: [
-            { name: 'Aviation Technology', path: '/institutions-list', desc: 'Sky-high career pathways' },
-            { name: 'Hospitality & Management', path: '/institutions-list', desc: 'Global service industry standards' },
-            { name: 'Allied Health Sciences', path: '/institutions-list', desc: 'Comprehensive medical training' }
-          ] 
+            { name: 'NCERC (Engineering)', path: '/institutions-list', desc: 'Pambady, Thrissur' },
+            { name: 'JCET (Engineering)', path: '/institutions-list', desc: 'Lakkidi, Palakkad' },
+            { name: 'PKDIMS (Medical College)', path: '/institutions-list', desc: 'Medical College & Hospital' },
+            { name: 'Nehru College of Pharmacy', path: '/institutions-list', desc: 'Pambady, Thrissur' },
+            { name: 'Nehru Academy of Law', path: '/institutions-list', desc: 'Lakkidi, Palakkad' },
+            { name: 'Nehru College of Architecture', path: '/institutions-list', desc: 'Pambady, Thrissur' }
+          ]
         },
-        { 
-          title: 'Specialized', 
+        {
+          title: 'NGI Tamil Nadu',
           items: [
-             { name: 'Research Centers', path: '/institutions-list', desc: 'Innovative labs and facilities' },
-             { name: 'View All 25+ Institutions', path: '/institutions-list', desc: 'The complete PKDAS advantage' }
-          ] 
-        }
+            { name: 'NIET (Engineering)', path: '/institutions-list', desc: 'Coimbatore, Tamil Nadu' },
+            { name: 'NASC (Arts & Science)', path: '/institutions-list', desc: 'Coimbatore, Tamil Nadu' },
+            { name: 'NCAAS (Aeronautics)', path: '/institutions-list', desc: 'Aviation Sciences, Coimbatore' },
+            { name: 'NIT (Technology)', path: '/institutions-list', desc: 'Coimbatore, Tamil Nadu' },
+            { name: 'NCM (Management)', path: '/institutions-list', desc: 'Business & Management' },
+            { name: 'NIITM (IT & Management)', path: '/institutions-list', desc: 'IT & Business studies' }
+          ]
+        },
+        // { 
+        //   title: 'Specialized', 
+        //   items: [
+        //      { name: 'Research Centers', path: '/institutions-list', desc: 'Innovative labs and facilities' },
+        //      { name: 'View All 25+ Institutions', path: '/institutions-list', desc: 'The complete PKDAS advantage' }
+        //   ] 
+        // }
       ],
       highlight: {
         title: 'Empower Your Future',
@@ -68,29 +98,29 @@ export function useNavigationData() {
     },
     'Facilities': {
       categories: [
-        { 
-          title: 'Academic', 
+        {
+          title: 'Academic',
           items: [
             { name: 'Central Library', path: '/facilities', desc: 'Knowledge at your fingertips' },
             { name: 'Smart Classrooms', path: '/facilities', desc: 'Digitally enhanced learning' },
             { name: 'Research Tech Labs', path: '/facilities', desc: 'State-of-the-art innovation' }
-          ] 
+          ]
         },
-        { 
-          title: 'Student Life', 
+        {
+          title: 'Student Life',
           items: [
             { name: 'Residential Hostels', path: '/facilities', desc: 'A home away from home' },
             { name: 'Dining & Cafeteria', path: '/facilities', desc: 'Nutritious global cuisines' },
             { name: 'Transportation', path: '/facilities', desc: 'Reliable campus connectivity' }
-          ] 
+          ]
         },
-        { 
-           title: 'Wellness', 
-           items: [
-              { name: 'Sports Complex', path: '/facilities', desc: 'Indoor/Outdoor facilities' },
-              { name: 'Medical Center', path: '/facilities', desc: '24/7 healthcare assistance' },
-              { name: 'Counselling Cell', path: '/facilities', desc: 'Mental health & career guidance' }
-           ] 
+        {
+          title: 'Wellness',
+          items: [
+            { name: 'Sports Complex', path: '/facilities', desc: 'Indoor/Outdoor facilities' },
+            { name: 'Medical Center', path: '/facilities', desc: '24/7 healthcare assistance' },
+            { name: 'Counselling Cell', path: '/facilities', desc: 'Mental health & career guidance' }
+          ]
         }
       ],
       highlight: {
@@ -103,22 +133,22 @@ export function useNavigationData() {
     },
     'Placements': {
       categories: [
-        { 
-          title: 'Services', 
+        {
+          title: 'Services',
           items: [
             { name: 'Career Guidance', path: '/placements', desc: 'Pathway to your dream job' },
             { name: 'Recruiter Interface', path: '/placements', desc: 'Connecting with global industry' },
             { name: 'Internship Programs', path: '/placements', desc: 'Early industry exposure' }
-          ] 
+          ]
         },
-        { 
-          title: 'Statistics', 
+        {
+          title: 'Statistics',
           items: [
             { name: 'Success Stories', path: '/placements', desc: 'Real stories from our alumni' },
             { name: 'Top Tier Recruiters', path: '/placements', desc: 'Partnered with over 500+ firms' },
             { name: 'Recent Placements', path: '/placements', desc: 'The 2025 Placement Report' },
             { name: 'Alumni Network', path: '/placements', desc: 'Mentorship and global outreach' }
-          ] 
+          ]
         }
       ],
       highlight: {
@@ -132,22 +162,22 @@ export function useNavigationData() {
     },
     'Faculty': {
       categories: [
-        { 
-          title: 'Leadership', 
+        {
+          title: 'Leadership',
           items: [
             { name: 'Academic Heads', path: '/faculty', desc: 'Leading our academic strategy' },
             { name: 'Core Professors', path: '/faculty', desc: 'Experts in their respective domains' },
             { name: 'Honorary Faculty', path: '/faculty', desc: 'Distinguished guest lecturers' }
-          ] 
+          ]
         },
-        { 
-          title: 'Departments', 
+        {
+          title: 'Departments',
           items: [
             { name: 'Engineering & Tech', path: '/faculty', desc: 'Pioneering technical mentors' },
             { name: 'Medical & Nursing', path: '/faculty', desc: 'Healthcare educators' },
             { name: 'Liberal Arts & Comm', path: '/faculty', desc: 'Academic diversity & culture' },
             { name: 'Research Mentors', path: '/faculty', desc: 'Guiding Doctoral candidates' }
-          ] 
+          ]
         }
       ],
       highlight: {

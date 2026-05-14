@@ -39,7 +39,7 @@ const ScholarDialog = ({ student, onClose }) => {
           className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors text-white"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
@@ -131,7 +131,9 @@ export const HomeScholars = ({ topStudents, activeScholar, setActiveScholar }) =
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl mb-12 mx-auto text-center">
-          <h2 className="gsap-reveal text-display-md md:text-5xl font-display mb-6 text-white">Our Top Scholars</h2>
+          <h2 className="gsap-reveal text-5xl md:text-6xl font-display font-bold text-white mb-8 leading-tight">
+            Our Top Scholars<span className="italic text-primary"></span>
+          </h2>
           <p className="gsap-reveal text-lg text-white/70 font-body">
             Meet some of our brightest minds who are setting new benchmarks in academics, leadership, and innovation.
           </p>
@@ -173,14 +175,14 @@ export const HomeScholars = ({ topStudents, activeScholar, setActiveScholar }) =
             className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
             aria-label="Previous Scholar"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/></svg>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" /></svg>
           </button>
           <button
             onClick={() => setActiveScholar((prev) => (prev + 1) % topStudents.length)}
             className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-full shadow-lg text-primary border border-primary/5 active:scale-90 transition-all"
             aria-label="Next Scholar"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/></svg>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7" /></svg>
           </button>
 
           <div className="overflow-hidden px-6">

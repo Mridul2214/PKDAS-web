@@ -21,7 +21,7 @@
   --font-display: "Poppins", sans-serif;
   --font-body: "Poppins", sans-serif;
   --font-editorial: "Poppins", sans-serif;
-  --font-cursive: "Poppins", sans-serif;
+  --font-cursive: "Dancing Script", cursive;
 
   --animate-fade-in: fade-in 1s ease-out forwards;
   --animate-slide-up: slide-up 0.8s ease-out forwards;

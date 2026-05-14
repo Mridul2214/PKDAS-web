@@ -6,9 +6,12 @@ import { useHomeAnimations } from '../hooks/useHomeAnimations';
 import { Hero } from '../components/Hero';
 import { Marquee } from '../components/Marquee';
 import { HomeAbout } from '../components/home/HomeAbout';
+import { HomeRankings } from '../components/home/HomeRankings';
 import { HomeAchievements } from '../components/home/HomeAchievements';
 import { HomeInstitutions } from '../components/home/HomeInstitutions';
 import { HomeInterests } from '../components/home/HomeInterests';
+import { HomeNews } from '../components/home/HomeNews';
+import { HomeEvents } from '../components/home/HomeEvents';
 import { HomeScholars } from '../components/home/HomeScholars';
 import { HomeHighlights } from '../components/home/HomeHighlights';
 import { HomeCulture } from '../components/home/HomeCulture';
@@ -21,7 +24,7 @@ export function Home() {
   const container = useRef(null);
 
   // Data fetching (Hooks mapping)
-  const { alumniReviews, institutionCategories, highlights } = useHomeData();
+  const { alumniReviews, institutionCategories, highlights, news, events, rankings, nirfStats } = useHomeData();
   const { topStudents, careerSuccessData, cultureSections } = useStudentData();
 
   // State
@@ -54,6 +57,7 @@ export function Home() {
       <Marquee />
       
       <HomeAbout />
+      <HomeRankings rankings={rankings} nirfStats={nirfStats} />
       <HomeAchievements />
       
       <HomeInstitutions 
@@ -68,6 +72,9 @@ export function Home() {
       />
       
       <HomeInterests />
+      
+      <HomeNews news={news} />
+      <HomeEvents events={events} />
       
       <HomeScholars 
         topStudents={topStudents}

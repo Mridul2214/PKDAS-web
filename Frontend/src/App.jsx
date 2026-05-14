@@ -13,7 +13,9 @@ import { Courses } from './pages/Courses';
 import { Facilities } from './pages/Facilities';
 import { Contact } from './pages/Contact';
 import { InterestPage } from './pages/InterestPage';
-import NewsEvents from './pages/NewsEvents';
+import News from './pages/News';
+import Events from './pages/Events';
+import Rankings from './pages/Rankings';
 import International from './pages/International';
 import Institutions from './pages/Institutions';
 import InstitutionsList from './pages/InstitutionsList';
@@ -26,6 +28,7 @@ import { CeoSecretary } from './pages/CeoSecretary';
 import { ExecutiveDirector } from './pages/ExecutiveDirector';
 import { Trust } from './pages/Trust';
 import { UniqueFeatures } from './pages/UniqueFeatures';
+import { Search } from './pages/Search';
 
 // Layout Components
 import { Navbar } from './components/layout/Navbar';
@@ -56,7 +59,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col relative bg-surface z-0">
-        
+
         <Navbar />
 
         {/* Main Content Area */}
@@ -75,12 +78,15 @@ function App() {
             <Route path="/facilities" element={<Facilities />} />
             <Route path="/placements" element={<Placements />} />
             <Route path="/faculty" element={<FacultyPage />} />
-            <Route path="/news" element={<NewsEvents />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/rankings" element={<Rankings />} />
             <Route path="/international" element={<International />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/interest/:slug" element={<InterestPage />} />
             <Route path="/college/:slug" element={<College3DView />} />
             <Route path="/highlights/:slug" element={<HighlightDetail />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </div>
 

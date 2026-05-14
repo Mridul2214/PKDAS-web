@@ -28,9 +28,9 @@ export const HomeAbout = () => {
               <span className="text-primary text-4xl md:text-2xl lg:text-6xl xl:text-7xl block">Next Generation</span>
             </h2>
             <p className="gsap-reveal text-lg font-body text-on-surface-variant leading-relaxed mb-8 max-w-2xl">
-              Nehru Arts and Science College (NASC) is a leading autonomous institution dedicated to academic excellence. We provide a dynamic learning environment that nurtures creativity, critical thinking, and leadership skills.
+             PKDAS University is a premier autonomous institution committed to academic excellence, innovation, and holistic development. We provide a dynamic learning environment that fosters creativity, critical thinking, and leadership skills.
               <br /><br />
-              With state-of-the-art facilities and a curriculum co-created with industry leaders, we are shaping the future of over 3,500 students every year.
+             With advanced infrastructure, industry-aligned programs, and a future-focused curriculum, PKDAS University is shaping the careers of thousands of students every year.
             </p>
 
             <div className="gsap-stagger-parent grid grid-cols-2 gap-6 mb-10 max-w-md">

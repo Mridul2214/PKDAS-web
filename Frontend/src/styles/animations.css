@@ -42,3 +42,16 @@
 .mega-menu-content-animate .col-span-4 {
   animation-delay: 0.4s;
 }
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
