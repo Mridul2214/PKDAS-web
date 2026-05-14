@@ -18,16 +18,16 @@ export const HomeRankings = ({ rankings, nirfStats }) => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           
-          <div className="flex flex-col lg:flex-row items-end justify-between gap-12 mb-12 border-b border-gray-100 pb-12">
-            <div className="max-w-md">
+          <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-12 mb-12 border-b border-gray-100 pb-12">
+            <div className="max-w-md text-center lg:text-left">
               <span className="text-primary font-black text-[9px] uppercase tracking-[0.4em] mb-2 block">Institutional Audit</span>
-              <h2 className="font-display text-4xl font-bold text-on-surface leading-tight">
-                Quality <span className="text-primary italic">Metrics.</span>
+              <h2 className="font-display text-5xl font-bold text-on-surface leading-tight">
+                Ranking & <span className="text-primary italic">Accreditation</span>
               </h2>
             </div>
 
             {/* NIRF Stats - Compact Chips */}
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-8">
                {nirfStats?.slice(0, 4).map((stat, idx) => (
                  <div key={idx} className="gsap-reveal flex flex-col items-center">
                     <span className="text-3xl font-display font-black text-on-surface tracking-tighter leading-none mb-1">{stat.value}</span>

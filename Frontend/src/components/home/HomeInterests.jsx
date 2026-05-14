@@ -117,27 +117,18 @@ export const HomeInterests = () => {
             </p>
           </div>
 
-          {/* Filter Labels */}
-          {/* <div className="gsap-reveal flex justify-center items-center gap-4 mb-8">
-            <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">Search by Level</span>
-            <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
-            <span className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-400">Search by Degree</span>
-            <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
-            <span className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-400">Search by Discipline</span>
-          </div> */}
-
           {/* Program Tabs */}
-          <div className="gsap-reveal flex justify-center mb-14">
-            <div className="inline-flex items-center p-1 bg-gray-100/30 backdrop-blur-md rounded-2xl border border-gray-200/50 shadow-inner">
+          <div className="gsap-reveal flex justify-center mb-14 px-6 w-full">
+            <div className="grid grid-cols-3 sm:inline-flex items-center p-1 bg-gray-100/30 backdrop-blur-md rounded-2xl border border-gray-200/50 shadow-inner w-full sm:w-auto">
               {tabs.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative px-7 py-3 rounded-[14px] text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 z-10 whitespace-nowrap ${
+                  className={`relative px-2 sm:px-7 py-3 rounded-[14px] text-[8px] sm:text-[10px] font-bold uppercase tracking-wider sm:tracking-[0.2em] transition-all duration-500 z-10 ${
                     activeTab === tab ? 'text-white' : 'text-on-surface/40 hover:text-on-surface'
                   }`}
                 >
-                  {tab}
+                  <span className="relative z-10 block sm:inline">{tab}</span>
                   {activeTab === tab && (
                     <div className="absolute inset-0 bg-primary rounded-[14px] -z-10 shadow-[0_8px_20px_-6px_rgba(0,0,0,0.25)] shadow-primary/30 ring-1 ring-white/10 animate-in fade-in zoom-in-95 duration-500"></div>
                   )}
@@ -150,14 +141,16 @@ export const HomeInterests = () => {
           <div ref={searchRef} className="gsap-reveal relative max-w-3xl mx-auto mb-10 group z-[60]">
              <div className={`absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-[2.5rem] blur transition-opacity duration-500 ${isFocused ? 'opacity-100' : 'opacity-0'}`}></div>
              <div className={`relative flex items-center bg-white border-2 rounded-[2.5rem] p-2 pr-4 shadow-xl transition-all duration-500 ${isFocused ? 'border-primary/30' : 'border-gray-100'}`}>
-                <div className="flex-shrink-0 pl-6 pr-4">
-                   <span className="font-display text-xl font-bold text-on-surface whitespace-nowrap">Global Search</span>
+                <div className="flex-shrink-0 pl-4 sm:pl-6 pr-2 sm:pr-4 text-primary opacity-60">
+                   <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                   </svg>
                 </div>
-                <div className="w-px h-8 bg-gray-200"></div>
+                <div className="w-px h-6 sm:h-8 bg-gray-100"></div>
                 <input 
                   type="text" 
-                  placeholder="Search for courses, colleges, news, events..."
-                  className="flex-grow px-6 py-4 bg-transparent border-none outline-none text-on-surface font-body text-lg placeholder:text-gray-300"
+                  placeholder="Search courses..."
+                  className="flex-grow px-3 sm:px-6 py-3 sm:py-4 bg-transparent border-none outline-none text-on-surface font-body text-base sm:text-lg placeholder:text-gray-300"
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -168,9 +161,9 @@ export const HomeInterests = () => {
                 />
                 <button 
                   onClick={handleSearch}
-                  className="flex-shrink-0 w-14 h-14 bg-on-surface text-white rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 shadow-lg shadow-black/10"
+                  className="flex-shrink-0 w-10 h-10 sm:w-14 sm:h-14 bg-on-surface text-white rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 shadow-lg shadow-black/10 active:scale-90"
                 >
-                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                    </svg>
                 </button>
@@ -228,14 +221,6 @@ export const HomeInterests = () => {
              )}
           </div>
 
-          {/* Filter Links */}
-          <div className="gsap-reveal flex flex-wrap justify-center gap-x-12 gap-y-4 mb-16 text-xs font-black uppercase tracking-[0.2em] text-on-surface-variant/40">
-             <button className="hover:text-primary transition-colors cursor-pointer border-b border-transparent hover:border-primary/30 pb-1">Search by Level</button>
-             <div className="w-1 h-1 bg-gray-300 rounded-full my-auto"></div>
-             <button className="hover:text-primary transition-colors cursor-pointer border-b border-transparent hover:border-primary/30 pb-1">Search by Degree</button>
-             <div className="w-1 h-1 bg-gray-300 rounded-full my-auto"></div>
-             <button className="hover:text-primary transition-colors cursor-pointer border-b border-transparent hover:border-primary/30 pb-1">Search by Discipline / Department</button>
-          </div>
 
           {/* Dynamic Category Cards */}
           <div className="gsap-reveal grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-24">

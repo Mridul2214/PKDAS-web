@@ -6,3 +6,11 @@
 @import "./styles/components.css";
 @import "./styles/animations.css";
 @import "./styles/buttons.css";
+
+@layer base {
+  html, body {
+    @apply overflow-x-hidden;
+    width: 100%;
+    position: relative;
+  }
+}

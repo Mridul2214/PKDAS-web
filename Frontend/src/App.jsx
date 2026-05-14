@@ -58,7 +58,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col relative bg-surface z-0">
+      <div className="min-h-screen flex flex-col relative bg-surface z-0 overflow-x-hidden">
 
         <Navbar />
 
